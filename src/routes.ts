@@ -14,20 +14,9 @@ router.use(function (req, res, next) {
 });
 
 
-// router.use((req, res, next) => {
-//     res.status(404).send('<h1>Página não encontrada :(</h1>')
-// })
-
-// router.use((err, req, res, next) => {
-//     console.error(err.stack)
-//     res.status(500).send('<h1>Houve um erro interno :(</h1>')
-// })
-
-// router.get('/', (req, res) => {
-//     res.status(200).json({
-//         message: "Olá mundo!"
-//     })
-// })
+router.use((req, res, next) => {
+    res.status(404).send('<h1>Página não encontrada :(</h1>')
+})
 
 router.post('/login', (req, res) => {
     return loginController.findLogin(req, res);

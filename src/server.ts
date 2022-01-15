@@ -1,12 +1,16 @@
 require('dotenv').config();
 import { app } from './app';
-
-import { Database } from './database/connection'
+import { Database } from './database/connection';
+import { logger } from './utils/logger';
 
 const db = new Database();
 
-db.connectDB()
+try {
+    db.connectDB()
 
-app.listen(process.env.PORT || 5000, () => {
-    console.log('Server running')
-})
+    app.listen(process.env.PORT || 5000, () => {
+        console.log('Server running')
+    })
+} catch (error) {
+    logger.error(error.message)
+}
