@@ -1,4 +1,5 @@
-import { ScheduleRepository, ISchedule } from '../repository/scheduleRepository'
+import { ScheduleRepository, ISchedule } from '../repository/scheduleRepository';
+import { logger } from '../utils/logger';
 
 class ScheduleUseCase {
     constructor(
@@ -6,48 +7,66 @@ class ScheduleUseCase {
     ) { }
 
     async findAllSchedules(id_user: string) {
-        const findAll = await this.scheduleRepository.findAllSchedules(id_user);
-        return findAll;
+        try {
+            const findAll = await this.scheduleRepository.findAllSchedules(id_user);
+            return findAll;
+        } catch (error) {
+            logger.error(`Error in ScheduleUseCase in function findAllSchedules: ${error.message}`)
+        }
     }
 
     async findScheduleByDate(id_user: string, date: string): Promise<ISchedule[]> {
-        const find = await this.scheduleRepository.findScheduleByDate(id_user, date);
-        return find;
+        try {
+            const find = await this.scheduleRepository.findScheduleByDate(id_user, date);
+            return find;
+        } catch (error) {
+            logger.error(`Error in ScheduleUseCase in function findScheduleByDate: ${error.message}`)
+        }
     }
 
     async saveSchedule({ id_user, client, procedure, date, time, price, phone }: ISchedule): Promise<void> {
         const scheduleAlreadyExists = await this.scheduleRepository.findScheduleByTime(id_user, time)
 
-        if (scheduleAlreadyExists.time) {
-            throw {
-                type: 'Time already exists',
-                message: 'This time already exists'
+        try {
+            if (scheduleAlreadyExists.time) {
+                throw {
+                    type: 'Time already exists',
+                    message: 'This time already exists'
+                }
             }
+            await this.scheduleRepository.saveSchedule({ id_user, client, procedure, date, time, price, phone })
+        } catch (error) {
+            logger.error(`Error in ScheduleUseCase in function saveSchedule: ${error.message}`)
         }
-        await this.scheduleRepository.saveSchedule({ id_user, client, procedure, date, time, price, phone })
     }
 
     async updateSchedule({ id_user, id, client, procedure, date, time, price, phone }: ISchedule): Promise<ISchedule> {
         const scheduleAlreadyExists = await this.scheduleRepository.findScheduleById(id_user, id)
 
-        if (!scheduleAlreadyExists) throw {
-            type: 'Schedule already not exists',
-            message: 'This time already not exists'
+        try {
+            if (!scheduleAlreadyExists) throw {
+                type: 'Schedule already not exists',
+                message: 'This time already not exists'
+            }
+            const update = await this.scheduleRepository.updateSchedule({ id_user, id, client, procedure, date, time, price, phone })
+            return update
+        } catch (error) {
+            logger.error(`Error in ScheduleUseCase in function updateSchedule: ${error.message}`)
         }
-
-        const update = await this.scheduleRepository.updateSchedule({ id_user, id, client, procedure, date, time, price, phone })
-        return update
     }
 
     async deleteSchedule(id_user: string, id: string): Promise<void> {
         const scheduleAlreadyExists = await this.scheduleRepository.findScheduleById(id_user, id);
 
-        if (!scheduleAlreadyExists) throw {
-            type: 'Schedule already not exists',
-            message: 'Schedule already not exists'
+        try {
+            if (!scheduleAlreadyExists) throw {
+                type: 'Schedule already not exists',
+                message: 'Schedule already not exists'
+            }
+            const deleteSchedule = await this.scheduleRepository.deleteSchedule(id_user, id);
+        } catch (error) {
+            logger.error(`Error in ScheduleUseCase in function deleteSchedule: ${error.message}`)
         }
-
-        const deleteSchedule = await this.scheduleRepository.deleteSchedule(id_user, id);
     }
 }
 
