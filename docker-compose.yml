@@ -15,4 +15,4 @@ services:
         restart: always
         build: ./nginx
         ports:
-            - "22:80"
+            - "80:80"
