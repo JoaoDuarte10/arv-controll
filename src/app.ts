@@ -1,6 +1,7 @@
 import express from "express";
 import { router } from "./routes"
 import path = require('path');
+import { logger } from "./utils/logger"
 
 const app = express();
 
