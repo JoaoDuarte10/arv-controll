@@ -9,7 +9,7 @@ try {
     db.connectDB()
 
     app.listen(process.env.PORT || 5000, () => {
-        console.log('Server running')
+        console.log(`Server running on PORT ${process.env.PORT || 5000}`)
     })
 } catch (error) {
     logger.error(error.message)
