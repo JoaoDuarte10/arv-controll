@@ -4,9 +4,9 @@ import { logger } from '../utils/logger';
 class SalesUseCase {
     constructor(private salesRepository: SalesRepository) { }
 
-    async saveSales({ id_user, description, date, price }: ISales): Promise<void> {
+    async saveSales({ id_user, description, client, date, price }: ISales): Promise<void> {
         try {
-            await this.salesRepository.saveSales({ id_user, description, date, price })
+            await this.salesRepository.saveSales({ id_user, description, client, date, price })
         } catch (error) {
             logger.error(`Error SalesUseCase function saveSales: ${error.message}`)
         }

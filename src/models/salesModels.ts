@@ -5,6 +5,7 @@ const { Schema } = mongoose;
 const salesSchema = new Schema({
     id_user: String,
     description: String,
+    client: String,
     date: String,
     price: String,
 });
