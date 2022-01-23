@@ -5,9 +5,9 @@ class SalesController {
     constructor(private salesUseCase: SalesUseCase) { }
 
     async saveSales(req: Request, res: Response): Promise<Response> {
-        const { id_user, description, price, date } = req.body;
+        const { id_user, description, client, price, date } = req.body;
 
-        const params = [id_user, description, price, date].filter(item => !!item);
+        const params = [id_user, description, client, price, date].filter(item => !!item);
 
         if (params.length < 3) {
             res.status(200).json({
@@ -17,7 +17,7 @@ class SalesController {
         }
 
         try {
-            await this.salesUseCase.saveSales({ id_user, description, date, price })
+            await this.salesUseCase.saveSales({ id_user, description, client, date, price })
             return res.status(200).json({
                 type: 'success',
                 message: 'Sale registry success!'

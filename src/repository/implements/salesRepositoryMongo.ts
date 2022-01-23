@@ -2,10 +2,11 @@ import { SalesRepository, ISales } from '../salesRepository';
 import { Sales } from '../../models/salesModels'
 
 class SalesRepositoryMongoDB implements SalesRepository {
-    async saveSales({ id_user, description, price, date }: ISales): Promise<void> {
+    async saveSales({ id_user, description, client, price, date }: ISales): Promise<void> {
         const sales = new Sales({
             id_user: id_user,
             description: description,
+            client: client,
             price: price,
             date: date
         });
