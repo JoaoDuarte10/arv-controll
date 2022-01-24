@@ -5,11 +5,11 @@ services:
         container_name: arv-controll
         restart: always
         build: .
-        command: npm run start
+        command: sh -c "npm run build && npm run start"
         ports:
             - '5000:5000'
         volumes:
-            - .:/usr/app/arv
+            - .dist:/usr/app/arv
     # nginx:
     #     container_name: nginx-server
     #     restart: always

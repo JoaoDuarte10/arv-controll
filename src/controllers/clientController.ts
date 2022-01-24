@@ -5,7 +5,14 @@ class ClientController {
     constructor(private clientUseCase: ClientUseCase) { }
 
     async newClient(req: Request, res: Response): Promise<Response> {
-        const { id_user, id, name, email, phone } = req.body;
+        const { id_user, name, email, phone } = req.body;
+
+        if (!name || !phone) {
+            res.status(200).json({
+                type: 'inputs_invalids',
+                message: 'Invalids parameters'
+            })
+        }
 
         try {
             await this.clientUseCase.newClient({ id_user, name, email, phone });
@@ -24,6 +31,13 @@ class ClientController {
 
     async updateClient(req: Request, res: Response): Promise<Response> {
         const { id_user, id, name, email, phone } = req.body;
+
+        if (!name || !phone) {
+            res.status(200).json({
+                type: 'inputs_invalids',
+                message: 'Invalids parameters'
+            })
+        }
         try {
             await this.clientUseCase.updateClient({ id_user, id, name, email, phone })
             return res.status(200).json({
