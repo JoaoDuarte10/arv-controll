@@ -25,9 +25,8 @@ class ScheduleUseCase {
     }
 
     async saveSchedule({ id_user, client, procedure, date, time, price, phone }: ISchedule): Promise<void> {
-        const scheduleAlreadyExists = await this.scheduleRepository.findScheduleByTime(id_user, time)
-
         try {
+            const scheduleAlreadyExists = await this.scheduleRepository.findScheduleByTime(id_user, time)
             if (scheduleAlreadyExists.time) {
                 throw {
                     type: 'Time already exists',
@@ -41,9 +40,8 @@ class ScheduleUseCase {
     }
 
     async updateSchedule({ id_user, id, client, procedure, date, time, price, phone }: ISchedule): Promise<ISchedule> {
-        const scheduleAlreadyExists = await this.scheduleRepository.findScheduleById(id_user, id)
-
         try {
+            const scheduleAlreadyExists = await this.scheduleRepository.findScheduleById(id_user, id)
             if (!scheduleAlreadyExists) throw {
                 type: 'Schedule already not exists',
                 message: 'This time already not exists'
@@ -56,9 +54,8 @@ class ScheduleUseCase {
     }
 
     async deleteSchedule(id_user: string, id: string): Promise<void> {
-        const scheduleAlreadyExists = await this.scheduleRepository.findScheduleById(id_user, id);
-
         try {
+            const scheduleAlreadyExists = await this.scheduleRepository.findScheduleById(id_user, id);
             if (!scheduleAlreadyExists) throw {
                 type: 'Schedule already not exists',
                 message: 'Schedule already not exists'

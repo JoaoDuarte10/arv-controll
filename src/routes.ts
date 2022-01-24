@@ -1,7 +1,7 @@
 import cors from 'cors';
 import { Router } from "express";
 
-import { scheduleController, salesController, loginController } from './useCases/index'
+import { scheduleController, salesController, loginController, clientController } from './useCases/index'
 
 const router = Router();
 
@@ -37,6 +37,26 @@ router.put('/update-schedule', (req, res) => {
 
 router.delete('/delete-schedule', (req, res) => {
     return scheduleController.deleteSchedule(req, res);
+})
+
+router.post('/new-client', (req, res) => {
+    return clientController.newClient(req, res);
+})
+
+router.post('/update-client', (req, res) => {
+    return clientController.updateClient(req, res);
+})
+
+router.post('/find-all-client', (req, res) => {
+    return clientController.findAllClients(req, res);
+})
+
+router.post('/find-client', (req, res) => {
+    return clientController.findClient(req, res);
+})
+
+router.post('/delete-client', (req, res) => {
+    return clientController.deleteClient(req, res);
 })
 
 export { router };
