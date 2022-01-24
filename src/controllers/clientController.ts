@@ -8,7 +8,7 @@ class ClientController {
         const { id_user, name, email, phone } = req.body;
 
         if (!name || !phone) {
-            res.status(200).json({
+            return res.status(200).json({
                 type: 'inputs_invalids',
                 message: 'Invalids parameters'
             })
@@ -33,7 +33,7 @@ class ClientController {
         const { id_user, id, name, email, phone } = req.body;
 
         if (!name || !phone) {
-            res.status(200).json({
+            return res.status(200).json({
                 type: 'inputs_invalids',
                 message: 'Invalids parameters'
             })

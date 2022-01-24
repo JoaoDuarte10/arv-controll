@@ -9,7 +9,7 @@ services:
         ports:
             - '5000:5000'
         volumes:
-            - .dist:/usr/app/arv
+            - .:/usr/app/arv
     # nginx:
     #     container_name: nginx-server
     #     restart: always
