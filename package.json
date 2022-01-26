@@ -1,7 +1,8 @@
 {
   "name": "api-arv-controll",
   "version": "0.2.0",
-  "main": "server.js",
+  "main": "dist/server.js",
+  "type": "commonjs",
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev src/server.ts",
