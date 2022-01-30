@@ -7,6 +7,7 @@ const clientSchema = new Schema({
     name: String,
     email: String,
     phone: String,
+    segment: String
 });
 
 const Client = mongoose.model('Client', clientSchema);

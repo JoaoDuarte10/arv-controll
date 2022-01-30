@@ -77,6 +77,40 @@ class SalesController {
             })
         }
     }
+
+    async findSalesByClientsForPeriod(req: Request, res: Response): Promise<Response> {
+        const { id_user, date1, date2 } = req.body;
+
+        if (!date1 && !date2 || date1 === '') {
+            return res.status(200).json({
+                type: "inputs_invalids",
+                message: "Invalid date"
+            })
+        }
+        try {
+            const findDates = await this.salesUseCase.findSaleByPeriodThatHasClientExists(id_user, date1, date2)
+            return res.status(200).json(findDates);
+        } catch (error) {
+            return res.status(200).json({
+                type: 'error',
+                message: error.message
+            })
+        }
+    }
+
+    async findSalesForClient(req: Request, res: Response): Promise<Response> {
+        const { id_user, client } = req.body;
+
+        try {
+            const findSales = await this.salesUseCase.findSaleByClient(id_user, client)
+            return res.status(200).json(findSales)
+        } catch (error) {
+            return res.status(200).json({
+                type: 'error',
+                message: error.message
+            })
+        }
+    }
 }
 
 export { SalesController }

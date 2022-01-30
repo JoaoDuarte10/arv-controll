@@ -22,6 +22,11 @@ class SalesRepositoryMongoDB implements SalesRepository {
         const find = await Sales.find({ id_user: id_user, date: { $gte: date1, $lte: date2 } }).sort({ date: 1 });
         return find;
     }
+
+    async findSalesByClient(id_user: string, client: string): Promise<ISales[]> {
+        const find = await Sales.find({ id_user: id_user, client: client }).sort({ date: 1 })
+        return find;
+    }
 }
 
 export { SalesRepositoryMongoDB }

@@ -1,7 +1,7 @@
 import cors from 'cors';
 import { Router } from "express";
 
-import { scheduleController, salesController, loginController, clientController } from './useCases/index'
+import { scheduleController, salesController, loginController, clientController, segmentController } from './useCases/index'
 
 const router = Router();
 
@@ -21,6 +21,14 @@ router.post('/sales-today', (req, res) => {
 
 router.post('/sales', (req, res) => {
     return salesController.findSalesByPeriod(req, res);
+})
+
+router.post('/sales-period-clients', (req, res) => {
+	return salesController.findSalesByClientsForPeriod(req, res);
+})
+
+router.post('/sales-clients', (req, res) => {
+	return salesController.findSalesForClient(req, res);
 })
 
 router.post('/schedule', (req, res) => {
@@ -55,8 +63,16 @@ router.post('/find-client', (req, res) => {
     return clientController.findClient(req, res);
 })
 
+router.post('/find-client-segment', (req, res) => {
+	return clientController.findClientBySegment(req, res);
+})
+
 router.post('/delete-client', (req, res) => {
     return clientController.deleteClient(req, res);
+})
+
+router.get('/segments' , (req, res) => {
+	return segmentController.findSegment(req, res);
 })
 
 export { router };
