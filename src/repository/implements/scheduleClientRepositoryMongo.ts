@@ -11,7 +11,6 @@ class ScheduleClientRepositoryMongo implements ScheduleClientRepository {
             time: time,
             phone: phone
         });
-        return
         await schedule.save()
     }
 
