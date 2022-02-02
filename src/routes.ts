@@ -1,7 +1,7 @@
 import cors from 'cors';
 import { Router } from "express";
 
-import { scheduleController, salesController, loginController, clientController, segmentController } from './useCases/index'
+import { scheduleController, salesController, loginController, clientController, segmentController, scheduleClientController } from './useCases/index'
 
 const router = Router();
 
@@ -73,6 +73,18 @@ router.post('/delete-client', (req, res) => {
 
 router.get('/segments' , (req, res) => {
 	return segmentController.findSegment(req, res);
+})
+
+router.post('/new-schedule-client', (req, res) => {
+    return scheduleClientController.saveScheduleClients(req, res);
+})
+
+router.post('/find-schedule-client', (req, res) => {
+    return scheduleClientController.findAllScheduleClients(req, res);
+})
+
+router.delete('/delete-schedule-client', (req, res) => {
+    return scheduleClientController.deleteSchedule(req, res);
 })
 
 export { router };
