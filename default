@@ -12,30 +12,16 @@ server {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
 
-	    return 404;
+	    proxy_pass http://31.220.31.51:5000;
 	}
-}
-
-server {
-
-    server_name salaolillianfabia.com.br;
-
-	location / {
+    location /pos-schedule {
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
 
-        return 404;
+        proxy_pass http://31.220.31.51:5000/;
     }
-
-    listen [::]:443 ssl ipv6only=on; # managed by Certbot
-    listen 443 ssl; # managed by Certbot
-    ssl_certificate /etc/letsencrypt/live/agenciaraisevalue.com.br/fullchain.pem; # managed by Certbot
-    ssl_certificate_key /etc/letsencrypt/live/agenciaraisevalue.com.br/privkey.pem; # managed by Certbot
-    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
-    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
-
 }
 
 server {
@@ -225,7 +211,13 @@ server {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
 
-        proxy_pass http://31.220.31.51:5000/;
+        if ($host = agenciaraisevalue.com.br) {
+            proxy_pass http://31.220.31.51:5000/;
+        } # managed by Certbot
+    
+        if ($host = salaolillianfabia.com.br) {
+            return 301 https://salaolillianfabia.com.br;
+        } 
     }
 
     listen [::]:443 ssl ipv6only=on; # managed by Certbot
@@ -242,11 +234,13 @@ server {
         return 301 https://$host$request_uri;
     } # managed by Certbot
 
+    if ($host = salaolillianfabia.com.br) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
 	listen 80 ;
 	listen [::]:80 ;
     server_name agenciaraisevalue.com.br;
     return 404; # managed by Certbot
-
-
 }
 
