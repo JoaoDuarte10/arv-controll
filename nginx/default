@@ -1,32 +1,8 @@
 # Default server configuration
 #
 server {
-	listen 80;
-	listen [::]:80;
-	server_name salaolillianfabia.com.br;
-	return 301 https://salaolillianfabia.com.br;
-
-	location / {
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-
-	    proxy_pass http://31.220.31.51:5000;
-	}
-    location /pos-schedule {
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-
-        proxy_pass http://31.220.31.51:5000/;
-    }
-}
-
-server {
-	listen 80;
-	listen [::]:80;
+	listen 80 default_server;
+	listen [::]:80 default_server;
 	server_name agenciaraisevalue.com.br;
 	return 301 https://agenciaraisevalue.com.br;
 	
@@ -202,7 +178,6 @@ server {
 }
 
 server {
-
     server_name agenciaraisevalue.com.br;
 
 	location / {
@@ -211,13 +186,8 @@ server {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
 
-        if ($host = agenciaraisevalue.com.br) {
-            proxy_pass http://31.220.31.51:5000/;
-        } # managed by Certbot
-    
-        if ($host = salaolillianfabia.com.br) {
-            return 301 https://salaolillianfabia.com.br;
-        } 
+        proxy_pass http://31.220.31.51:5000;
+
     }
 
     listen [::]:443 ssl ipv6only=on; # managed by Certbot
@@ -231,10 +201,6 @@ server {
 
 server {
     if ($host = agenciaraisevalue.com.br) {
-        return 301 https://$host$request_uri;
-    } # managed by Certbot
-
-    if ($host = salaolillianfabia.com.br) {
         return 301 https://$host$request_uri;
     } # managed by Certbot
 
