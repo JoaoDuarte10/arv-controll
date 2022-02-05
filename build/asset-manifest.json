@@ -1,14 +1,17 @@
 {
   "files": {
-    "main.css": "./static/css/main.c70bd757.css",
-    "main.js": "./static/js/main.56b85978.js",
-    "static/media/raise-value.png": "./static/media/raise-value.8b5f05a96f9d9340648f.png",
+    "main.css": "./static/css/main.8959026a.css",
+    "main.js": "./static/js/main.dfa5bb90.js",
+    "static/media/cabelo.jpg": "./static/media/cabelo.ce30870bf166028ff7e6.jpg",
+    "static/media/manicure.jpg": "./static/media/manicure.756dda69637373797fd0.jpg",
+    "static/media/maquiagem.jpg": "./static/media/maquiagem.ba87796026c2e4a850a6.jpg",
+    "static/media/lillian.jpeg": "./static/media/lillian.e36399696db697eb8c87.jpeg",
     "index.html": "./index.html",
-    "main.c70bd757.css.map": "./static/css/main.c70bd757.css.map",
-    "main.56b85978.js.map": "./static/js/main.56b85978.js.map"
+    "main.8959026a.css.map": "./static/css/main.8959026a.css.map",
+    "main.dfa5bb90.js.map": "./static/js/main.dfa5bb90.js.map"
   },
   "entrypoints": [
-    "static/css/main.c70bd757.css",
-    "static/js/main.56b85978.js"
+    "static/css/main.8959026a.css",
+    "static/js/main.dfa5bb90.js"
   ]
 }
