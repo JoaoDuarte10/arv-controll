@@ -7,7 +7,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
+            "name": "Debug ARV",
             "skipFiles": [
                 "<node_internals>/**"
             ],

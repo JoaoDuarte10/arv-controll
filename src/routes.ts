@@ -24,11 +24,11 @@ router.post('/sales', (req, res) => {
 })
 
 router.post('/sales-period-clients', (req, res) => {
-	return salesController.findSalesByClientsForPeriod(req, res);
+    return salesController.findSalesByClientsForPeriod(req, res);
 })
 
 router.post('/sales-clients', (req, res) => {
-	return salesController.findSalesForClient(req, res);
+    return salesController.findSalesForClient(req, res);
 })
 
 router.post('/schedule', (req, res) => {
@@ -64,15 +64,15 @@ router.post('/find-client', (req, res) => {
 })
 
 router.post('/find-client-segment', (req, res) => {
-	return clientController.findClientBySegment(req, res);
+    return clientController.findClientBySegment(req, res);
 })
 
 router.post('/delete-client', (req, res) => {
     return clientController.deleteClient(req, res);
 })
 
-router.get('/segments' , (req, res) => {
-	return segmentController.findSegment(req, res);
+router.get('/segments', (req, res) => {
+    return segmentController.findSegment(req, res);
 })
 
 router.post('/new-schedule-client', (req, res) => {
