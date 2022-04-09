@@ -5,10 +5,10 @@
   "type": "commonjs",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev src/server.ts",
-    "start": "node dist/server.js",
+    "start:dev": "ts-node-dev src/server.ts",
+    "start:prd": "npm run build && node dist/server.js",
     "build": "tsc --build",
-    "clean": "tsc --build --clean"
+    "build:clean": "tsc --build --clean"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
