@@ -5,7 +5,7 @@ services:
         container_name: arv-controll
         restart: always
         build: .
-        command: sh -c "npm run build && npm run start"
+        command: sh -c "npm run start:prd"
         ports:
             - '5000:5000'
         volumes:
