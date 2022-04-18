@@ -26,7 +26,7 @@ const clientRepositoryMongo = new ClientRepositoryMongo();
 const segmentRepositoryMongo = new SegmentRepositoryMongo();
 const scheduleClientRepositoryMongo = new ScheduleClientRepositoryMongo();
 
-const scheduleUseCase = new ScheduleUseCase(scheduleRepositoryMongoDB);
+const scheduleUseCase = new ScheduleUseCase(scheduleRepositoryMongoDB, salesRepositoryMongo);
 const salesUseCase = new SalesUseCase(salesRepositoryMongo);
 const loginUseCase = new LoginUseCase(loginRepositoryMongo);
 const clientUseCase = new ClientUseCase(clientRepositoryMongo);

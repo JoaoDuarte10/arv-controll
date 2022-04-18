@@ -47,6 +47,10 @@ router.delete('/api/delete-schedule', (req, res) => {
     return scheduleController.deleteSchedule(req, res);
 })
 
+router.delete('/api/finish-schedule', (req, res) => {
+    return scheduleController.finishSchedule(req, res);
+})
+
 router.post('/api/new-client', (req, res) => {
     return clientController.newClient(req, res);
 })

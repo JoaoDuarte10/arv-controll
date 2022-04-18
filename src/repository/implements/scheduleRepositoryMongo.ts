@@ -22,7 +22,22 @@ class ScheduleRepositoryMongoDB implements ScheduleRepository {
         return find;
     }
 
-    async saveSchedule({ id_user, client, procedure, date, time, price, phone }: ISchedule): Promise<boolean> {
+    async findScheduleWhereDateLassThen(id_user: string, date: string): Promise<ISchedule[]> {
+        const find = await Schedule.find({ id_user: id_user, date: { $lte: date } });
+        return find.map(item => ({
+            _id: item._id,
+            id_user: item.id_user,
+            client: item.client,
+            procedure: item.procedure,
+            date: item.date,
+            time: item.time,
+            price: item.price,
+            phone: item.price,
+            isDefeated: true,
+        }))
+    }
+
+    async saveSchedule({ id_user, client, procedure, date, time, price, phone, pacote, qtdTotalAtendimento }: ISchedule): Promise<boolean> {
         const schedule = new Schedule({
             id_user: id_user,
             client: client,
@@ -30,7 +45,10 @@ class ScheduleRepositoryMongoDB implements ScheduleRepository {
             date: date,
             time: time,
             price: price,
-            phone: phone
+            phone: phone,
+            pacote: pacote,
+            qtdTotalAtendimento: qtdTotalAtendimento,
+            qtdAtendimento: 0
         });
         try {
             await schedule.save()
@@ -40,7 +58,7 @@ class ScheduleRepositoryMongoDB implements ScheduleRepository {
         }
     }
 
-    async updateSchedule({ id_user, id, client, procedure, date, time, price, phone }: ISchedule): Promise<ISchedule> {
+    async updateSchedule({ id_user, id, client, procedure, date, time, price, phone, pacote, qtdTotalAtendimento, qtdAtendimento }: ISchedule): Promise<ISchedule> {
         const findSchedule = await Schedule.findOne({ id_user: id_user, _id: id })
 
         try {
@@ -50,7 +68,10 @@ class ScheduleRepositoryMongoDB implements ScheduleRepository {
                 date: date,
                 time: time,
                 price: price,
-                phone: phone
+                phone: phone,
+                pacote: pacote,
+                qtdTotalAtendimento: qtdTotalAtendimento,
+                qtdAtendimento: qtdAtendimento
             })
             return update
         } catch (err) {
