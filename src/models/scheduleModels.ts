@@ -9,7 +9,10 @@ const scheduleSchema = new Schema({
     date: String,
     time: String,
     price: String,
-    phone: String
+    phone: String,
+    pacote: Boolean,
+    qtdAtendimento: Number,
+    qtdTotalAtendimento: Number,
 });
 
 const Schedule = mongoose.model('Schedule', scheduleSchema)

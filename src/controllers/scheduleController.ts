@@ -34,7 +34,7 @@ class ScheduleController {
     }
 
     async saveSchedule(req: Request, res: Response): Promise<Response> {
-        const { id_user, client, procedure, date, time, price, contact } = req.body;
+        const { id_user, client, procedure, date, time, price, contact, pacote, qtdTotalAtendimento } = req.body;
 
 
         if (contact.replace("_", "").toString().length < 16 && contact.replace("_", "").toString().length > 1) {
@@ -59,7 +59,9 @@ class ScheduleController {
                 date: date,
                 time: time,
                 price: price,
-                phone: contact
+                phone: contact,
+                pacote: pacote,
+                qtdTotalAtendimento: qtdTotalAtendimento
             })
             return res.status(200).json({
                 type: 'success',
@@ -74,7 +76,7 @@ class ScheduleController {
     }
 
     async updateSchedule(req: Request, res: Response): Promise<Response> {
-        const { id_user, id, client, procedure, date, time, price, contact } = req.body;
+        const { id_user, id, client, procedure, date, time, price, contact, pacote, qtdTotalAtendimento } = req.body;
 
         if (contact.replace("_", "").toString().length < 16 && contact.replace("_", "").toString().length > 1) {
             return res.status(200).json({
@@ -98,7 +100,9 @@ class ScheduleController {
                 date: date,
                 time: time,
                 price: price,
-                phone: contact
+                phone: contact,
+                pacote, 
+                qtdTotalAtendimento
             })
             return res.status(200).json({
                 type: 'success',
@@ -120,6 +124,23 @@ class ScheduleController {
             return res.status(200).json({
                 type: 'success',
                 message: 'Horário atualizado com sucesso!'
+            })
+        } catch (error) {
+            return res.status(200).json({
+                type: 'error',
+                message: error.message
+            })
+        }
+    }
+
+    async finishSchedule(req: Request, res: Response): Promise<Response> {
+        const { id_user, id } = req.query;
+
+        try {
+            await this.scheduleUseCase.finishSchedule(id_user.toString(), id.toString())
+            return res.status(200).json({
+                type: 'success',
+                message: 'Horário finalizado com sucesso!'
             })
         } catch (error) {
             return res.status(200).json({

@@ -3,7 +3,10 @@ FROM node:16-alpine
 WORKDIR /usr/app/arv
 
 COPY package*.json ./
+COPY scripts/ ./
 
-RUN npm install
+RUN apk add bash && \
+    npm install && \
+    npm install typescript
 
 COPY . .
