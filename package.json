@@ -11,7 +11,7 @@
     "lint": "eslint \"{src,test}/**/*.ts\" --fix",
     "prepare": "husky install",
     "start:dev": "ts-node-dev src/server.ts",
-    "start:prd": "npm run build && node dist/src/server.js",
+    "start:prd": "node dist/src/server.js",
     "test": "jest --passWithNoTests --silent --runInBand",
     "test:verbose": "jest --passWithNoTests",
     "test:unit": "npm run test -- --watch",
