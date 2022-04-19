@@ -1,9 +1,9 @@
 interface ISegment {
-    segment: string
+  segment: string;
 }
 
 interface SegmentRepository {
-    findSegment(): Promise<ISegment[]>
+  findSegment(): Promise<ISegment[]>;
 }
 
-export { ISegment, SegmentRepository }
+export { ISegment, SegmentRepository };
