@@ -1,21 +1,26 @@
 module.exports = {
-  'env': {
-    'node': true,
-    'es2021': true,
+  root: true,
+  env: {
+    node: true,
+    es2021: true,
   },
-  'parser': '@typescript-eslint/parser',
-  'parserOptions': {
-    'ecmaVersion': 'latest',
-    'project': 'tsconfig.json',
-    'sourceType': 'module',
+  overrides: [{
+    files: ['test/*.ts', 'test/**/*.ts'],
+  }],
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    project: './tsconfig.json',
+    sourceType: 'module',
   },
-  'plugins': [
+  plugins: [
     '@typescript-eslint',
   ],
-  "ignorePatterns": ['.eslintrc.js'],
-  'rules': {
-    'semi': ['error', 'always'],
-    'quotes': ['error', 'single'],
-
+  extends: [
+    'plugin:@typescript-eslint/recommended',
+  ],
+  ignorePatterns: ['.eslintrc.js'],
+  rules: {
+    semi: ['error', 'always'],
+    quotes: ['error', 'single'],
   },
 };

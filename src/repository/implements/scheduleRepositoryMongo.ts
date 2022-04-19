@@ -2,6 +2,7 @@ import { ScheduleRepository, ISchedule } from '../scheduleRepository';
 import { Schedule } from '../../models/scheduleModels';
 
 class ScheduleRepositoryMongoDB implements ScheduleRepository {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async findScheduleByTime(id_user: string, time: string): Promise<any> {
     const find = await Schedule.find({ id_user: id_user, time: time });
     return find;
@@ -41,7 +42,7 @@ class ScheduleRepositoryMongoDB implements ScheduleRepository {
       date: item.date,
       time: item.time,
       price: item.price,
-      phone: item.price,
+      phone: item.phone,
       isDefeated: true,
     }));
   }

@@ -4,7 +4,8 @@ import { LoginUseCase } from '../useCases/loginUseCase';
 class LoginController {
   constructor(private loginUseCase: LoginUseCase) {}
   async findLogin(req: Request, res: Response): Promise<Response> {
-    let { user, password } = req.body;
+    let { user } = req.body;
+    const { password } = req.body;
 
     user = user.replace(' ', '');
 
