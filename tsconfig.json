@@ -23,5 +23,7 @@
     "noFallthroughCasesInSwitch": false,
     "strictPropertyInitialization": false,
     "useUnknownInCatchVariables": false,
-  }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "test", "dist", "**/*spec.ts", "jest.config.ts"]
 }

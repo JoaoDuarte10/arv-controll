@@ -5,7 +5,7 @@ services:
         container_name: api-arv-controll
         restart: always
         build: .
-        command: sh -c "npm run start:prd"
+        command: sh -c "./scripts/start-app.sh"
         ports:
             - '5000'
         volumes:
