@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.2](https://github.com/JoaoDuarte10/arv-controll/compare/v0.2.1...v0.2.2) (2022-04-21)
+
+
+### Features
+
+* add changelog configs ([3eb49d4](https://github.com/JoaoDuarte10/arv-controll/commit/3eb49d4771f6e939c8697eab45389807327c99e6))
+
 ### 0.2.1 (2022-04-21)
 
 
