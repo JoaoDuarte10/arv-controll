@@ -1,6 +1,6 @@
 {
   "name": "api-arv-controll",
-  "version": "0.2.110",
+  "version": "0.2.111",
   "main": "dist/server.js",
   "type": "commonjs",
   "license": "MIT",
