@@ -12,7 +12,7 @@ class ScheduleUseCase {
     private salesRepository: SalesRepository,
   ) {}
 
-  async findAllSchedules(id_user: string) {
+  async findAllSchedules(id_user: string): Promise<ISchedule[]> {
     try {
       const findAll = await this.scheduleRepository.findAllSchedules(id_user);
       return findAll;
