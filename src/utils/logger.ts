@@ -1,12 +1,12 @@
-import { createLogger, format, transports } from 'winston';
+import winston, { createLogger, format, transports } from 'winston';
 const { combine, timestamp, printf } = format;
 
-const myFormat = printf(({ timestamp, level, message }) => {
-  return `Date: [${timestamp}] Level: [${level}] Message: { ${message} }`;
+const customFormat = printf(({ timestamp, level, message }) => {
+  return `${timestamp} | ${level}: ${message}`;
 });
 
 const logger = createLogger({
-  format: combine(format.splat(), format.simple(), timestamp(), myFormat),
+  format: combine(format.splat(), format.simple(), timestamp(), customFormat),
   transports: [
     new transports.File({
       filename: 'logs/errors.log',
@@ -18,5 +18,19 @@ const logger = createLogger({
     }),
   ],
 });
+
+if (process.env.WINSTON_CONSOLE_LOG === 'true') {
+  logger.add(
+    new winston.transports.Console({
+      format: combine(
+        format.colorize(),
+        format.splat(),
+        format.simple(),
+        timestamp(),
+        customFormat,
+      ),
+    }),
+  );
+}
 
 export { logger };
