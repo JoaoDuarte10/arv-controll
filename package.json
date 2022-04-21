@@ -16,7 +16,7 @@
     "test:verbose": "jest --passWithNoTests",
     "test:unit": "npm run test -- --watch",
     "test:coverage": "jest --coverage",
-    "release": "standard-version -- --first-release"
+    "release": "standard-version"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
