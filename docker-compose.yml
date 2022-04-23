@@ -1,29 +1,6 @@
 version: '3.7'
 
 services:
-<<<<<<< HEAD
-    api-arv-controll:
-        container_name: api-arv-controll
-        restart: always
-        build: .
-        command: sh -c "./scripts/start-app.sh"
-        ports:
-            - '5000'
-        volumes:
-            - .:/usr/app/arv
-    nginx:
-        container_name: nginx-server
-        restart: always
-        build: ./nginx
-        ports:
-            - "80:80"
-            - "443:443"
-        depends_on:
-            - api-arv-controll
-        volumes:
-            - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-            - ./letsencrypt:/etc/letsencrypt
-=======
   api-arv-controll:
     container_name: api-arv-controll
     restart: always
@@ -47,4 +24,3 @@ services:
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
       - ./letsencrypt:/etc/letsencrypt
->>>>>>> abb1fdc61f534890e4caa69d0226eb94f6dba156
