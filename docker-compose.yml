@@ -6,10 +6,12 @@ services:
     restart: always
     build: .
     command: sh -c "./scripts/start-app.sh"
-    ports:
+    expose:
       - '5000'
     volumes:
       - .:/usr/app/arv
+    environment:
+      - NODE_ENV=production
   nginx:
     container_name: nginx-server
     restart: always

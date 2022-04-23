@@ -31,14 +31,21 @@ class ScheduleUseCase {
       const dateSubtract = moment(new Date())
         .subtract('1', 'day')
         .format('YYYY-MM-DD');
+
       const findWhereDataLassThen =
         await this.scheduleRepository.findScheduleWhereDateLassThen(
           id_user,
           dateSubtract,
         );
+
       const findScheduleByDate =
         await this.scheduleRepository.findScheduleByDate(id_user, date);
-      return [...findScheduleByDate, ...findWhereDataLassThen];
+
+      const result = [...findScheduleByDate, ...findWhereDataLassThen];
+
+      return result
+        .filter((item) => !!item._id)
+        .filter((item) => (item.isDefeated ? item : item));
     } catch (error) {
       logger.error(
         `Error in ScheduleUseCase in function findScheduleByDate: ${error.message}`,
