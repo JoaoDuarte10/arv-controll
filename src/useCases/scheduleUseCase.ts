@@ -50,7 +50,7 @@ class ScheduleUseCase {
           }
           return item;
         })
-        .filter((item) => item.date === actualDate);
+        .filter((item) => item.date === date);
 
       return result;
     } catch (error) {
