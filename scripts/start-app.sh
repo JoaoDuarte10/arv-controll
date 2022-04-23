@@ -1,5 +1,13 @@
 #!/bin/bash
 
+echo -e " \033[0;32m Configurando as variáveis de ambiente \033[0m"
+if [ $NODE_ENV == 'production' ]
+then
+    cp .env.prod .env
+else
+    cp .env.dev .env
+fi
+
 echo -e " \033[0;32m Excluindo a pasta dist/ \033[0m"
 rm -r dist/
 
