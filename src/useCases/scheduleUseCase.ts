@@ -33,6 +33,7 @@ class ScheduleUseCase {
       const findScheduleByDate =
         await this.scheduleRepository.findScheduleByDate(id_user, date);
 
+<<<<<<< HEAD
       const result = findScheduleByDate.map((item) => {
         if (item.date < actualDate) {
           return {
@@ -49,6 +50,26 @@ class ScheduleUseCase {
         }
         return item;
       });
+=======
+      const result = findScheduleByDate
+        .map((item) => {
+          if (item.date < actualDate) {
+            return {
+              _id: item._id,
+              id_user: item.id_user,
+              client: item.client,
+              procedure: item.procedure,
+              date: item.date,
+              time: item.time,
+              price: item.price,
+              phone: item.phone,
+              isDefeated: true,
+            };
+          }
+          return item;
+        })
+        .filter((item) => item.date === actualDate);
+>>>>>>> f3d0a6be0d58efb53ac1b80141713411c2a621a5
 
       return result;
     } catch (error) {
