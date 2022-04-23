@@ -19,10 +19,6 @@ interface ScheduleRepository {
   findScheduleById(id_user: string, id: string): Promise<ISchedule>;
   findAllSchedules(id_user: string): Promise<ISchedule[]>;
   findScheduleByDate(id_user: string, date: string): Promise<ISchedule[]>;
-  findScheduleWhereDateLassThen(
-    id_user: string,
-    date: string,
-  ): Promise<ISchedule[]>;
   saveSchedule({
     id_user,
     client,

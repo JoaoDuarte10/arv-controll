@@ -22,29 +22,11 @@ class ScheduleRepositoryMongoDB implements ScheduleRepository {
     id_user: string,
     date: string,
   ): Promise<ISchedule[]> {
-    const find = await Schedule.find({ id_user: id_user, date: date });
-    return find;
-  }
-
-  async findScheduleWhereDateLassThen(
-    id_user: string,
-    date: string,
-  ): Promise<ISchedule[]> {
     const find = await Schedule.find({
       id_user: id_user,
       date: { $lte: date },
     });
-    return find.map((item) => ({
-      _id: item._id,
-      id_user: item.id_user,
-      client: item.client,
-      procedure: item.procedure,
-      date: item.date,
-      time: item.time,
-      price: item.price,
-      phone: item.phone,
-      isDefeated: true,
-    }));
+    return find;
   }
 
   async saveSchedule({

@@ -28,24 +28,29 @@ class ScheduleUseCase {
     date: string,
   ): Promise<ISchedule[]> {
     try {
-      const dateSubtract = moment(new Date())
-        .subtract('1', 'day')
-        .format('YYYY-MM-DD');
-
-      const findWhereDataLassThen =
-        await this.scheduleRepository.findScheduleWhereDateLassThen(
-          id_user,
-          dateSubtract,
-        );
+      const actualDate = moment(new Date()).format('YYYY-MM-DD');
 
       const findScheduleByDate =
         await this.scheduleRepository.findScheduleByDate(id_user, date);
 
-      const result = [...findScheduleByDate, ...findWhereDataLassThen];
+      const result = findScheduleByDate.map((item) => {
+        if (item.date < actualDate) {
+          return {
+            _id: item._id,
+            id_user: item.id_user,
+            client: item.client,
+            procedure: item.procedure,
+            date: item.date,
+            time: item.time,
+            price: item.price,
+            phone: item.phone,
+            isDefeated: true,
+          };
+        }
+        return item;
+      });
 
-      return result
-        .filter((item) => !!item._id)
-        .filter((item) => (item.isDefeated ? item : item));
+      return result;
     } catch (error) {
       logger.error(
         `Error in ScheduleUseCase in function findScheduleByDate: ${error.message}`,
