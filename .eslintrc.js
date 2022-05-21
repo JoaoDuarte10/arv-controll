@@ -18,7 +18,7 @@ module.exports = {
   extends: [
     'plugin:@typescript-eslint/recommended',
   ],
-  ignorePatterns: ['.eslintrc.js', 'test/**/*.ts', 'build/**', 'dist/**'],
+  ignorePatterns: ['.eslintrc.js', 'test/**/*.ts', 'build/**', 'dist/**', 'jest.config.ts'],
   rules: {
     semi: ['error', 'always'],
     quotes: ['error', 'single'],

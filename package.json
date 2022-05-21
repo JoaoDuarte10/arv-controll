@@ -15,7 +15,7 @@
     "test": "jest --passWithNoTests --silent --runInBand",
     "test:verbose": "jest --passWithNoTests",
     "test:unit": "npm run test -- --watch",
-    "test:coverage": "jest --coverage",
+    "test:coverage": "jest --coverage --runInBand",
     "release": "standard-version"
   },
   "devDependencies": {

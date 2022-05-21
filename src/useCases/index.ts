@@ -1,3 +1,5 @@
+import { logger } from '../utils/logger';
+
 import { ScheduleController } from '../controllers/scheduleController';
 import { SalesController } from '../controllers/salesController';
 import { LoginController } from '../controllers/loginController';
@@ -31,7 +33,7 @@ const scheduleUseCase = new ScheduleUseCase(
   salesRepositoryMongo,
 );
 const salesUseCase = new SalesUseCase(salesRepositoryMongo);
-const loginUseCase = new LoginUseCase(loginRepositoryMongo);
+const loginUseCase = new LoginUseCase(loginRepositoryMongo, logger);
 const clientUseCase = new ClientUseCase(clientRepositoryMongo);
 const segmentUseCase = new SegmentUseCase(segmentRepositoryMongo);
 const scheduleClientUseCase = new ScheduleClientUseCase(
