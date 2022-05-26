@@ -1,8 +1,11 @@
 import { ClientRepository, IClient } from '../repository/clientRepository';
-import { logger } from '../utils/logger';
+import { ILogger } from '../utils/logger';
 
 class ClientUseCase {
-  constructor(private clientRepository: ClientRepository) {}
+  constructor(
+    private clientRepository: ClientRepository,
+    private readonly logger: ILogger,
+  ) {}
 
   async newClient({
     id_user,
@@ -45,7 +48,7 @@ class ClientUseCase {
         segment,
       });
     } catch (error) {
-      logger.error(
+      this.logger.error(
         `Error in ClientUseCase in function newClient: ${error.message}`,
       );
     }
@@ -78,7 +81,7 @@ class ClientUseCase {
       });
       return updateClient;
     } catch (error) {
-      logger.error(
+      this.logger.error(
         `Error in ClientUseCase in function updateClient: ${error.message}`,
       );
     }
@@ -89,7 +92,7 @@ class ClientUseCase {
       const allClients = await this.clientRepository.findAllClients(id_user);
       return allClients;
     } catch (error) {
-      logger.error(
+      this.logger.error(
         `Error in ClientUseCase in function findAllClients: ${error.message}`,
       );
     }
@@ -100,7 +103,7 @@ class ClientUseCase {
       const findClient = await this.clientRepository.findClient(id_user, id);
       return findClient;
     } catch (error) {
-      logger.error(
+      this.logger.error(
         `Error in ClientUseCase in function findClient: ${error.message}`,
       );
     }
@@ -114,7 +117,7 @@ class ClientUseCase {
       );
       return findClients;
     } catch (error) {
-      logger.error(
+      this.logger.error(
         `Error in ClientUseCase in function findBySegment: ${error.message}`,
       );
     }
@@ -133,7 +136,7 @@ class ClientUseCase {
     try {
       await this.clientRepository.deleteClient(id_user, id);
     } catch (error) {
-      logger.error(
+      this.logger.error(
         `Error in ClientUseCase in function deleteClient: ${error.message}`,
       );
     }

@@ -34,7 +34,7 @@ const scheduleUseCase = new ScheduleUseCase(
 );
 const salesUseCase = new SalesUseCase(salesRepositoryMongo);
 const loginUseCase = new LoginUseCase(loginRepositoryMongo, logger);
-const clientUseCase = new ClientUseCase(clientRepositoryMongo);
+const clientUseCase = new ClientUseCase(clientRepositoryMongo, logger);
 const segmentUseCase = new SegmentUseCase(segmentRepositoryMongo);
 const scheduleClientUseCase = new ScheduleClientUseCase(
   scheduleClientRepositoryMongo,
