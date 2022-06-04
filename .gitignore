@@ -1,5 +1,8 @@
 node_modules/
 logs
 dist/
+letsencrypt
 
 .env
+.env.dev
+.env.prod
