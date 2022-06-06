@@ -176,6 +176,7 @@ class ScheduleUseCase {
     }
 
     const qtdAtendimentoAtual = scheduleAlreadyExists.qtdAtendimento + 1;
+    const firstScheduleForPacote = 1;
 
     await this.updateSchedule({
       id_user,
@@ -192,10 +193,9 @@ class ScheduleUseCase {
     });
 
     if (
-      qtdAtendimentoAtual >= scheduleAlreadyExists.qtdTotalAtendimento ||
+      qtdAtendimentoAtual === firstScheduleForPacote ||
       !scheduleAlreadyExists.pacote
     ) {
-      await this.scheduleRepository.deleteSchedule(id_user, id);
       await this.salesRepository.saveSales({
         id_user,
         description: scheduleAlreadyExists.procedure,
@@ -204,6 +204,12 @@ class ScheduleUseCase {
         price: scheduleAlreadyExists.price,
       });
     }
+
+    if (
+      qtdAtendimentoAtual >= scheduleAlreadyExists.qtdTotalAtendimento ||
+      !scheduleAlreadyExists.pacote
+    )
+      await this.scheduleRepository.deleteSchedule(id_user, id);
   }
 }
 
