@@ -14,6 +14,10 @@ const router = Router();
 
 router.use(cors());
 
+router.get('/health-check', (req, res) => {
+  res.status(201).send();
+});
+
 router.post('/api/login', (req, res) => {
   return loginController.findLogin(req, res);
 });
