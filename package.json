@@ -1,6 +1,6 @@
 {
   "name": "api-arv-controll",
-  "version": "0.2.4",
+  "version": "1.0.0",
   "main": "dist/server.js",
   "type": "commonjs",
   "license": "MIT",
@@ -16,7 +16,9 @@
     "test:verbose": "jest --passWithNoTests",
     "test:unit": "npm run test -- --watch",
     "test:coverage": "jest --coverage",
-    "release": "standard-version"
+    "release": "standard-version",
+    "docker:build": "docker build --rm -f \"Dockerfile\" -t 741258321/arv-controll:latest \".\"",
+    "docker:run": "docker run --env-file .env 741258321/arv-controll:latest"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",

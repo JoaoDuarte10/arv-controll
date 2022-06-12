@@ -1,3 +1,9 @@
 node_modules
 .gitignore
 .env
+dist
+letsencrypt
+logs
+.env
+.env.dev.
+.env.prod
