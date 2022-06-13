@@ -9,11 +9,14 @@ RUN apk add bash && \
 COPY package*.json ./
 COPY scripts/ ./
 
+ENV NODE_ENV=production
+ENV PORT=5000
+
 RUN npm install && \
     npm install typescript
 
 COPY . .
 
-EXPOSE "5000"
-
 CMD ["./scripts/start-app.sh"]
+
+EXPOSE "5000"

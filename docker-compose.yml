@@ -4,7 +4,7 @@ services:
   api-arv-controll-1:
     container_name: api-arv-controll-1
     restart: always
-    build: .
+    build: 741258321/arv-controll:latest
     command: sh -c "./scripts/start-app.sh"
     expose:
       - '5000'
@@ -12,6 +12,8 @@ services:
       - .:/usr/app/arv
     environment:
       - NODE_ENV=production
+    env_file:
+      - .env
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:5000/health-check"]
       interval: 1m30s
@@ -21,7 +23,7 @@ services:
   api-arv-controll-2:
     container_name: api-arv-controll-2
     restart: always
-    build: .
+    build: 741258321/arv-controll:latest
     command: sh -c "./scripts/start-app.sh"
     expose:
       - '5000'
@@ -29,6 +31,8 @@ services:
       - .:/usr/app/arv
     environment:
       - NODE_ENV=production
+    env_file:
+      - .env
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:5000/health-check"]
       interval: 1m30s
