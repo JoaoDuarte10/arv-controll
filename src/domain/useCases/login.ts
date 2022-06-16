@@ -1,4 +1,4 @@
-import { ILogin, LoginRepository } from '../repository/loginRepository';
+import { ILogin, LoginRepository } from '../domain/repository/loginRepository';
 import { logger } from '../utils/logger';
 
 class LoginUseCase {

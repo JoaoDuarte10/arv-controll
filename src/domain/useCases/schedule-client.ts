@@ -1,7 +1,7 @@
 import {
   ScheduleClientRepository,
   IScheduleClient,
-} from '../repository/scheduleClientRepository';
+} from '../domain/repository/scheduleClientRepository';
 import { logger } from '../utils/logger';
 
 class ScheduleClientUseCase {

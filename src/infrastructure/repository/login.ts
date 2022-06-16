@@ -1,5 +1,5 @@
-import { LoginRepository, ILogin } from '../loginRepository';
-import { Login } from '../../models/loginModel';
+import { ILogin, LoginRepository } from '@domain/repository';
+import { Login } from '@infrastructure/models';
 
 class LoginRepositoryMongo implements LoginRepository {
   async findLogin({ user, password }: ILogin): Promise<ILogin> {

@@ -1,5 +1,5 @@
-import { SalesRepository, ISales } from '../salesRepository';
-import { Sales } from '../../models/salesModels';
+import { ISales, SalesRepository } from '@domain/repository';
+import { Sales } from '@infrastructure/models';
 
 class SalesRepositoryMongoDB implements SalesRepository {
   async saveSales({

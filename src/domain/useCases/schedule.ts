@@ -1,9 +1,9 @@
 import moment from 'moment';
-import { SalesRepository } from '../repository/salesRepository';
+import { SalesRepository } from '../domain/repository/salesRepository';
 import {
   ScheduleRepository,
   ISchedule,
-} from '../repository/scheduleRepository';
+} from '../domain/repository/scheduleRepository';
 import { logger } from '../utils/logger';
 
 class ScheduleUseCase {

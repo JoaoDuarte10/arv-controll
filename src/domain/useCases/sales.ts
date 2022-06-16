@@ -1,4 +1,4 @@
-import { SalesRepository, ISales } from '../repository/salesRepository';
+import { SalesRepository, ISales } from '../domain/repository/salesRepository';
 import { logger } from '../utils/logger';
 
 class SalesUseCase {

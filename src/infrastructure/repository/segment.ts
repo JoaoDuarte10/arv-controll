@@ -1,5 +1,5 @@
-import { SegmentRepository, ISegment } from '../segmentsRepository';
-import { Segment } from '../../models/segments';
+import { ISegment, SegmentRepository } from '@domain/repository';
+import { Segment } from '@infrastructure/models';
 
 class SegmentRepositoryMongo implements SegmentRepository {
   async findSegment(): Promise<ISegment[]> {

@@ -1,4 +1,7 @@
-import { SegmentRepository, ISegment } from '../repository/segmentsRepository';
+import {
+  SegmentRepository,
+  ISegment,
+} from '../domain/repository/segmentsRepository';
 import { logger } from '../utils/logger';
 
 class SegmentUseCase {

@@ -1,23 +1,9 @@
-import { ScheduleController } from '../controllers/scheduleController';
-import { SalesController } from '../controllers/salesController';
-import { LoginController } from '../controllers/loginController';
-import { ClientController } from '../controllers/clientController';
-import { SegmentController } from '../controllers/segmentController';
-import { ScheduleClientController } from '../controllers/scheduleClientController';
-
-import { ScheduleUseCase } from './scheduleUseCase';
-import { SalesUseCase } from './salesUseCase';
-import { LoginUseCase } from './loginUseCase';
-import { ClientUseCase } from './clientUseCase';
-import { SegmentUseCase } from './segmentUseCase';
-import { ScheduleClientUseCase } from './scheduleClientUseCase';
-
-import { ScheduleRepositoryMongoDB } from '../repository/implements/scheduleRepositoryMongo';
-import { SalesRepositoryMongoDB } from '../repository/implements/salesRepositoryMongo';
-import { LoginRepositoryMongo } from '../repository/implements/loginRepositoryMongo';
-import { ClientRepositoryMongo } from '../repository/implements/clientRepositoryMongo';
-import { SegmentRepositoryMongo } from '../repository/implements/segmentRepositoryMongo';
-import { ScheduleClientRepositoryMongo } from '../repository/implements/scheduleClientRepositoryMongo';
+import { ScheduleUseCase } from './schedule';
+import { SalesUseCase } from './sales';
+import { LoginUseCase } from './login';
+import { ClientUseCase } from './client';
+import { SegmentUseCase } from './segment';
+import { ScheduleClientUseCase } from './schedule-client';
 
 const scheduleRepositoryMongoDB = new ScheduleRepositoryMongoDB();
 const salesRepositoryMongo = new SalesRepositoryMongoDB();

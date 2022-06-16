@@ -1,5 +1,5 @@
-import { ClientRepository, IClient } from '../clientRepository';
-import { Client } from '../../models/clientsModel';
+import { ClientRepository, IClient } from '@domain/repository';
+import { Client } from '@infrastructure/models';
 
 class ClientRepositoryMongo implements ClientRepository {
   async newClient({

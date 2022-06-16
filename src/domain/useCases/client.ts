@@ -1,8 +1,11 @@
-import { ClientRepository, IClient } from '../repository/clientRepository';
-import { logger } from '../utils/logger';
+import { ClientRepository, IClient } from '@domain/repository';
+import { logger } from '@infrastructure/utils/logger';
 
 class ClientUseCase {
-  constructor(private clientRepository: ClientRepository) {}
+  constructor(
+    private clientRepository: ClientRepository,
+    private readonly logger: Logger,
+  ) {}
 
   async newClient({
     id_user,

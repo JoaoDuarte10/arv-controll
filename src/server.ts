@@ -1,8 +1,8 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
 import { app } from './app';
-import { Database } from './database/connection';
-import { logger } from './utils/logger';
+import { Database } from './infrastructure/database/connection';
+import { logger } from './infrastructure/utils/logger';
 
 const db = new Database();
 
