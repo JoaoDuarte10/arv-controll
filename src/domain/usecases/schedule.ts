@@ -1,15 +1,16 @@
 import moment from 'moment';
-import { SalesRepository } from '../domain/repository/salesRepository';
+import { ILogger } from '@infrastructure/utils/logger';
 import {
+  SalesRepository,
   ScheduleRepository,
   ISchedule,
-} from '../domain/repository/scheduleRepository';
-import { logger } from '../utils/logger';
+} from '@domain/repository';
 
 class ScheduleUseCase {
   constructor(
     private scheduleRepository: ScheduleRepository,
     private salesRepository: SalesRepository,
+    private readonly logger: ILogger,
   ) {}
 
   async findAllSchedules(id_user: string): Promise<ISchedule[]> {
@@ -17,7 +18,7 @@ class ScheduleUseCase {
       const findAll = await this.scheduleRepository.findAllSchedules(id_user);
       return findAll;
     } catch (error) {
-      logger.error(
+      this.logger.error(
         `Error in ScheduleUseCase in function findAllSchedules: ${error.message}`,
       );
     }
@@ -54,7 +55,7 @@ class ScheduleUseCase {
 
       return result;
     } catch (error) {
-      logger.error(
+      this.logger.error(
         `Error in ScheduleUseCase in function findScheduleByDate: ${error.message}`,
       );
     }
@@ -92,7 +93,7 @@ class ScheduleUseCase {
         qtdTotalAtendimento,
       });
     } catch (error) {
-      logger.error(
+      this.logger.error(
         `Error in ScheduleUseCase in function saveSchedule: ${error.message}`,
       );
     }
@@ -141,7 +142,7 @@ class ScheduleUseCase {
       });
       return update;
     } catch (error) {
-      logger.error(
+      this.logger.error(
         `Error in ScheduleUseCase in function updateSchedule: ${error.message}`,
       );
     }
@@ -159,7 +160,7 @@ class ScheduleUseCase {
       }
       await this.scheduleRepository.deleteSchedule(id_user, id);
     } catch (error) {
-      logger.error(
+      this.logger.error(
         `Error in ScheduleUseCase in function deleteSchedule: ${error.message}`,
       );
     }

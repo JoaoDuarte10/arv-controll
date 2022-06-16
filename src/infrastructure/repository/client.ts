@@ -1,5 +1,5 @@
-import { ClientRepository, IClient } from '@domain/repository';
-import { Client } from '@infrastructure/models';
+import { ClientRepository, IClient } from '../../domain/repository';
+import { Client } from '../models';
 
 class ClientRepositoryMongo implements ClientRepository {
   async newClient({
@@ -16,6 +16,7 @@ class ClientRepositoryMongo implements ClientRepository {
       phone: phone,
       segment: segment,
     });
+
     await client.save();
   }
 

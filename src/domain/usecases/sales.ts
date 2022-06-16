@@ -1,8 +1,11 @@
-import { SalesRepository, ISales } from '../domain/repository/salesRepository';
-import { logger } from '../utils/logger';
+import { ILogger } from '@infrastructure/utils/logger';
+import { SalesRepository, ISales } from '@domain/repository';
 
 class SalesUseCase {
-  constructor(private salesRepository: SalesRepository) {}
+  constructor(
+    private salesRepository: SalesRepository,
+    private readonly logger: ILogger,
+  ) {}
 
   async saveSales({
     id_user,
@@ -20,7 +23,9 @@ class SalesUseCase {
         price,
       });
     } catch (error) {
-      logger.error(`Error SalesUseCase function saveSales: ${error.message}`);
+      this.logger.error(
+        `Error SalesUseCase function saveSales: ${error.message}`,
+      );
     }
   }
 
@@ -29,7 +34,7 @@ class SalesUseCase {
       const find = await this.salesRepository.findSaleByDate(id_user, date);
       return find;
     } catch (error) {
-      logger.error(
+      this.logger.error(
         `Error SalesUseCase function findSalesByDate: ${error.message}`,
       );
     }
@@ -48,7 +53,7 @@ class SalesUseCase {
       );
       return find;
     } catch (error) {
-      logger.error(
+      this.logger.error(
         `Error SalesUseCase function findSalesByPeriod: ${error.message}`,
       );
     }
@@ -67,7 +72,7 @@ class SalesUseCase {
       );
       return find.filter((item) => !!item.client);
     } catch (error) {
-      logger.error(
+      this.logger.error(
         `Error SalesUseCase function findSaleByPeriodThatHasClientExists: ${error.message}`,
       );
     }
@@ -81,7 +86,7 @@ class SalesUseCase {
       );
       return find;
     } catch (error) {
-      logger.error(
+      this.logger.error(
         `Error SalesUseCase function findSaleByClient: ${error.message}`,
       );
     }

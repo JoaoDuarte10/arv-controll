@@ -1,5 +1,8 @@
-import { IScheduleClient, ScheduleClientRepository } from '@domain/repository';
-import { ScheduleClient } from '@infrastructure/models';
+import {
+  IScheduleClient,
+  ScheduleClientRepository,
+} from '../../domain/repository';
+import { ScheduleClient } from '../models';
 
 class ScheduleClientRepositoryMongo implements ScheduleClientRepository {
   async newSchedule({

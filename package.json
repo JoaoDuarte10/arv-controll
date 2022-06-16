@@ -9,7 +9,7 @@
     "build:clean": "tsc --build --clean",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "lint": "eslint \"{src,test}/**/*.ts\" --fix",
-    "start:dev": "ts-node-dev src/server.ts",
+    "start:dev": "ts-node-dev src/entrypoint/http/config/server.ts",
     "start:prd": "node dist/server.js",
     "test": "jest --passWithNoTests --silent --runInBand",
     "test:verbose": "jest --passWithNoTests",

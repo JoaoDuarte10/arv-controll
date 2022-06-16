@@ -1,11 +1,6 @@
-interface IClient {
-  id?: string;
-  id_user: string;
-  name: string;
-  email: string;
-  phone: string;
-  segment?: string;
-}
+import { IClientEntity } from '../entities/client';
+
+type IClient = IClientEntity;
 
 interface ClientRepository {
   newClient({ id_user, name, email, phone, segment }: IClient): Promise<void>;

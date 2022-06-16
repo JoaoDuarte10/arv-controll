@@ -1,5 +1,5 @@
+import { SalesUseCase } from '@domain/usecases/sales';
 import { Request, Response } from 'express';
-import { SalesUseCase } from '../useCases/salesUseCase';
 
 class SalesController {
   constructor(private salesUseCase: SalesUseCase) {}

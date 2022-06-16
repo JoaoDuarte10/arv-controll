@@ -1,5 +1,5 @@
+import { ScheduleUseCase } from '@domain/usecases/schedule';
 import { Request, Response } from 'express';
-import { ScheduleUseCase } from '../useCases/scheduleUseCase';
 
 class ScheduleController {
   constructor(private scheduleUseCase: ScheduleUseCase) {}

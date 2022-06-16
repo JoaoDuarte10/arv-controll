@@ -1,9 +1,10 @@
+import { setupRoutes } from '../config/routes';
+
 import express from 'express';
-import { router } from './entrypoint/routes';
 
 const app = express();
 
 app.use(express.json());
-app.use(router);
+setupRoutes(app);
 
 export { app };

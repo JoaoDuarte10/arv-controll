@@ -1,5 +1,5 @@
+import { SegmentUseCase } from '@domain/usecases/segment';
 import { Request, Response } from 'express';
-import { SegmentUseCase } from '../useCases/segmentUseCase';
 
 class SegmentController {
   constructor(private segmentUseCase: SegmentUseCase) {}

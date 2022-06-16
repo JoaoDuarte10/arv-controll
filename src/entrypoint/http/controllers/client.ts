@@ -1,5 +1,6 @@
+// import 'module-alias/register';
+import { ClientUseCase } from '@domain/usecases/client';
 import { Request, Response } from 'express';
-import { ClientUseCase } from '../useCases/clientUseCase';
 
 class ClientController {
   constructor(private clientUseCase: ClientUseCase) {}

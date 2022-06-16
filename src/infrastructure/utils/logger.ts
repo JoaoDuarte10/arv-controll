@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import winston, { createLogger, format, transports } from 'winston';
 const { combine, timestamp, printf } = format;
 
@@ -33,4 +34,7 @@ if (process.env.WINSTON_CONSOLE_LOG === 'true') {
   );
 }
 
-export { logger };
+abstract class ILogger {
+  constructor(readonly info: any, readonly error: any) {}
+}
+export { logger, ILogger };

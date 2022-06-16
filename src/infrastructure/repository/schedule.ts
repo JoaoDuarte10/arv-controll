@@ -1,5 +1,5 @@
-import { ISchedule, ScheduleRepository } from '@domain/repository';
-import { Schedule } from '@infrastructure/models';
+import { ISchedule, ScheduleRepository } from '../../domain/repository';
+import { Schedule } from '../models';
 
 class ScheduleRepositoryMongoDB implements ScheduleRepository {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
