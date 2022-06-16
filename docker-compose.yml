@@ -4,12 +4,9 @@ services:
   api-arv-controll-1:
     container_name: api-arv-controll-1
     restart: always
-    image: 741258321/arv-controll:latest
-    command: sh -c "./scripts/start-app.sh"
+    image: 741258321/arv-controll:${TAG_VERSION}
     expose:
       - '5000'
-    volumes:
-      - .:/usr/app/arv
     env_file:
       - .env
     healthcheck:
@@ -21,12 +18,9 @@ services:
   api-arv-controll-2:
     container_name: api-arv-controll-2
     restart: always
-    image: 741258321/arv-controll:latest
-    command: sh -c "./scripts/start-app.sh"
+    image: 741258321/arv-controll:${TAG_VERSION}
     expose:
       - '5000'
-    volumes:
-      - .:/usr/app/arv
     env_file:
       - .env
     healthcheck:
