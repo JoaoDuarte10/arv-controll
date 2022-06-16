@@ -1,22 +1,22 @@
-FROM node:16-alpine
-
+FROM node:16-alpine AS build
 WORKDIR /usr/app/arv
-
-RUN apk add bash && \
-    apk add curl && \
-    apk add nano
-
 COPY package*.json ./
-COPY scripts/ ./
+RUN npm install
+COPY . .
+RUN npm run build
 
+FROM node:16-alpine
+WORKDIR /usr/app/arv
 ENV NODE_ENV=production
 ENV PORT=5000
-
-RUN npm install && \
-    npm install typescript
-
-COPY . .
-
-CMD ["./scripts/start-app.sh"]
-
+COPY package*.json ./
+RUN apk add bash && \
+    apk add curl && \
+    apk add nano && \
+    apk add dumb-init && \
+    npm ci --only=production && \
+    mkdir logs
+USER node
+COPY --chown=node:node --from=build /usr/app/arv/dist .
+CMD ["dumb-init", "node", "server.js"]
 EXPOSE "5000"

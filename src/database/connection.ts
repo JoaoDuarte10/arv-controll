@@ -12,6 +12,10 @@ class Database {
       logger.error(error.message);
     }
   }
+
+  async closeDB(): Promise<void> {
+    await mongoose.disconnect();
+  }
 }
 
 export { Database };

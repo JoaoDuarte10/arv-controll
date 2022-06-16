@@ -6,6 +6,16 @@ import { logger } from './utils/logger';
 
 const db = new Database();
 
+async function closeGracefully(signal) {
+  await db.closeDB();
+  console.log(`${signal}: Exit application... Bye!`);
+
+  process.exit();
+}
+
+process.on('SIGINT', closeGracefully);
+process.on('SIGTERM', closeGracefully);
+
 try {
   db.connectDB();
 

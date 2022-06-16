@@ -1,6 +1,5 @@
 import express from 'express';
 import { router } from './routes';
-// import path = require('path');
 
 const app = express();
 

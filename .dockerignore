@@ -1,9 +1,11 @@
+Dockerfile
 node_modules
-.gitignore
-.env
 dist
 letsencrypt
 logs
+test
+.env
 .env.dev
 .env.prod
-test
+.git
+.gitignore

@@ -4,14 +4,12 @@ services:
   api-arv-controll-1:
     container_name: api-arv-controll-1
     restart: always
-    build: 741258321/arv-controll:latest
+    image: 741258321/arv-controll:latest
     command: sh -c "./scripts/start-app.sh"
     expose:
       - '5000'
     volumes:
       - .:/usr/app/arv
-    environment:
-      - NODE_ENV=production
     env_file:
       - .env
     healthcheck:
@@ -23,14 +21,12 @@ services:
   api-arv-controll-2:
     container_name: api-arv-controll-2
     restart: always
-    build: 741258321/arv-controll:latest
+    image: 741258321/arv-controll:latest
     command: sh -c "./scripts/start-app.sh"
     expose:
       - '5000'
     volumes:
       - .:/usr/app/arv
-    environment:
-      - NODE_ENV=production
     env_file:
       - .env
     healthcheck:
