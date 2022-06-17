@@ -1,5 +1,11 @@
-import { IClientEntity } from '../../entities';
-
 export interface CreateClient {
-  create: (params: IClientEntity) => Promise<void>;
+  execute: (params: CreateClientInput) => Promise<void>;
 }
+
+export type CreateClientInput = {
+  id_user: string;
+  name: string;
+  email: string;
+  phone: string;
+  segment?: string;
+};

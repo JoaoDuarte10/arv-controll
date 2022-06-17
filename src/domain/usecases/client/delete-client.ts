@@ -1,3 +1,3 @@
 export interface DeleteClient {
-  delete: (id_user: string, id: string) => Promise<void>;
+  execute: (id_user: string, id: string) => Promise<void>;
 }

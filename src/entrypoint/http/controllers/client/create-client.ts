@@ -26,15 +26,8 @@ export class CreateClientController implements Controller {
       return invalidParameters;
     }
 
-    if (
-      phone.replace('_', '').toString().length < 16 &&
-      phone.replace('_', '').toString().length > 1
-    ) {
-      return invalidParameters;
-    }
-
     try {
-      await this.clientUseCase.create({
+      await this.clientUseCase.execute({
         id_user,
         name,
         email,

@@ -1,7 +1,7 @@
 import { HttpResponse, Response } from '../../../../entrypoint/contracts';
 import { Controller } from '../../../contracts/controller';
 import { IClientEntity } from '../../../../domain/entities/client';
-import { FindClientService } from '../../../../data/services/client/find-clients';
+import { FindClientService } from '../../../../application/services/client/find-clients';
 import { HttpRequest } from '../../../contracts/http';
 
 import { Request } from 'express';

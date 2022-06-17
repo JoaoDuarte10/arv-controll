@@ -25,7 +25,7 @@ export class UpdateClientController implements Controller {
       };
     }
     try {
-      await this.clientUseCase.update({
+      await this.clientUseCase.execute({
         id_user,
         id,
         name,

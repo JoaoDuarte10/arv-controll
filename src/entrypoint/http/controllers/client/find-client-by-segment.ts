@@ -1,5 +1,5 @@
 import { Controller } from '../../../contracts/controller';
-import { FindClientService } from '../../../../data/services/client/find-clients';
+import { FindClientService } from '../../../../application/services/client/find-clients';
 import { HttpResponse } from 'src/entrypoint/contracts';
 import { Response } from '../../../contracts/response-request';
 import { IClientEntity } from '../../../../domain/entities/client';

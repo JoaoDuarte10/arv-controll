@@ -1,5 +1,5 @@
 import { Controller } from '../../../contracts/controller';
-import { DeleteClientService } from '../../../../data/services/client/delete-client';
+import { DeleteClientService } from '../../../../application/services/client/delete-client';
 import { HttpResponse } from 'src/entrypoint/contracts';
 import { Response } from '../../../contracts/response-request';
 import { HttpRequest } from '../../../contracts/http';
@@ -16,7 +16,7 @@ export class DeleteClientController implements Controller {
     const { id_user } = req.headers;
 
     try {
-      await this.clientUseCase.delete(JSON.stringify(id_user), id);
+      await this.clientUseCase.execute(JSON.stringify(id_user), id);
       return { statusCode: 201 };
     } catch (error) {
       return {

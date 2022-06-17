@@ -8,7 +8,7 @@ export class DeleteClientService implements DeleteClient {
     private readonly logger: ILogger,
   ) {}
 
-  async delete(id_user: string, id: string): Promise<void> {
+  async execute(id_user: string, id: string): Promise<void> {
     const findClient = await this.clientRepository.find(id_user, id);
 
     if (!findClient) {
