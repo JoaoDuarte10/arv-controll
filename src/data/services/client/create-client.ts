@@ -1,6 +1,6 @@
 import { ClientEntity, IClientEntity } from '../../../domain/entities';
 import { ILogger } from '../../../infrastructure/utils/logger';
-import { CreateClient } from '../../../domain/usecases/client/create-client';
+import { CreateClient } from '../../../domain/usecases/client';
 import { ClientRepository } from '../../../domain/repository';
 
 export class CreateClientService implements CreateClient {
@@ -31,7 +31,7 @@ export class CreateClientService implements CreateClient {
     }
 
     try {
-      await this.clientRepository.newClient(client.props);
+      await this.clientRepository.create(client.props);
     } catch (error) {
       this.logger.error(
         `Error in CreateClientService in function create: ${error.message}`,

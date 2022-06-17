@@ -2,7 +2,7 @@ import { ClientRepository, IClient } from '../../domain/repository';
 import { Client } from '../models';
 
 class ClientRepositoryMongo implements ClientRepository {
-  async newClient({
+  async create({
     id_user,
     name,
     email,
@@ -20,14 +20,14 @@ class ClientRepositoryMongo implements ClientRepository {
     await client.save();
   }
 
-  async updateClient({
+  async update({
     id_user,
     id,
     name,
     email,
     phone,
     segment,
-  }: IClient): Promise<IClient[]> {
+  }: IClient): Promise<void> {
     const findClient = await Client.findOne({ id_user: id_user, _id: id });
     const updateClient = await findClient.updateOne({
       id_user: id_user,
@@ -39,12 +39,12 @@ class ClientRepositoryMongo implements ClientRepository {
     return updateClient;
   }
 
-  async findAllClients(id_user: string): Promise<IClient[]> {
+  async findAll(id_user: string): Promise<IClient[]> {
     const findAll = await Client.find({ id_user: id_user }).sort({ name: 1 });
     return findAll;
   }
 
-  async findClient(id_user: string, id: string): Promise<IClient> {
+  async find(id_user: string, id: string): Promise<IClient> {
     const findClient = await Client.findOne({ id_user: id_user, _id: id });
     return findClient;
   }
@@ -70,7 +70,7 @@ class ClientRepositoryMongo implements ClientRepository {
     return findBySegment;
   }
 
-  async deleteClient(id_user: string, id: string): Promise<void> {
+  async delete(id_user: string, id: string): Promise<void> {
     const findClient = await Client.findOne({ id_user: id_user, _id: id });
     await findClient.delete();
   }

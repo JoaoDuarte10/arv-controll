@@ -1,14 +1,18 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { Request } from 'express';
 import { Controller, HttpResponse } from '../../../contracts';
 import { HttpRequest } from '../../../contracts/http';
 import { CreateClient } from '../../../../domain/usecases/client/create-client';
+import { Response } from '../../../contracts/response-request';
+
+import { Request } from 'express';
 
 export class CreateClientController implements Controller {
   constructor(private clientUseCase: CreateClient) {}
 
-  async handle(req: HttpRequest<Request>): Promise<HttpResponse<any>> {
-    const { id_user, name, email, phone, segment } = req.body;
+  async handle(
+    req: HttpRequest<Request>,
+  ): Promise<HttpResponse<void | Response>> {
+    const { name, email, phone, segment } = req.body;
+    const id_user = JSON.stringify(req.headers.id_user);
 
     const invalidParameters = {
       statusCode: 200,
@@ -19,7 +23,6 @@ export class CreateClientController implements Controller {
     };
 
     if (!name || !phone) {
-      console.log(id_user, name, email, phone, segment);
       return invalidParameters;
     }
 
