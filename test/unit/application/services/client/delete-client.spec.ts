@@ -44,4 +44,17 @@ describe('Create Client Service', () => {
     expect(clientRepositorySpy).toHaveBeenCalledTimes(0);
     expect(loggerErrorSpy).toHaveBeenCalledTimes(0);
   });
+
+  it('should logger with eroror in delete client', async () => {
+    jest.spyOn(makeClientRepository, 'delete').mockImplementationOnce(() => {
+      throw new Error();
+    });
+    try {
+      await clientService.execute('123', '123');
+    } catch (error) {
+      expect(error).toBeDefined();
+    }
+    expect(clientRepositorySpy).toHaveBeenCalledTimes(1);
+    expect(loggerErrorSpy).toHaveBeenCalledTimes(1);
+  });
 });
