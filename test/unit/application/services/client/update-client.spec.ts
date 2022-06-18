@@ -3,7 +3,8 @@ import { UpdateClientInput } from '../../../../../src/domain/usecases/client';
 
 describe('Create Client Service', () => {
   let makeClientRepository = {} as any;
-  let clientRepositorySpy: {};
+  let clientRepositoryFindSpy: {};
+  let clientRepositoryUpdateSpy: {};
   let logger: { error: () => void };
   let loggerErrorSpy: {};
 
@@ -17,7 +18,8 @@ describe('Create Client Service', () => {
       update: () => new Promise((resolve, reject) => resolve(jest.fn)),
     };
 
-    clientRepositorySpy = jest.spyOn(makeClientRepository, 'update');
+    clientRepositoryUpdateSpy = jest.spyOn(makeClientRepository, 'update');
+    clientRepositoryFindSpy = jest.spyOn(makeClientRepository, 'update');
 
     logger = { error: jest.fn() };
     loggerErrorSpy = jest.spyOn(logger, 'error');
@@ -37,7 +39,21 @@ describe('Create Client Service', () => {
     const result = await sut.execute(clientParams);
 
     expect(result).toBeUndefined();
-    expect(clientRepositorySpy).toHaveBeenCalledTimes(1);
+    expect(clientRepositoryUpdateSpy).toHaveBeenCalledTimes(1);
+    expect(loggerErrorSpy).toHaveBeenCalledTimes(0);
+  });
+
+  it('should return error with client not exist', async () => {
+    jest.spyOn(makeClientRepository, 'find').mockImplementationOnce(() => {
+      new Promise((resolve, reject) => resolve(null));
+    });
+    try {
+      await sut.execute(clientParams);
+    } catch (error) {
+      expect(error).toBeDefined();
+    }
+
+    expect(clientRepositoryUpdateSpy).toHaveBeenCalledTimes(0);
     expect(loggerErrorSpy).toHaveBeenCalledTimes(0);
   });
 });
