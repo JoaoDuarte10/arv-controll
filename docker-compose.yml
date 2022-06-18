@@ -28,7 +28,7 @@ services:
   #   env_file:
   #     - .env
   #   healthcheck:
-  #     test: ["CMD", "curl", "-f", "http://localhost:5000/health-check"]
+  #     test: ["CMD", "curl", "-f", "http://localhost:5000/api/health-check"]
   #     interval: 1m30s
   #     timeout: 10s
   #     retries: 5
@@ -42,7 +42,7 @@ services:
   #   env_file:
   #     - .env
   #   healthcheck:
-  #     test: ["CMD", "curl", "-f", "http://localhost:5000/health-check"]
+  #     test: ["CMD", "curl", "-f", "http://localhost:5000/api/health-check"]
   #     interval: 1m30s
   #     timeout: 10s
   #     retries: 5

@@ -4,19 +4,12 @@ import { readdirSync } from 'fs';
 
 export const setupRoutes = (app: Express): void => {
   const router = Router();
+  app.use(cors());
   app.use('/api', router);
   readdirSync(`${__dirname}/../routes`).map(async (fileName) => {
     (await import(`../routes/${fileName}`)).default(router);
   });
 };
-
-const router = Router();
-
-router.use(cors());
-
-router.get('/health-check', (req, res) => {
-  res.status(201).send();
-});
 
 // router.post('/api/login', (req, res) => {
 //   return loginController.findLogin(req, res);
