@@ -81,6 +81,12 @@ export class ClientEntity {
         message: 'Invalid Email',
       });
     }
+    if (!this.props.phone.trim()) {
+      this.notification.addError({
+        type: 'InvalidParams',
+        message: 'Invalid Phone',
+      });
+    }
   }
 
   updateName(name: string) {
