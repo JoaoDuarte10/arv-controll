@@ -2,7 +2,7 @@ import { ISales, SalesRepository } from '../../domain/repository';
 import { Sales } from '../models';
 
 class SalesRepositoryMongoDB implements SalesRepository {
-  async saveSales({
+  async create({
     id_user,
     description,
     client,
