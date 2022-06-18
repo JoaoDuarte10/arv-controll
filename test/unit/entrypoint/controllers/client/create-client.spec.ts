@@ -27,4 +27,15 @@ describe('Create Client Controller', () => {
     expect(result.statusCode).toBe(201);
     expect(result.data).toBeUndefined();
   });
+
+  it('should return message with invalid name or phone', async () => {
+    httpRequest.body.name = '';
+    httpRequest.body.phone = '';
+
+    const result = await sut.handle(httpRequest);
+    const message = result.data ? result.data.message : '';
+
+    expect(result.statusCode).toBe(200);
+    expect(message).toBe('Invalids parameters');
+  });
 });
