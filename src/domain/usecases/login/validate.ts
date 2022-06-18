@@ -4,11 +4,11 @@ export interface ValidateLoginUseCase {
 
 export type Login = {
   id?: string;
-  name: string;
+  user: string;
   password: string;
 };
 
 export type LoginOutput = {
   id: string;
-  name: string;
+  user: string;
 };

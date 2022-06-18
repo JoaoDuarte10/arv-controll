@@ -15,16 +15,20 @@ export class LoginEntity {
     return this.props.id;
   }
 
-  get name() {
-    return this.props.name;
+  get user() {
+    return this.props.user;
   }
 
   get password() {
     return this.props.password;
   }
 
+  insertId(id: string) {
+    this.props.id = id;
+  }
+
   private validateProps() {
-    if (!this.props.name.trim()) {
+    if (!this.props.user.trim()) {
       this.notification.addError({
         type: 'InvalidParams',
         message: 'Invalid Name',
@@ -39,8 +43,8 @@ export class LoginEntity {
   }
 
   validateLogin(login: Login): LoginOutput {
-    if (this.name === login.name && this.password === login.password) {
-      return { id: this.id, name: this.name };
+    if (this.user === login.user && this.password === login.password) {
+      return { id: this.id, user: this.user };
     }
     this.notification.addError({
       type: 'unauthorized',
@@ -56,11 +60,11 @@ export class LoginEntity {
 
 export type Login = {
   id?: string;
-  name: string;
+  user: string;
   password: string;
 };
 
 export type LoginOutput = {
   id: string;
-  name: string;
+  user: string;
 };

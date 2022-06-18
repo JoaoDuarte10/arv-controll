@@ -3,7 +3,7 @@ import { NotificationErrorException } from '../../../../src/domain/exceptions/no
 describe('Login Entity', () => {
   it('should create a new instance login', () => {
     const params = {
-      name: 'any_name',
+      user: 'any_name',
       password: 'any_password',
     };
     const login = new LoginEntity(params);
@@ -12,7 +12,7 @@ describe('Login Entity', () => {
 
   it('should return error with invalid props', () => {
     const params = {
-      name: '',
+      user: '',
       password: '',
     };
     expect(() => new LoginEntity(params)).toThrowError(
@@ -22,23 +22,23 @@ describe('Login Entity', () => {
 
   it('should return name with valid login', () => {
     const params = {
-      name: 'any_name',
+      user: 'any_name',
       password: 'any_password',
     };
     const login = new LoginEntity(params);
 
-    expect(login.validateLogin(params).name).toBe('any_name');
+    expect(login.validateLogin(params).user).toBe('any_name');
   });
 
   it('should return error with invalid login', () => {
     const params = {
-      name: 'any_name',
+      user: 'any_name',
       password: 'any_password',
     };
     const login = new LoginEntity(params);
 
     expect(() =>
-      login.validateLogin({ name: 'name', password: 'password' }),
+      login.validateLogin({ user: 'name', password: 'password' }),
     ).toThrowError(NotificationErrorException);
   });
 });

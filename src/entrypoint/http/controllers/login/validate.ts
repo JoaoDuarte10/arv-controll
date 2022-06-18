@@ -12,10 +12,10 @@ export class ValidateLoginController implements Controller {
   async handle(
     req: HttpRequest<Request>,
   ): Promise<HttpResponse<LoginOutput | Response>> {
-    const { name, password } = req.body;
+    const { user, password } = req.body;
 
     try {
-      const result = await this.loginService.execute({ name, password });
+      const result = await this.loginService.execute({ user, password });
       return {
         statusCode: 200,
         data: result,

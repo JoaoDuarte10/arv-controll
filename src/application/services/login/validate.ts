@@ -13,6 +13,10 @@ export class ValidateLoginService implements ValidateLoginUseCase {
 
     const result = await this.loginRepository.find(login);
 
+    if (!result) throw new Error('Client Not Exist');
+
+    loginEntity.insertId(result.id);
+
     return loginEntity.validateLogin(result);
   }
 }

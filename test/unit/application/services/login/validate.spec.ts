@@ -7,7 +7,7 @@ describe('Validate Login Service', () => {
     loginRepository = {
       find: () => {
         return new Promise((resolve, reject) =>
-          resolve({ id: 'any_id', name: 'any_name', password: 'any_password' }),
+          resolve({ id: 'any_id', user: 'any_name', password: 'any_password' }),
         );
       },
     };
@@ -17,18 +17,18 @@ describe('Validate Login Service', () => {
     const sut = new ValidateLoginService(loginRepository);
 
     const result = await sut.execute({
-      name: 'any_name',
+      user: 'any_name',
       password: 'any_password',
     });
 
-    expect(result.name).toBe('any_name');
+    expect(result.user).toBe('any_name');
   });
 
   it('should return error a invalid login', async () => {
     const sut = new ValidateLoginService(loginRepository);
 
     try {
-      await sut.execute({ name: 'any_nam', password: 'any_password' });
+      await sut.execute({ user: 'any_nam', password: 'any_password' });
     } catch (error) {
       expect(error).toBeDefined();
     }
