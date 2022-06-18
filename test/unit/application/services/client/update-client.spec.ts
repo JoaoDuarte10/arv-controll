@@ -56,4 +56,19 @@ describe('Create Client Service', () => {
     expect(clientRepositoryUpdateSpy).toHaveBeenCalledTimes(0);
     expect(loggerErrorSpy).toHaveBeenCalledTimes(0);
   });
+
+  it('should logger with error in repository', async () => {
+    jest.spyOn(makeClientRepository, 'update').mockImplementationOnce(() => {
+      throw new Error();
+    });
+
+    try {
+      await sut.execute(clientParams);
+    } catch (error) {
+      expect(error).toBeDefined();
+    }
+
+    expect(clientRepositoryUpdateSpy).toHaveBeenCalledTimes(1);
+    expect(loggerErrorSpy).toHaveBeenCalledTimes(1);
+  });
 });
