@@ -51,4 +51,23 @@ describe('Create Client Service', () => {
     expect(clientRepositoryFindSpy).toHaveBeenCalledTimes(1);
     expect(loggerErrorSpy).toHaveBeenCalledTimes(1);
   });
+
+  it('should return all clients', async () => {
+    const result = await sut.findAll(params.id_user);
+
+    expect(result).toBeDefined();
+    expect(clientRepositoryFindAllSpy).toHaveBeenCalledTimes(1);
+    expect(loggerErrorSpy).toHaveBeenCalledTimes(0);
+  });
+
+  it('should logger with error in find all clients in repository', async () => {
+    jest.spyOn(makeClientRepository, 'findAll').mockImplementationOnce(() => {
+      throw new Error();
+    });
+    const result = await sut.findAll(params.id_user);
+
+    expect(result).toBeUndefined();
+    expect(clientRepositoryFindAllSpy).toHaveBeenCalledTimes(1);
+    expect(loggerErrorSpy).toHaveBeenCalledTimes(1);
+  });
 });
