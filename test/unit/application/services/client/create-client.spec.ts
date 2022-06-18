@@ -6,7 +6,7 @@ describe('Create Client Service', () => {
   let logger: { error: () => void };
   let loggerErrorSpy: {};
 
-  let clientService = {} as CreateClientService;
+  let sut = {} as CreateClientService;
 
   let clientParams: CreateClientInput;
 
@@ -20,10 +20,7 @@ describe('Create Client Service', () => {
     logger = { error: jest.fn() };
     loggerErrorSpy = jest.spyOn(logger, 'error');
 
-    clientService = new CreateClientService(
-      makeClientRepository as any,
-      logger as any,
-    );
+    sut = new CreateClientService(makeClientRepository as any, logger as any);
 
     clientParams = {
       id_user: '123',
@@ -46,7 +43,7 @@ describe('Create Client Service', () => {
         () => new Promise((resolve, reject) => resolve(null)),
       );
 
-    const result = await clientService.execute(clientParams);
+    const result = await sut.execute(clientParams);
 
     expect(result).toBeUndefined();
     expect(loggerErrorSpy).toHaveBeenCalledTimes(0);
@@ -56,7 +53,7 @@ describe('Create Client Service', () => {
     clientParams.phone = '999';
 
     try {
-      await clientService.execute(clientParams);
+      await sut.execute(clientParams);
     } catch (error) {
       expect(error).toBeDefined();
     }
@@ -64,7 +61,7 @@ describe('Create Client Service', () => {
 
   it('should return error with client already exist', async () => {
     try {
-      await clientService.execute(clientParams);
+      await sut.execute(clientParams);
     } catch (error) {
       expect(error).toBeDefined();
     }
@@ -86,7 +83,7 @@ describe('Create Client Service', () => {
       throw new Error();
     });
 
-    const result = await clientService.execute(clientParams);
+    const result = await sut.execute(clientParams);
 
     expect(result).toBeUndefined();
     expect(loggerErrorSpy).toHaveBeenCalledTimes(1);

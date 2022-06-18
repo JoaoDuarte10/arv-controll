@@ -5,7 +5,7 @@ describe('Create Client Service', () => {
   let logger: { error: () => void };
   let loggerErrorSpy: {};
 
-  let clientService = {} as DeleteClientService;
+  let sut = {} as DeleteClientService;
 
   beforeEach(() => {
     makeClientRepository = {
@@ -18,14 +18,11 @@ describe('Create Client Service', () => {
     logger = { error: jest.fn() };
     loggerErrorSpy = jest.spyOn(logger, 'error');
 
-    clientService = new DeleteClientService(
-      makeClientRepository as any,
-      logger as any,
-    );
+    sut = new DeleteClientService(makeClientRepository as any, logger as any);
   });
 
   it('should delete client', async () => {
-    const result = await clientService.execute('123', '123');
+    const result = await sut.execute('123', '123');
 
     expect(result).toBeUndefined();
     expect(clientRepositorySpy).toHaveBeenCalledTimes(1);
@@ -37,7 +34,7 @@ describe('Create Client Service', () => {
       new Promise((resolve, reject) => resolve(null));
     });
     try {
-      await clientService.execute('123', '123');
+      await sut.execute('123', '123');
     } catch (error) {
       expect(error).toBeDefined();
     }
@@ -50,7 +47,7 @@ describe('Create Client Service', () => {
       throw new Error();
     });
     try {
-      await clientService.execute('123', '123');
+      await sut.execute('123', '123');
     } catch (error) {
       expect(error).toBeDefined();
     }
