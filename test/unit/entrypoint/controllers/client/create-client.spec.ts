@@ -38,4 +38,16 @@ describe('Create Client Controller', () => {
     expect(result.statusCode).toBe(200);
     expect(message).toBe('Invalids parameters');
   });
+
+  it('should return response error with error in create client', async () => {
+    jest.spyOn(clientService, 'execute').mockImplementationOnce(() => {
+      throw new Error('Error');
+    });
+
+    const result = await sut.handle(httpRequest);
+    const message = result.data ? result.data.message : '';
+
+    expect(result.statusCode).toBe(500);
+    expect(message).toBe('Error');
+  });
 });
