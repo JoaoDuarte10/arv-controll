@@ -1,4 +1,5 @@
-import { CreateClientController } from '../../../../../src/entrypoint/http/controllers/client/create-client';
+import { CreateClientController } from '../../../../../../src/entrypoint/http/controllers/client/create-client';
+
 describe('Create Client Controller', () => {
   let clientService: { execute: () => Promise<void> };
   let sut: CreateClientController;
