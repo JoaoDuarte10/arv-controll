@@ -61,4 +61,34 @@ describe('Create Client Service', () => {
       expect(error).toBeDefined();
     }
   });
+
+  it('should return error with client already exist', async () => {
+    try {
+      await clientService.execute(clientParams);
+    } catch (error) {
+      expect(error).toBeDefined();
+    }
+  });
+
+  it('should logger with error in create a new client', async () => {
+    jest
+      .spyOn(makeClientRepository, 'findByName')
+      .mockImplementationOnce(
+        () => new Promise((resolve, reject) => resolve(null)),
+      );
+    jest
+      .spyOn(makeClientRepository, 'findByEmail')
+      .mockImplementationOnce(
+        () => new Promise((resolve, reject) => resolve(null)),
+      );
+
+    jest.spyOn(makeClientRepository, 'create').mockImplementationOnce(() => {
+      throw new Error();
+    });
+
+    const result = await clientService.execute(clientParams);
+
+    expect(result).toBeUndefined();
+    expect(loggerErrorSpy).toHaveBeenCalledTimes(1);
+  });
 });
