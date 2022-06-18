@@ -14,19 +14,17 @@ export class CreateClientController implements Controller {
     const { name, email, phone, segment } = req.body;
     const id_user = JSON.stringify(req.headers.id_user);
 
-    const invalidParameters = {
-      statusCode: 200,
-      data: {
-        type: 'inputs_invalids',
-        message: 'Invalids parameters',
-      },
-    };
-
-    if (!name || !phone) {
-      return invalidParameters;
-    }
-
     try {
+      if (!name || !phone) {
+        return {
+          statusCode: 200,
+          data: {
+            type: 'inputs_invalids',
+            message: 'Invalids parameters',
+          },
+        };
+      }
+
       await this.clientUseCase.execute({
         id_user,
         name,
