@@ -3,6 +3,9 @@ import { LoadSalesForDateService } from '../../../../../src/application/services
 
 describe('Load Sales For Date', () => {
   let salesRepository: { findByDate: () => Promise<Sales[]> };
+  let sut = {} as LoadSalesForDateService;
+  let logger: { error: () => void };
+  let loggerErrorSpy;
 
   beforeEach(() => {
     salesRepository = {
@@ -20,24 +23,38 @@ describe('Load Sales For Date', () => {
         );
       },
     };
+    logger = { error: () => jest.fn() };
+    loggerErrorSpy = jest.spyOn(logger, 'error');
+
+    sut = new LoadSalesForDateService(salesRepository as any, logger as any);
   });
 
   it('should return sales for date', async () => {
-    const service = new LoadSalesForDateService(salesRepository as any);
-    const result = await service.execute('any_id', new Date().toISOString());
+    const result = await sut.execute('any_id', new Date().toISOString());
 
     expect(new Date(result[0].date).getDate()).toBe(new Date().getDate());
   });
 
   it('should return error with date more than now', async () => {
-    const sut = new LoadSalesForDateService(salesRepository as any);
     const date = new Date();
 
-    await expect(() =>
-      sut.execute(
+    try {
+      await sut.execute(
         'any_id',
         new Date(date.setDate(date.getDate() + 5)).toISOString(),
-      ),
-    ).rejects.toThrow();
+      );
+    } catch (error) {
+      expect(error).toBeDefined();
+      expect(error.message).toBe('Invalid Date');
+    }
+  });
+
+  it('should logger with error in find sales', async () => {
+    jest.spyOn(salesRepository, 'findByDate').mockImplementationOnce(() => {
+      throw new Error();
+    });
+    await sut.execute('any_id', new Date().toISOString());
+
+    expect(loggerErrorSpy).toHaveBeenCalled();
   });
 });
