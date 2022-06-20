@@ -1,7 +1,7 @@
-import { Sales } from 'src/domain/entities/sales';
 import { LoadSalesForDate } from '../../../domain/usecases/sales/load-sales-for-date';
 import { SalesRepository } from '../../../domain/repository';
 import { ILogger } from '../../../infrastructure/utils/logger';
+import { SalesModel } from '../../models/sales';
 
 export class LoadSalesForDateService implements LoadSalesForDate {
   constructor(
@@ -9,7 +9,7 @@ export class LoadSalesForDateService implements LoadSalesForDate {
     private readonly logger: ILogger,
   ) {}
 
-  async execute(id_user: string, date: string): Promise<Sales[]> {
+  async execute(id_user: string, date: string): Promise<SalesModel[]> {
     if (new Date(date) > new Date()) {
       throw {
         type: 'inputs_invalids',
