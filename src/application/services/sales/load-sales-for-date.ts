@@ -7,6 +7,13 @@ export class LoadSalesForDateService implements LoadSalesForDate {
 
   async execute(id_user: string, date: string): Promise<Sales[]> {
     try {
+      if (new Date(date) > new Date()) {
+        throw {
+          type: 'inputs_invalids',
+          message: 'Invalid Date',
+        };
+      }
+
       const result = await this.salesRepository.findByDate(id_user, date);
       return result;
     } catch (error) {
