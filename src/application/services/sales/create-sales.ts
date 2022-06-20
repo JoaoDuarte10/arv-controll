@@ -1,8 +1,8 @@
-import { Sales } from 'src/domain/entities/sales';
 import { CreateSalesUseCase } from '../../../domain/usecases/sales/create-sales';
 import { SalesRepository } from '../../../domain/repository';
 import { SalesEntity } from '../../../domain/entities/sales';
 import { ILogger } from '../../../infrastructure/utils/logger';
+import { SalesModel } from '../../models/sales';
 
 export class CreateSalesService implements CreateSalesUseCase {
   constructor(
@@ -10,7 +10,7 @@ export class CreateSalesService implements CreateSalesUseCase {
     private readonly logger: ILogger,
   ) {}
 
-  async execute(params: Sales): Promise<void> {
+  async execute(params: SalesModel): Promise<void> {
     const sales = new SalesEntity(params);
 
     if (!sales.isValidSales()) {

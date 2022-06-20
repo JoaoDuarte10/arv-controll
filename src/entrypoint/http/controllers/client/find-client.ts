@@ -1,8 +1,8 @@
 import { HttpResponse, Response } from '../../../../entrypoint/contracts';
 import { Controller } from '../../../contracts/controller';
-import { IClientEntity } from '../../../../domain/entities/client';
 import { FindClientService } from '../../../../application/services/client/find-clients';
 import { HttpRequest } from '../../../contracts/http';
+import { ClientViewModel } from '../../../view-model';
 
 import { Request } from 'express';
 
@@ -11,7 +11,7 @@ export class FindClientController implements Controller {
 
   async handle(
     req?: HttpRequest<Request>,
-  ): Promise<HttpResponse<IClientEntity | Response>> {
+  ): Promise<HttpResponse<ClientViewModel | Response>> {
     const { id_user } = req.headers;
     const { id } = req.params;
 

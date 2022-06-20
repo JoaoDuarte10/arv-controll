@@ -3,7 +3,7 @@ import { FindClientService } from '../../../../application/services/client/find-
 import { HttpResponse } from 'src/entrypoint/contracts';
 import { HttpRequest } from '../../../contracts/http';
 import { Response } from '../../../contracts/response-request';
-import { IClientEntity } from '../../../../domain/entities/client';
+import { ClientViewModel } from '../../../view-model';
 
 import { Request } from 'express';
 
@@ -12,7 +12,7 @@ export class FindAllClientController implements Controller {
 
   async handle(
     req?: HttpRequest<Request>,
-  ): Promise<HttpResponse<IClientEntity[] | Response>> {
+  ): Promise<HttpResponse<ClientViewModel[] | Response>> {
     const { id_user } = req.headers;
 
     try {

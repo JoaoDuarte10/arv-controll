@@ -1,7 +1,7 @@
 import { FindClient } from '../../../domain/usecases/client';
-import { IClientEntity } from '../../../domain/entities/client';
 import { ClientRepository } from '../../../domain/repository';
 import { ILogger } from '../../../infrastructure/utils/logger';
+import { ClientModel } from '../../models';
 
 export class FindClientService implements FindClient {
   constructor(
@@ -9,7 +9,7 @@ export class FindClientService implements FindClient {
     private readonly logger: ILogger,
   ) {}
 
-  async find(id_user: string, id: string): Promise<IClientEntity> {
+  async find(id_user: string, id: string): Promise<ClientModel> {
     try {
       const findClient = await this.clientRepository.find(id_user, id);
       return findClient;
@@ -20,7 +20,7 @@ export class FindClientService implements FindClient {
     }
   }
 
-  async findAll(id_user: string): Promise<IClientEntity[]> {
+  async findAll(id_user: string): Promise<ClientModel[]> {
     try {
       return await this.clientRepository.findAll(id_user);
     } catch (error) {
@@ -33,7 +33,7 @@ export class FindClientService implements FindClient {
   async findBySegment(
     id_user: string,
     segment: string,
-  ): Promise<IClientEntity[]> {
+  ): Promise<ClientModel[]> {
     try {
       const findClients = await this.clientRepository.findBySegment(
         id_user,

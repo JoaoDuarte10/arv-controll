@@ -1,7 +1,5 @@
-import { IClientEntity } from '../../entities';
-
 export interface UpdateClient {
-  execute: (params: IClientEntity) => Promise<void>;
+  execute: (params: UpdateClientInput) => Promise<void>;
 }
 
 export type UpdateClientInput = {

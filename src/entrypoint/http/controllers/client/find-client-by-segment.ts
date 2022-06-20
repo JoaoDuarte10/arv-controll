@@ -2,8 +2,8 @@ import { Controller } from '../../../contracts/controller';
 import { FindClientService } from '../../../../application/services/client/find-clients';
 import { HttpResponse } from 'src/entrypoint/contracts';
 import { Response } from '../../../contracts/response-request';
-import { IClientEntity } from '../../../../domain/entities/client';
 import { HttpRequest } from '../../../contracts/http';
+import { ClientViewModel } from '../../../view-model';
 
 import { Request } from 'express';
 
@@ -12,7 +12,7 @@ export class FindClientBySegmentController implements Controller {
 
   async handle(
     req?: HttpRequest<Request>,
-  ): Promise<HttpResponse<IClientEntity[] | Response>> {
+  ): Promise<HttpResponse<ClientViewModel[] | Response>> {
     const { id_user } = req.headers;
     const { segment } = req.params;
 

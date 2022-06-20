@@ -1,14 +1,12 @@
-import {
-  Login,
-  ValidateLoginUseCase,
-} from '../../../domain/usecases/login/validate';
+import { ValidateLoginUseCase } from '../../../domain/usecases/login/validate';
 import { LoginRepository } from '../../../domain/repository';
-import { LoginEntity, LoginOutput } from '../../../domain/entities/login';
+import { LoginEntity } from '../../../domain/entities/login';
+import { LoginModel, LoginOutputModel } from '../../models';
 
 export class ValidateLoginService implements ValidateLoginUseCase {
   constructor(private readonly loginRepository: LoginRepository) {}
 
-  async execute(login: Login): Promise<LoginOutput> {
+  async execute(login: LoginModel): Promise<LoginOutputModel> {
     const loginEntity = new LoginEntity(login);
 
     const result = await this.loginRepository.find(login);
