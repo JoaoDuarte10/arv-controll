@@ -19,14 +19,14 @@ class SalesRepositoryMongoDB implements SalesRepository {
     await sales.save();
   }
 
-  async findSaleByDate(id_user: string, date: string): Promise<ISales[]> {
+  async findByDate(id_user: string, date: string): Promise<ISales[]> {
     const find = await Sales.find({ id_user: id_user, date: date }).sort({
       date: 1,
     });
     return find;
   }
 
-  async findSaleByPeriod(
+  async findByPeriod(
     id_user: string,
     date1: string,
     date2: string,
@@ -38,7 +38,7 @@ class SalesRepositoryMongoDB implements SalesRepository {
     return find;
   }
 
-  async findSalesByClient(id_user: string, client: string): Promise<ISales[]> {
+  async findByClient(id_user: string, client: string): Promise<ISales[]> {
     const find = await Sales.find({ id_user: id_user, client: client }).sort({
       date: 1,
     });
