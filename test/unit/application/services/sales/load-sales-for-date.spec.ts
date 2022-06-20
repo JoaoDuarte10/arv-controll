@@ -28,4 +28,16 @@ describe('Load Sales For Date', () => {
 
     expect(new Date(result[0].date).getDate()).toBe(new Date().getDate());
   });
+
+  it('should return error with date more than now', async () => {
+    const sut = new LoadSalesForDateService(salesRepository as any);
+    const date = new Date();
+
+    await expect(() =>
+      sut.execute(
+        'any_id',
+        new Date(date.setDate(date.getDate() + 5)).toISOString(),
+      ),
+    ).rejects.toThrow();
+  });
 });
