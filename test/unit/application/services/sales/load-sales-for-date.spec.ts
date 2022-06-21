@@ -1,8 +1,8 @@
-import { Sales } from '../../../../../src/domain/entities/sales';
 import { LoadSalesForDateService } from '../../../../../src/application/services/sales/load-sales-for-date';
+import { SalesModel } from '../../../../../src/application/models/sales';
 
 describe('Load Sales For Date', () => {
-  let salesRepository: { findByDate: () => Promise<Sales[]> };
+  let salesRepository: { findByDate: () => Promise<SalesModel[]> };
   let sut = {} as LoadSalesForDateService;
   let logger: { error: () => void };
   let loggerErrorSpy;

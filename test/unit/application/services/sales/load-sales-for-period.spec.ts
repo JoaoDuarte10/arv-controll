@@ -1,9 +1,9 @@
-import { Sales } from '../../../../../src/domain/entities/sales';
 import { LoadSalesForPeriodService } from '../../../../../src/application/services/sales/load-sales-for-period';
+import { SalesModel } from '../../../../../src/application/models/sales';
 
 describe('Load Sales For Period', () => {
   let salesRepository: {
-    findByPeriod: () => Promise<Sales[]>;
+    findByPeriod: () => Promise<SalesModel[]>;
   };
   let sut = {} as LoadSalesForPeriodService;
 
