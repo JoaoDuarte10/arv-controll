@@ -1,5 +1,6 @@
 import { CreateSalesService } from '../../../../../src/application/services/sales/create-sales';
 import { Sales } from '../../../../../src/domain/entities/sales';
+
 describe('Create Sales Service', () => {
   let salesRepository: { create: () => Promise<void> };
   let sut = {} as CreateSalesService;
@@ -37,6 +38,7 @@ describe('Create Sales Service', () => {
     } catch (error) {
       expect(error).toBeDefined();
       expect(error.message).toBe('InvalidParams: Invalid Price');
+      expect(loggerErrorSpy).toHaveBeenCalledTimes(0);
     }
   });
 

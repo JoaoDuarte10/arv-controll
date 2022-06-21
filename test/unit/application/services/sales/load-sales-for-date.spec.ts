@@ -5,7 +5,7 @@ describe('Load Sales For Date', () => {
   let salesRepository: { findByDate: () => Promise<SalesModel[]> };
   let sut = {} as LoadSalesForDateService;
   let logger: { error: () => void };
-  let loggerErrorSpy;
+  let loggerErrorSpy: {};
 
   beforeEach(() => {
     salesRepository = {
@@ -33,6 +33,7 @@ describe('Load Sales For Date', () => {
     const result = await sut.execute('any_id', new Date().toISOString());
 
     expect(new Date(result[0].date).getDate()).toBe(new Date().getDate());
+    expect(loggerErrorSpy).toHaveBeenCalledTimes(0);
   });
 
   it('should return error with date more than now', async () => {
@@ -46,6 +47,7 @@ describe('Load Sales For Date', () => {
     } catch (error) {
       expect(error).toBeDefined();
       expect(error.message).toBe('Invalid Date');
+      expect(loggerErrorSpy).toHaveBeenCalledTimes(0);
     }
   });
 
