@@ -29,4 +29,14 @@ describe('Create Sales Service', () => {
     expect(result).toBeUndefined();
     expect(loggerErrorSpy).toHaveBeenCalledTimes(0);
   });
+
+  it('should return error with invalid params', async () => {
+    try {
+      params.price = '';
+      await sut.execute(params);
+    } catch (error) {
+      expect(error).toBeDefined();
+      expect(error.message).toBe('InvalidParams: Invalid Price');
+    }
+  });
 });
