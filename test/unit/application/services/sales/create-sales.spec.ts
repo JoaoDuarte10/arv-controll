@@ -39,4 +39,13 @@ describe('Create Sales Service', () => {
       expect(error.message).toBe('InvalidParams: Invalid Price');
     }
   });
+
+  it('should logger with error in create sales in repository', async () => {
+    jest.spyOn(salesRepository, 'create').mockImplementationOnce(() => {
+      throw new Error();
+    });
+    await sut.execute(params);
+
+    expect(loggerErrorSpy).toHaveBeenCalled();
+  });
 });
