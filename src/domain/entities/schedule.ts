@@ -20,8 +20,8 @@ export class ScheduleEntity {
     return this.props.id_user;
   }
 
-  get id() {
-    return this.props.id;
+  get idSchedule() {
+    return this.props.idSchedule;
   }
 
   get client() {
@@ -113,6 +113,13 @@ export class ScheduleEntity {
     return this.actualAttendace === 1 || !this.pacote;
   }
 
+  isNotPacoteRemoveCalls() {
+    if (!this.pacote) {
+      this.props.qtdTotalAtendimento = 0;
+      this.props.qtdAtendimento = 0;
+    }
+  }
+
   returnProps() {
     return this.props;
   }
@@ -120,7 +127,7 @@ export class ScheduleEntity {
 
 export type Schedule = {
   id_user: string;
-  id?: string;
+  idSchedule?: string;
   client: string;
   procedure: string;
   date: string;

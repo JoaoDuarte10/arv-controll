@@ -3,25 +3,22 @@ import { Schedule } from '../models';
 
 class ScheduleRepositoryMongoDB implements ScheduleRepository {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  async findScheduleByTime(id_user: string, time: string): Promise<any> {
+  async findByTime(id_user: string, time: string): Promise<any> {
     const find = await Schedule.find({ id_user: id_user, time: time });
     return find;
   }
 
-  async findScheduleById(id_user: string, id: string): Promise<ISchedule> {
+  async findById(id_user: string, id: string): Promise<ISchedule> {
     const find = await Schedule.findOne({ id_user: id_user, _id: id });
     return find;
   }
 
-  async findAllSchedules(id_user: string): Promise<ISchedule[]> {
+  async findAll(id_user: string): Promise<ISchedule[]> {
     const find = await Schedule.find({ id_user: id_user });
     return find;
   }
 
-  async findScheduleByDate(
-    id_user: string,
-    date: string,
-  ): Promise<ISchedule[]> {
+  async findByDate(id_user: string, date: string): Promise<ISchedule[]> {
     const find = await Schedule.find({
       id_user: id_user,
       date: { $lte: date },
@@ -29,7 +26,7 @@ class ScheduleRepositoryMongoDB implements ScheduleRepository {
     return find;
   }
 
-  async saveSchedule({
+  async save({
     id_user,
     client,
     procedure,
@@ -60,7 +57,7 @@ class ScheduleRepositoryMongoDB implements ScheduleRepository {
     }
   }
 
-  async updateSchedule({
+  async update({
     id_user,
     id,
     client,
@@ -93,7 +90,7 @@ class ScheduleRepositoryMongoDB implements ScheduleRepository {
     }
   }
 
-  async deleteSchedule(id_user: string, id: string): Promise<boolean> {
+  async delete(id_user: string, id: string): Promise<boolean> {
     const findSchedule = await Schedule.findOne({ id_user: id_user, _id: id });
 
     try {

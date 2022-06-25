@@ -15,11 +15,11 @@ interface ISchedule {
 }
 
 interface ScheduleRepository {
-  findScheduleByTime(id_user: string, time: string): Promise<ISchedule>;
-  findScheduleById(id_user: string, id: string): Promise<ISchedule>;
-  findAllSchedules(id_user: string): Promise<ISchedule[]>;
-  findScheduleByDate(id_user: string, date: string): Promise<ISchedule[]>;
-  saveSchedule({
+  findByTime(id_user: string, time: string): Promise<ISchedule>;
+  findById(id_user: string, id: string): Promise<ISchedule>;
+  findAll(id_user: string): Promise<ISchedule[]>;
+  findByDate(id_user: string, date: string): Promise<ISchedule[]>;
+  save({
     id_user,
     client,
     procedure,
@@ -30,7 +30,7 @@ interface ScheduleRepository {
     pacote,
     qtdTotalAtendimento,
   }: ISchedule): Promise<boolean>;
-  updateSchedule({
+  update({
     id_user,
     id,
     client,
@@ -43,7 +43,7 @@ interface ScheduleRepository {
     qtdTotalAtendimento,
     qtdAtendimento,
   }: ISchedule): Promise<ISchedule>;
-  deleteSchedule(id_user: string, id: string): Promise<boolean>;
+  delete(id_user: string, id: string): Promise<boolean>;
 }
 
 export { ScheduleRepository, ISchedule };

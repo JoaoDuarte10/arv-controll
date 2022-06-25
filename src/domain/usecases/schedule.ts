@@ -4,7 +4,7 @@ import {
   SalesRepository,
   ScheduleRepository,
   ISchedule,
-} from '@domain/repository';
+} from '../../domain/repository';
 
 class ScheduleUseCase {
   constructor(
