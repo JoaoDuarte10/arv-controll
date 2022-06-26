@@ -1,7 +1,7 @@
 interface ISchedule {
-  _id?: string;
-  id_user: string;
   id?: string;
+  id_user: string;
+  idSchedule?: string;
   client: string;
   procedure: string;
   date: string;

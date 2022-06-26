@@ -27,7 +27,7 @@ export class LoadScheduleByDateService implements LoadSchedulesByDate {
         .map((item) => {
           if (item.date < actualDate) {
             return {
-              _id: item._id,
+              id: item.id,
               id_user: item.id_user,
               client: item.client,
               procedure: item.procedure,

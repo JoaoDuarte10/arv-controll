@@ -15,19 +15,27 @@ export class UpdateScheduleService implements UpdateSchedule {
 
     const scheduleAlreadyExists = await this.scheduleRepository.findById(
       params.id_user,
-      params.time,
+      params.idSchedule,
     );
-    if (scheduleAlreadyExists.time) {
+
+    if (!scheduleAlreadyExists) {
       throw {
-        type: 'Time already exists',
-        message: 'This time already exists',
+        type: 'Schedule not exists',
+        message: 'This schedule not exists',
+      };
+    }
+
+    if (params.phone && schedule.isValidPhone()) {
+      throw {
+        type: 'inputs_invalids',
+        message: 'Invalids parameters',
       };
     }
 
     schedule.isNotPacoteRemoveCalls();
 
     try {
-      await this.scheduleRepository.update(schedule);
+      await this.scheduleRepository.update(schedule.returnProps());
     } catch (error) {
       this.logger.error(
         `Error in ScheduleUseCase in function saveSchedule: ${error.message}`,

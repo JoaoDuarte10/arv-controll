@@ -5,12 +5,16 @@ class ScheduleRepositoryMongoDB implements ScheduleRepository {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async findByTime(id_user: string, time: string): Promise<any> {
     const find = await Schedule.find({ id_user: id_user, time: time });
-    return find;
+    return find.map((item) => {
+      const { _id, ...result } = item._doc;
+      return Object.assign({}, result, { id: _id });
+    });
   }
 
   async findById(id_user: string, id: string): Promise<ISchedule> {
     const find = await Schedule.findOne({ id_user: id_user, _id: id });
-    return find;
+    const { _id, ...result } = find._doc;
+    return Object.assign({}, result, { id: _id });
   }
 
   async findAll(id_user: string): Promise<ISchedule[]> {
@@ -23,7 +27,11 @@ class ScheduleRepositoryMongoDB implements ScheduleRepository {
       id_user: id_user,
       date: { $lte: date },
     });
-    return find;
+
+    return find.map((item) => {
+      const { _id, ...result } = item._doc;
+      return Object.assign({}, result, { id: _id });
+    });
   }
 
   async save({

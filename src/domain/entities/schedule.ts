@@ -120,6 +120,11 @@ export class ScheduleEntity {
     }
   }
 
+  isValidPhone() {
+    const replacePhone = this.phone.replace('_', '').toString();
+    return replacePhone.length < 16 && replacePhone.length > 1 ? false : true;
+  }
+
   returnProps() {
     return this.props;
   }

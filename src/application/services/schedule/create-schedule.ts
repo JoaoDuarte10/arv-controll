@@ -13,19 +13,31 @@ export class CreateScheduleService implements CreateSchedule {
   async execute(params: CreateScheduleModel): Promise<void> {
     const schedule = new ScheduleEntity(params);
 
-    const scheduleAlreadyExists = await this.scheduleRepository.findByTime(
+    const scheduleAlreadyExists = await this.scheduleRepository.findByDate(
       params.id_user,
-      params.time,
+      params.date,
     );
-    if (scheduleAlreadyExists.time) {
+
+    if (scheduleAlreadyExists) {
+      scheduleAlreadyExists.forEach((item) => {
+        if (item.time === params.time) {
+          throw {
+            type: 'Time already exists',
+            message: 'This time already exists',
+          };
+        }
+      });
+    }
+
+    if (params.phone && !schedule.isValidPhone()) {
       throw {
-        type: 'Time already exists',
-        message: 'This time already exists',
+        type: 'inputs_invalids',
+        message: 'Invalid phone',
       };
     }
 
     try {
-      await this.scheduleRepository.save(schedule);
+      await this.scheduleRepository.save(schedule.returnProps());
     } catch (error) {
       this.logger.error(
         `Error in ScheduleUseCase in function saveSchedule: ${error.message}`,
