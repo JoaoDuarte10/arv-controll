@@ -3,6 +3,7 @@
     "outDir": "./dist",
     "module": "commonjs",
     "target": "es2021",
+    "moduleResolution": "node",
     "esModuleInterop": true,
     "allowJs": true,
     "strict": false,

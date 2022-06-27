@@ -10,7 +10,7 @@ import {
 
 import { Router } from 'express';
 
-export default (router: Router): void => {
+export const clientRoutes = (router: Router): void => {
   router.post('/create-client', adaptRoute(makeCreateClientController()));
   router.put('/update-client', adaptRoute(makeUpdateClientController()));
   router.get('/client/:id', adaptRoute(makeFindClientController()));

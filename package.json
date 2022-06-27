@@ -5,12 +5,12 @@
   "type": "commonjs",
   "license": "MIT",
   "scripts": {
-    "build": "tsc --build",
+    "build": "rimraf ./dist && tsc --build",
     "build:clean": "tsc --build --clean",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "lint": "eslint \"{src,test}/**/*.ts\" --fix",
     "start:dev": "ts-node-dev src/entrypoint/http/config/server.ts",
-    "start:prd": "node dist/server.js",
+    "start:prd": "node dist/entrypoint/http/config/server.js",
     "test": "jest --passWithNoTests --silent --runInBand",
     "test:verbose": "jest --passWithNoTests",
     "test:unit": "npm run test -- --watch",
@@ -24,14 +24,12 @@
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.13",
     "@types/jest": "^27.4.1",
-    "@types/mysql": "^2.15.20",
     "@types/node": "^17.0.25",
     "@types/triple-beam": "^1.3.2",
     "@types/winston": "^2.4.4",
     "@typescript-eslint/eslint-plugin": "^5.20.0",
     "@typescript-eslint/parser": "^5.20.0",
     "eslint": "^8.13.0",
-    "eslint-config-google": "^0.14.0",
     "eslint-plugin-prettier": "^4.0.0",
     "git-commit-msg-linter": "^4.1.3",
     "husky": "^7.0.4",
@@ -41,15 +39,15 @@
     "standard-version": "^9.3.2",
     "ts-jest": "^27.1.4",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^4.6.3"
+    "typescript": "^4.7.4"
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "dotenv": "^10.0.0",
-    "express": "^4.17.2",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
     "moment": "^2.29.1",
-    "mongoose": "^6.1.5",
+    "mongoose": "^6.4.1",
     "triple-beam": "^1.3.0",
-    "winston": "^3.4.0"
+    "winston": "^3.8.0"
   }
 }

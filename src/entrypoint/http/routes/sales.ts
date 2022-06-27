@@ -9,7 +9,7 @@ import {
   makeLoadSalesForClientByPeriodController,
 } from '../../factories/sales';
 
-export default (router: Router): void => {
+export const salesRoutes = (router: Router): void => {
   router.post('/new-sales', adaptRoute(makeCreateSalesController()));
   router.get(
     '/sales-period-clients',

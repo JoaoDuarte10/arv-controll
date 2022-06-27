@@ -3,6 +3,6 @@ import { makeHealthCheckController } from '../../factories';
 
 import { Router } from 'express';
 
-export default (router: Router): void => {
+export const healthCheckRoutes = (router: Router): void => {
   router.get('/health-check', adaptRoute(makeHealthCheckController()));
 };

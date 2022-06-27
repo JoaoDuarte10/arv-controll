@@ -10,7 +10,7 @@ import {
 
 import { Router } from 'express';
 
-export default (router: Router): void => {
+export const scheduleRoutes = (router: Router): void => {
   router.post('/new-schedule', adaptRoute(makeCreateScheduleController()));
   router.put('/schedule', adaptRoute(makeUpdateScheduleController()));
   router.delete('/schedule', adaptRoute(makeDeleteScheduleController()));
