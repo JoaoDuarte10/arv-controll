@@ -21,6 +21,8 @@ export class LoadScheduleByDateController implements Controller {
         date,
       });
 
+      if (schedules.length === 0) return { statusCode: 404 };
+
       return {
         statusCode: 200,
         data: schedules.sort((a, b) => parseFloat(a.time) - parseFloat(b.time)),

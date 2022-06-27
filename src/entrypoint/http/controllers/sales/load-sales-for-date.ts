@@ -12,7 +12,7 @@ export class LoadSalesForDateController implements Controller {
   async handle(
     req: HttpRequest<Request>,
   ): Promise<HttpResponse<SalesViewModel[] | Response>> {
-    const { date } = req.body;
+    const { date } = req.query;
     const id_user: string = req.headers.id_user as string;
 
     if (!date) {
@@ -26,7 +26,7 @@ export class LoadSalesForDateController implements Controller {
     }
 
     try {
-      const result = await this.salesService.execute(id_user, date);
+      const result = await this.salesService.execute(id_user, date as string);
       return {
         statusCode: 200,
         data: result,

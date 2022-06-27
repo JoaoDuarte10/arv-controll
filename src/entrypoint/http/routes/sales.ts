@@ -11,11 +11,11 @@ import {
 
 export default (router: Router): void => {
   router.post('/new-sales', adaptRoute(makeCreateSalesController()));
-  router.post(
+  router.get(
     '/sales-period-clients',
     adaptRoute(makeLoadSalesForClientByPeriodController()),
   );
-  router.post('/sales-clients', adaptRoute(makeLoadSalesForClientController()));
-  router.post('/sales-today', adaptRoute(makeLoadSalesForDateController()));
-  router.post('/sales-period', adaptRoute(makeLoadSalesForPeriodController()));
+  router.get('/sales-clients', adaptRoute(makeLoadSalesForClientController()));
+  router.get('/sales-today', adaptRoute(makeLoadSalesForDateController()));
+  router.get('/sales-period', adaptRoute(makeLoadSalesForPeriodController()));
 };

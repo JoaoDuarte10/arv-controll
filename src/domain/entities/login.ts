@@ -53,6 +53,14 @@ export class LoginEntity {
     throw new NotificationErrorException(this.notification.getErros());
   }
 
+  invalidLogin() {
+    this.notification.addError({
+      type: 'unauthorized',
+      message: 'Name or Password Invalid',
+    });
+    throw new NotificationErrorException(this.notification.getErros());
+  }
+
   returnProps() {
     return this.props;
   }

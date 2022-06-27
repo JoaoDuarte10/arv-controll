@@ -13,7 +13,7 @@ class ScheduleRepositoryMongoDB implements ScheduleRepository {
 
   async findById(id_user: string, id: string): Promise<ISchedule> {
     const find = await Schedule.findOne({ id_user: id_user, _id: id });
-    const { _id, ...result } = find._doc;
+    const { _id, ...result } = find._doc || find;
     return Object.assign({}, result, { id: _id });
   }
 
@@ -84,18 +84,17 @@ class ScheduleRepositoryMongoDB implements ScheduleRepository {
     });
 
     try {
-      const update = await findSchedule.updateOne({
-        client: client,
-        procedure: procedure,
-        date: date,
-        time: time,
-        price: price,
-        phone: phone,
-        pacote: pacote,
-        qtdTotalAtendimento: qtdTotalAtendimento,
-        qtdAtendimento: qtdAtendimento,
+      await findSchedule.updateOne({
+        client,
+        procedure,
+        date,
+        time,
+        price,
+        phone,
+        pacote,
+        qtdTotalAtendimento,
+        qtdAtendimento,
       });
-      return update;
     } catch (err) {
       return err.message;
     }

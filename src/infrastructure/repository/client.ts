@@ -41,7 +41,10 @@ class ClientRepositoryMongo implements ClientRepository {
 
   async findAll(id_user: string): Promise<IClient[]> {
     const findAll = await Client.find({ id_user: id_user }).sort({ name: 1 });
-    return findAll;
+    return findAll.map((item) => {
+      const { _id, ...result } = item._doc;
+      return Object.assign({}, result, { id: _id });
+    });
   }
 
   async find(id_user: string, id: string): Promise<IClient> {

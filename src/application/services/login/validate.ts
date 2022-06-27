@@ -11,7 +11,7 @@ export class ValidateLoginService implements ValidateLoginUseCase {
 
     const result = await this.loginRepository.find(login);
 
-    if (!result) throw new Error('Client Not Exist');
+    if (!result) loginEntity.invalidLogin();
 
     loginEntity.insertId(result.id);
 

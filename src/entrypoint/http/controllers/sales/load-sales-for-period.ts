@@ -15,7 +15,7 @@ export class LoadSalesForPeriodController implements Controller {
   async handle(
     req: HttpRequest<Request>,
   ): Promise<HttpResponse<SalesViewModel[] | Response>> {
-    const { date1, date2 } = req.body;
+    const { date1, date2 } = req.query;
     const id_user: string = req.headers.id_user as string;
 
     if ((!date1 && !date2) || date1 === '') {
@@ -32,8 +32,8 @@ export class LoadSalesForPeriodController implements Controller {
       if (date1 && date2) {
         const resultForPeriod = await this.salesServicePeriod.execute({
           id_user,
-          date1,
-          date2,
+          date1: date1 as string,
+          date2: date2 as string,
         });
         return {
           statusCode: 200,
@@ -43,7 +43,7 @@ export class LoadSalesForPeriodController implements Controller {
       if (date1 && !date2) {
         const resultForDate = await this.salesServiceDate.execute(
           id_user,
-          date1,
+          date1 as string,
         );
         return {
           statusCode: 200,

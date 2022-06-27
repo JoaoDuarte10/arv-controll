@@ -1,7 +1,7 @@
 {
   "name": "api-arv-controll",
   "version": "1.0.0",
-  "main": "dist/server.js",
+  "main": "dist/entrypoint/http/config/server.js",
   "type": "commonjs",
   "license": "MIT",
   "scripts": {

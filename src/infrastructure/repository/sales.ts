@@ -23,7 +23,10 @@ class SalesRepositoryMongoDB implements SalesRepository {
     const find = await Sales.find({ id_user: id_user, date: date }).sort({
       date: 1,
     });
-    return find;
+    return find.map((item) => {
+      const { _id, id_user, __v, ...result } = item._doc;
+      return Object.assign({}, result);
+    });
   }
 
   async findByPeriod(

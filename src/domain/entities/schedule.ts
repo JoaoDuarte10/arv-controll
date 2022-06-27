@@ -100,8 +100,10 @@ export class ScheduleEntity {
 
   private defineActualAttendace() {
     if (this.pacote) {
-      this.props.qtdAtendimento = this.qtdAtendimento + 1;
+      this.props.qtdAtendimento = this.qtdAtendimento ? this.qtdAtendimento : 0;
+      return;
     }
+    this.props.qtdAtendimento = 0;
   }
 
   isValidForFinish() {
@@ -125,7 +127,7 @@ export class ScheduleEntity {
   }
 
   addAttendace() {
-    this.qtdAtendimento + 1;
+    this.props.qtdAtendimento = this.props.qtdAtendimento + 1;
   }
 
   registerIdSchedule(idSchedule: string) {
