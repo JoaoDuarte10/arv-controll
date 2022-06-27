@@ -25,7 +25,7 @@ export class UpdateScheduleService implements UpdateSchedule {
       };
     }
 
-    if (params.phone && schedule.isValidPhone()) {
+    if (params.phone && !schedule.isValidPhone()) {
       throw {
         type: 'inputs_invalids',
         message: 'Invalids parameters',

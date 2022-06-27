@@ -3,6 +3,7 @@ import {
   NotificationError,
 } from '../../application/notification/notification-error';
 import { NotificationErrorException } from '../exceptions/notification-error-exception';
+
 export class ScheduleEntity {
   private notification: INotificationError;
   actualAttendace: number;
@@ -83,7 +84,7 @@ export class ScheduleEntity {
         message: 'Invalid Procedure',
       });
     }
-    if (!this.date.trim() || new Date(this.date) < new Date()) {
+    if (!this.date.trim()) {
       this.notification.addError({
         type: 'InvalidParams',
         message: 'Invalid Date',
@@ -99,18 +100,16 @@ export class ScheduleEntity {
 
   private defineActualAttendace() {
     if (this.pacote) {
-      this.actualAttendace = this.qtdAtendimento + 1;
-    } else {
-      this.actualAttendace = 0;
+      this.props.qtdAtendimento = this.qtdAtendimento + 1;
     }
   }
 
   isValidForFinish() {
-    return this.actualAttendace >= this.qtdTotalAtendimento || !this.pacote;
+    return this.qtdAtendimento >= this.qtdTotalAtendimento || !this.pacote;
   }
 
-  isFirstForPacote() {
-    return this.actualAttendace === 1 || !this.pacote;
+  isFirstAttendaceForPacote() {
+    return this.qtdAtendimento === 1 || !this.pacote;
   }
 
   isNotPacoteRemoveCalls() {
@@ -123,6 +122,14 @@ export class ScheduleEntity {
   isValidPhone() {
     const replacePhone = this.phone.replace('_', '').toString();
     return replacePhone.length < 16 && replacePhone.length > 1 ? false : true;
+  }
+
+  addAttendace() {
+    this.qtdAtendimento + 1;
+  }
+
+  registerIdSchedule(idSchedule: string) {
+    this.props.idSchedule = idSchedule;
   }
 
   returnProps() {

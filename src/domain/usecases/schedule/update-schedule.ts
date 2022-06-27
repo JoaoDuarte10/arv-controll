@@ -13,5 +13,5 @@ type Input = {
   phone?: string;
   pacote?: boolean;
   qtdTotalAtendimento?: number;
-  qtdAtendimento: number;
+  qtdAtendimento?: number;
 };

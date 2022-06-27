@@ -23,9 +23,11 @@ export class FinishScheduleService implements FinishSchedule {
     }
 
     const schedule = new ScheduleEntity(scheduleAlreadyExists);
+    schedule.registerIdSchedule(scheduleAlreadyExists.id);
+    schedule.addAttendace();
 
     try {
-      if (schedule.isFirstForPacote()) {
+      if (schedule.isFirstAttendaceForPacote()) {
         await this.salesRepository.create({
           id_user: params.id_user,
           description: scheduleAlreadyExists.procedure,
@@ -38,6 +40,8 @@ export class FinishScheduleService implements FinishSchedule {
       if (schedule.isValidForFinish()) {
         await this.scheduleRepository.delete(params.id_user, params.id);
       }
+
+      await this.scheduleRepository.update(schedule.returnProps());
     } catch (error) {
       this.logger.error(
         `Failed in finish schedule service with schedule: ${params.id}. Error: ${error.message}`,

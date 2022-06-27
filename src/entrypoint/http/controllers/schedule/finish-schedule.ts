@@ -17,8 +17,8 @@ export class FinishScheduleController implements Controller {
 
     try {
       await this.scheduleService.execute({
-        id_user: id_user.toString(),
-        id: id.toString(),
+        id_user,
+        id,
       });
       return { statusCode: 201 };
     } catch (error) {

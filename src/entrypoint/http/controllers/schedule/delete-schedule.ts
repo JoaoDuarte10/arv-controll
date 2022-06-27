@@ -12,13 +12,13 @@ export class DeleteScheduleController implements Controller {
   async handle(
     req: HttpRequest<Request>,
   ): Promise<HttpResponse<void | Response>> {
-    const { id } = req.body;
+    const id = req.query.id as string;
     const id_user = req.headers.id_user as string;
 
     try {
       await this.scheduleService.execute({
-        id_user: id_user,
-        id: id.toString(),
+        id_user,
+        id,
       });
       return { statusCode: 201 };
     } catch (error) {
