@@ -13,10 +13,10 @@ export class FindAllClientController implements Controller {
   async handle(
     req?: HttpRequest<Request>,
   ): Promise<HttpResponse<ClientViewModel[] | Response>> {
-    const { id_user } = req.headers;
+    const id_user = req.headers.id_user as string;
 
     try {
-      const findAll = await this.clientUseCase.findAll(JSON.stringify(id_user));
+      const findAll = await this.clientUseCase.findAll(id_user);
       return {
         statusCode: 200,
         data: findAll,
