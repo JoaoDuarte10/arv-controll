@@ -11,10 +11,10 @@ import {
 import { Router } from 'express';
 
 export const scheduleRoutes = (router: Router): void => {
-  router.post('/new-schedule', adaptRoute(makeCreateScheduleController()));
-  router.put('/schedule', adaptRoute(makeUpdateScheduleController()));
+  router.post('/schedule/new', adaptRoute(makeCreateScheduleController()));
+  router.put('/schedule/update', adaptRoute(makeUpdateScheduleController()));
   router.delete('/schedule', adaptRoute(makeDeleteScheduleController()));
-  router.post('/finish-schedule', adaptRoute(makeFinishScheduleController()));
-  router.get('/all-schedule', adaptRoute(makeLoadAllScheduleController()));
-  router.get('/schedule', adaptRoute(makeLoadScheduleByDateController()));
+  router.post('/schedule/finish', adaptRoute(makeFinishScheduleController()));
+  router.get('/schedule/all', adaptRoute(makeLoadAllScheduleController()));
+  router.get('/schedule/date', adaptRoute(makeLoadScheduleByDateController()));
 };
