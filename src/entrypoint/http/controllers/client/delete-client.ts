@@ -12,11 +12,11 @@ export class DeleteClientController implements Controller {
   async handle(
     req?: HttpRequest<Request>,
   ): Promise<HttpResponse<void | Response>> {
-    const { id } = req.query;
-    const { id_user } = req.headers;
+    const id = req.query.id as string;
+    const id_user = req.headers.id_user as string;
 
     try {
-      await this.clientUseCase.execute(JSON.stringify(id_user), id as string);
+      await this.clientUseCase.execute(id_user, id);
       return { statusCode: 201 };
     } catch (error) {
       return {

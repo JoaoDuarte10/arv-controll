@@ -10,12 +10,12 @@ import {
 } from '../../factories/sales';
 
 export const salesRoutes = (router: Router): void => {
-  router.post('/new-sales', adaptRoute(makeCreateSalesController()));
+  router.post('/sales/new', adaptRoute(makeCreateSalesController()));
   router.get(
-    '/sales-period-clients',
+    '/sales/period-clients',
     adaptRoute(makeLoadSalesForClientByPeriodController()),
   );
-  router.get('/sales-clients', adaptRoute(makeLoadSalesForClientController()));
-  router.get('/sales-today', adaptRoute(makeLoadSalesForDateController()));
-  router.get('/sales-period', adaptRoute(makeLoadSalesForPeriodController()));
+  router.get('/sales/clients', adaptRoute(makeLoadSalesForClientController()));
+  router.get('/sales/today', adaptRoute(makeLoadSalesForDateController()));
+  router.get('/sales/period', adaptRoute(makeLoadSalesForPeriodController()));
 };
