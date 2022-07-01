@@ -43,6 +43,8 @@ class ClientRepositoryMongo implements ClientRepository {
   async findAll(id_user: string): Promise<IClient[]> {
     const findAll = await Client.find({ id_user: id_user }).sort({ name: 1 });
 
+    if (!findAll) return;
+
     return findAll.map((item) => {
       const { _id, id_user, name, email, phone, segment } = item;
       return Object.assign(
@@ -61,6 +63,8 @@ class ClientRepositoryMongo implements ClientRepository {
 
   async find(idUser: string, id: string): Promise<IClient> {
     const findClient = await Client.findOne({ id_user: idUser, _id: id });
+
+    if (!findClient) return;
 
     const { _id, id_user, name, email, phone, segment } = findClient;
     return Object.assign(
@@ -82,6 +86,8 @@ class ClientRepositoryMongo implements ClientRepository {
       email: emailUser,
     });
 
+    if (!findByEmail) return;
+
     const { _id, id_user, name, email, phone, segment } = findByEmail;
     return Object.assign(
       {},
@@ -101,6 +107,8 @@ class ClientRepositoryMongo implements ClientRepository {
       id_user: idUser,
       name: userName,
     });
+
+    if (!findByName) return;
 
     const { _id, id_user, name, email, phone, segment } = findByName;
     return Object.assign(
