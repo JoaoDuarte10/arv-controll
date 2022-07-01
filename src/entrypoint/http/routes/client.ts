@@ -16,7 +16,7 @@ export const clientRoutes = (router: Router): void => {
   router.get('/client/:id', adaptRoute(makeFindClientController()));
   router.get('/all-clients', adaptRoute(makeFindAllClientController()));
   router.get(
-    '/client/:segment',
+    '/client-segment',
     adaptRoute(makeFindBySegmentClientController()),
   );
   router.delete('/client', adaptRoute(makeDeleteClientController()));

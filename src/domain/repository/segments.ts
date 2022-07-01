@@ -3,7 +3,7 @@ interface ISegment {
 }
 
 interface SegmentRepository {
-  find(): Promise<ISegment[]>;
+  find(id_user: string): Promise<ISegment[]>;
 }
 
 export { ISegment, SegmentRepository };

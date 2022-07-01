@@ -23,9 +23,20 @@ class SalesRepositoryMongoDB implements SalesRepository {
     const find = await Sales.find({ id_user: id_user, date: date }).sort({
       date: 1,
     });
+
     return find.map((item) => {
-      const { _id, id_user, __v, ...result } = item._doc;
-      return Object.assign({}, result);
+      const { _id, id_user, description, client, date, price } = item;
+      return Object.assign(
+        {},
+        {
+          id: _id as any,
+          id_user,
+          description,
+          client,
+          date,
+          price,
+        },
+      );
     });
   }
 
@@ -38,14 +49,41 @@ class SalesRepositoryMongoDB implements SalesRepository {
       id_user: id_user,
       date: { $gte: date1, $lte: date2 },
     }).sort({ date: 1 });
-    return find;
+
+    return find.map((item) => {
+      const { _id, id_user, description, client, date, price } = item;
+      return Object.assign(
+        {},
+        {
+          id: _id as any,
+          id_user,
+          description,
+          client,
+          date,
+          price,
+        },
+      );
+    });
   }
 
   async findByClient(id_user: string, client: string): Promise<ISales[]> {
     const find = await Sales.find({ id_user: id_user, client: client }).sort({
       date: 1,
     });
-    return find;
+    return find.map((item) => {
+      const { _id, id_user, description, client, date, price } = item;
+      return Object.assign(
+        {},
+        {
+          id: _id as any,
+          id_user,
+          description,
+          client,
+          date,
+          price,
+        },
+      );
+    });
   }
 }
 

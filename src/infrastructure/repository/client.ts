@@ -41,28 +41,78 @@ class ClientRepositoryMongo implements ClientRepository {
 
   async findAll(id_user: string): Promise<IClient[]> {
     const findAll = await Client.find({ id_user: id_user }).sort({ name: 1 });
+
     return findAll.map((item) => {
-      const { _id, ...result } = item._doc;
-      return Object.assign({}, result, { id: _id });
+      const { _id, id_user, name, email, phone, segment } = item;
+      return Object.assign(
+        {},
+        {
+          id: _id as any,
+          id_user,
+          name,
+          email,
+          phone,
+          segment,
+        },
+      );
     });
   }
 
-  async find(id_user: string, id: string): Promise<IClient> {
-    const findClient = await Client.findOne({ id_user: id_user, _id: id });
-    return findClient;
+  async find(idUser: string, id: string): Promise<IClient> {
+    const findClient = await Client.findOne({ id_user: idUser, _id: id });
+
+    const { _id, id_user, name, email, phone, segment } = findClient;
+    return Object.assign(
+      {},
+      {
+        id: _id as any,
+        id_user,
+        name,
+        email,
+        phone,
+        segment,
+      },
+    );
   }
 
-  async findByEmail(id_user: string, email: string): Promise<IClient> {
+  async findByEmail(idUser: string, emailUser: string): Promise<IClient> {
     const findByEmail = await Client.findOne({
-      id_user: id_user,
-      email: email,
+      id_user: idUser,
+      email: emailUser,
     });
-    return findByEmail;
+
+    const { _id, id_user, name, email, phone, segment } = findByEmail;
+    return Object.assign(
+      {},
+      {
+        id: _id as any,
+        id_user,
+        name,
+        email,
+        phone,
+        segment,
+      },
+    );
   }
 
-  async findByName(id_user: string, name: string): Promise<IClient> {
-    const findByName = await Client.findOne({ id_user: id_user, name: name });
-    return findByName;
+  async findByName(idUser: string, userName: string): Promise<IClient> {
+    const findByName = await Client.findOne({
+      id_user: idUser,
+      name: userName,
+    });
+
+    const { _id, id_user, name, email, phone, segment } = findByName;
+    return Object.assign(
+      {},
+      {
+        id: _id as any,
+        id_user,
+        name,
+        email,
+        phone,
+        segment,
+      },
+    );
   }
 
   async findBySegment(id_user: string, segment: string): Promise<IClient[]> {
@@ -70,7 +120,21 @@ class ClientRepositoryMongo implements ClientRepository {
       id_user: id_user,
       segment: segment,
     });
-    return findBySegment;
+
+    return findBySegment.map((item) => {
+      const { _id, id_user, name, email, phone, segment } = item;
+      return Object.assign(
+        {},
+        {
+          id: _id as any,
+          id_user,
+          name,
+          email,
+          phone,
+          segment,
+        },
+      );
+    }) as any;
   }
 
   async delete(id_user: string, id: string): Promise<void> {

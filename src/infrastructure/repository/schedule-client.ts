@@ -26,7 +26,7 @@ class ScheduleClientRepositoryMongo implements ScheduleClientRepository {
 
   async findAllScheduleClients(id_user: string): Promise<IScheduleClient[]> {
     const findAll = await ScheduleClient.find({ id_user: id_user });
-    return findAll;
+    return findAll as any;
   }
 
   async deleteScheduleClients(id_user: string, _id: string): Promise<void> {

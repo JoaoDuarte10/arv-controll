@@ -1,5 +1,5 @@
 export interface FindSegmentUseCase {
-  execute: () => Promise<Segment[]>;
+  execute: (id_user: string) => Promise<Segment[]>;
 }
 
 export type Segment = {
