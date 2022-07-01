@@ -12,7 +12,7 @@ export class LoadSalesForClientController implements Controller {
   async handle(
     req: HttpRequest<Request>,
   ): Promise<HttpResponse<SalesViewModel[] | Response>> {
-    const { client } = req.body;
+    const client = req.query.client as string;
     const id_user: string = req.headers.id_user as string;
 
     try {
