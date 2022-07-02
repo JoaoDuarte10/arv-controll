@@ -1,6 +1,6 @@
 import { Controller } from '../../../contracts/controller';
 import { UpdateSchedule } from '../../../../domain/usecases/schedule/update-schedule';
-import { HttpResponse } from 'src/entrypoint/contracts';
+import { HttpResponse } from '../../../../entrypoint/contracts';
 import { HttpRequest } from '../../../contracts/http';
 import { Response } from '../../../contracts/response-request';
 
@@ -8,7 +8,7 @@ import { Request } from 'express';
 import {
   TYPE_ALREADY_EXISTS,
   TYPE_INPUT_INVALIDS,
-} from 'src/application/utils/type-errors';
+} from '../../../../application/utils/type-errors';
 
 export class UpdateScheduleController implements Controller {
   constructor(private readonly scheduleService: UpdateSchedule) {}
