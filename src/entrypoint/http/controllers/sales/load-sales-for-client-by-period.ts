@@ -16,13 +16,7 @@ export class LoadSalesForClientByPeriodController implements Controller {
     const id_user: string = req.headers.id_user as string;
 
     if ((!date1 && !date2) || date1 === '') {
-      return {
-        statusCode: 400,
-        data: {
-          type: 'inputs_invalids',
-          message: 'Invalid date',
-        },
-      };
+      return { statusCode: 400 };
     }
 
     try {
@@ -31,6 +25,9 @@ export class LoadSalesForClientByPeriodController implements Controller {
         date1,
         date2,
       });
+
+      if (result.length === 0) return { statusCode: 404 };
+
       return {
         statusCode: 200,
         data: result.filter((item) => !!item.client),

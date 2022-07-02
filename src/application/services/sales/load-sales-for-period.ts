@@ -12,11 +12,10 @@ export class LoadSalesForPeriodService implements LoadSalesForPeriod {
   constructor(private readonly salesRepository: SalesRepository) {}
 
   async execute(params: SalesPeriod): Promise<SalesModel[]> {
-    const result = await this.salesRepository.findByPeriod(
+    return await this.salesRepository.findByPeriod(
       params.id_user,
       params.date1,
       params.date2,
     );
-    return result;
   }
 }

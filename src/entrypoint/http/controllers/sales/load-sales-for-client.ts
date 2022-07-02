@@ -21,9 +21,8 @@ export class LoadSalesForClientController implements Controller {
         client,
       });
 
-      if (!result || result.length === 0) {
-        return { statusCode: 404 };
-      }
+      if (!result || result.length === 0) return { statusCode: 404 };
+
       return {
         statusCode: 200,
         data: result,

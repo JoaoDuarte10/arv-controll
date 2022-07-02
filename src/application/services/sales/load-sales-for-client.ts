@@ -11,19 +11,10 @@ export class LoadSalesForClientService implements LoadSalesForClient {
 
   async execute(params: { id_user: string; client: string }): Promise<Sales[]> {
     try {
-      const result = await this.salesRepository.findByClient(
+      return await this.salesRepository.findByClient(
         params.id_user,
         params.client,
       );
-
-      if (!result) {
-        throw {
-          type: 'not_found',
-          message: 'Sales Not Found',
-        };
-      }
-
-      return result;
     } catch (error) {
       this.logger.error(
         `Error SalesUseCase function findSaleByClient: ${error.message}`,

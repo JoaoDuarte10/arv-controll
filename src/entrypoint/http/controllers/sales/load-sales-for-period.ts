@@ -18,15 +18,7 @@ export class LoadSalesForPeriodController implements Controller {
     const { date1, date2 } = req.query;
     const id_user: string = req.headers.id_user as string;
 
-    if ((!date1 && !date2) || date1 === '') {
-      return {
-        statusCode: 400,
-        data: {
-          type: 'inputs_invalids',
-          message: 'Invalid date',
-        },
-      };
-    }
+    if ((!date1 && !date2) || date1 === '') return { statusCode: 400 };
 
     try {
       if (date1 && date2) {
@@ -40,6 +32,7 @@ export class LoadSalesForPeriodController implements Controller {
           data: resultForPeriod,
         };
       }
+
       if (date1 && !date2) {
         const resultForDate = await this.salesServiceDate.execute(
           id_user,
@@ -50,6 +43,8 @@ export class LoadSalesForPeriodController implements Controller {
           data: resultForDate,
         };
       }
+
+      return { statusCode: 404 };
     } catch (error) {
       return {
         statusCode: 500,

@@ -11,8 +11,7 @@ export class LoadSalesForDateService implements LoadSalesForDate {
 
   async execute(id_user: string, date: string): Promise<SalesModel[]> {
     try {
-      const result = await this.salesRepository.findByDate(id_user, date);
-      return result;
+      return await this.salesRepository.findByDate(id_user, date);
     } catch (error) {
       this.logger.error(
         `Error SalesUseCase function findSalesByDate: ${error.message}`,

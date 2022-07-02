@@ -12,21 +12,18 @@ export class LoadSalesForDateController implements Controller {
   async handle(
     req: HttpRequest<Request>,
   ): Promise<HttpResponse<SalesViewModel[] | Response>> {
-    const { date } = req.query;
+    const date = req.query.date as string;
     const id_user: string = req.headers.id_user as string;
 
     if (!date) {
-      return {
-        statusCode: 400,
-        data: {
-          type: 'inputs_invalids',
-          message: 'Invalid date',
-        },
-      };
+      return { statusCode: 400 };
     }
 
     try {
-      const result = await this.salesService.execute(id_user, date as string);
+      const result = await this.salesService.execute(id_user, date);
+
+      if (result.length === 0) return { statusCode: 404 };
+
       return {
         statusCode: 200,
         data: result,
