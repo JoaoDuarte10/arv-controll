@@ -3,6 +3,10 @@ import { CreateSchedule } from '../../../domain/usecases/schedule/create-schedul
 import { CreateScheduleModel } from '../../models/schedule';
 import { ScheduleEntity } from '../../../domain/entities/schedule';
 import { ILogger } from '../../../infrastructure/utils/logger';
+import {
+  TYPE_ALREADY_EXISTS,
+  TYPE_INPUT_INVALIDS,
+} from '../../utils/type-errors';
 
 export class CreateScheduleService implements CreateSchedule {
   constructor(
@@ -22,7 +26,7 @@ export class CreateScheduleService implements CreateSchedule {
       scheduleAlreadyExists.forEach((item) => {
         if (item.time === params.time) {
           throw {
-            type: 'Time already exists',
+            type: TYPE_ALREADY_EXISTS,
             message: 'This time already exists',
           };
         }
@@ -31,7 +35,7 @@ export class CreateScheduleService implements CreateSchedule {
 
     if (params.phone && !schedule.isValidPhone()) {
       throw {
-        type: 'inputs_invalids',
+        type: TYPE_INPUT_INVALIDS,
         message: 'Invalid phone',
       };
     }

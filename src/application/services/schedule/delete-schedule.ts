@@ -1,6 +1,7 @@
 import { DeleteSchedule } from '../../../domain/usecases/schedule/delete-schedule';
 import { ILogger } from '../../../infrastructure/utils/logger';
 import { ScheduleRepository } from 'src/domain/repository';
+import { TYPE_NOT_EXISTS } from '../../utils/type-errors';
 
 export class DeleteScheduleService implements DeleteSchedule {
   constructor(
@@ -14,7 +15,7 @@ export class DeleteScheduleService implements DeleteSchedule {
     );
     if (!scheduleAlreadyExists) {
       throw {
-        type: 'Schedule already not exists',
+        type: TYPE_NOT_EXISTS,
         message: 'Schedule already not exists',
       };
     }

@@ -2,6 +2,7 @@ import { FinishSchedule } from '../../../domain/usecases/schedule/finish-schedul
 import { ILogger } from '../../../infrastructure/utils/logger';
 import { SalesRepository, ScheduleRepository } from 'src/domain/repository';
 import { ScheduleEntity } from '../../../domain/entities/schedule';
+import { TYPE_NOT_EXISTS } from '../../utils/type-errors';
 
 export class FinishScheduleService implements FinishSchedule {
   constructor(
@@ -17,7 +18,7 @@ export class FinishScheduleService implements FinishSchedule {
     );
     if (!scheduleAlreadyExists) {
       throw {
-        type: 'Schedule already not exists',
+        type: TYPE_NOT_EXISTS,
         message: 'Schedule already not exists',
       };
     }

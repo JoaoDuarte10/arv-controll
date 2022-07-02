@@ -3,6 +3,7 @@ import { UpdateScheduleModel } from '../../models/schedule';
 import { ScheduleEntity } from '../../../domain/entities/schedule';
 import { ILogger } from '../../../infrastructure/utils/logger';
 import { UpdateSchedule } from '../../../domain/usecases/schedule/update-schedule';
+import { TYPE_NOT_EXISTS, TYPE_INPUT_INVALIDS } from '../../utils/type-errors';
 
 export class UpdateScheduleService implements UpdateSchedule {
   constructor(
@@ -20,14 +21,14 @@ export class UpdateScheduleService implements UpdateSchedule {
 
     if (!scheduleAlreadyExists) {
       throw {
-        type: 'Schedule not exists',
+        type: TYPE_NOT_EXISTS,
         message: 'This schedule not exists',
       };
     }
 
     if (params.phone && !schedule.isValidPhone()) {
       throw {
-        type: 'inputs_invalids',
+        type: TYPE_INPUT_INVALIDS,
         message: 'Invalids parameters',
       };
     }

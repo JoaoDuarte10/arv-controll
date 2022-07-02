@@ -5,6 +5,7 @@ import { Response } from '../../../contracts/response-request';
 import { DeleteSchedule } from '../../../../domain/usecases/schedule/delete-schedule';
 
 import { Request } from 'express';
+import { TYPE_NOT_EXISTS } from '../../../../application/utils/type-errors';
 
 export class DeleteScheduleController implements Controller {
   constructor(private readonly scheduleService: DeleteSchedule) {}
@@ -22,12 +23,13 @@ export class DeleteScheduleController implements Controller {
       });
       return { statusCode: 201 };
     } catch (error) {
+      if (error.type === TYPE_NOT_EXISTS) {
+        return { statusCode: 404 };
+      }
+
       return {
         statusCode: 500,
-        data: {
-          type: 'error',
-          message: error.message,
-        },
+        data: error.message,
       };
     }
   }

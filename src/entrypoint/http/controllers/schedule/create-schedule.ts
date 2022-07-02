@@ -5,6 +5,10 @@ import { Response } from '../../../contracts/response-request';
 import { CreateSchedule } from '../../../../domain/usecases/schedule/create-schedule';
 
 import { Request } from 'express';
+import {
+  TYPE_ALREADY_EXISTS,
+  TYPE_INPUT_INVALIDS,
+} from '../../../../application/utils/type-errors';
 
 export class CreateScheduleController implements Controller {
   constructor(private readonly scheduleService: CreateSchedule) {}
@@ -26,13 +30,7 @@ export class CreateScheduleController implements Controller {
     const id_user = req.headers.id_user as string;
 
     if (!client || !procedure || !date || !time || !price) {
-      return {
-        statusCode: 400,
-        data: {
-          type: 'error',
-          message: 'invalids_inputs',
-        },
-      };
+      return { statusCode: 400 };
     }
 
     try {
@@ -49,12 +47,17 @@ export class CreateScheduleController implements Controller {
       });
       return { statusCode: 201 };
     } catch (error) {
+      if (error.type === TYPE_ALREADY_EXISTS) {
+        return { statusCode: 409 };
+      }
+
+      if (error.type === TYPE_INPUT_INVALIDS) {
+        return { statusCode: 400 };
+      }
+
       return {
         statusCode: 500,
-        data: {
-          type: 'error',
-          message: error.message,
-        },
+        data: error.message,
       };
     }
   }

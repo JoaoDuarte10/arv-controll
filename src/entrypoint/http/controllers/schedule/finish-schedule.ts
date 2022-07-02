@@ -5,6 +5,7 @@ import { HttpRequest } from '../../../contracts/http';
 import { Response } from '../../../contracts/response-request';
 
 import { Request } from 'express';
+import { TYPE_NOT_EXISTS } from '../../../../application/utils/type-errors';
 
 export class FinishScheduleController implements Controller {
   constructor(private readonly scheduleService: FinishSchedule) {}
@@ -22,12 +23,13 @@ export class FinishScheduleController implements Controller {
       });
       return { statusCode: 201 };
     } catch (error) {
+      if (error.type === TYPE_NOT_EXISTS) {
+        return { statusCode: 404 };
+      }
+
       return {
         statusCode: 500,
-        data: {
-          type: 'error',
-          message: error.message,
-        },
+        data: error.message,
       };
     }
   }
