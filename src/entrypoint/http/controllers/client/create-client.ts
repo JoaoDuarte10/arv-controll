@@ -4,6 +4,10 @@ import { CreateClient } from '../../../../domain/usecases/client/create-client';
 import { Response } from '../../../contracts/response-request';
 
 import { Request } from 'express';
+import {
+  TYPE_ALREADY_EXISTS,
+  TYPE_INPUT_INVALIDS,
+} from '../../../../application/utils/type-errors';
 
 export class CreateClientController implements Controller {
   constructor(private clientUseCase: CreateClient) {}
@@ -17,7 +21,7 @@ export class CreateClientController implements Controller {
     try {
       if (!name || !phone) {
         return {
-          statusCode: 200,
+          statusCode: 400,
           data: {
             type: 'inputs_invalids',
             message: 'Invalids parameters',
@@ -35,6 +39,14 @@ export class CreateClientController implements Controller {
 
       return { statusCode: 201 };
     } catch (error) {
+      if (error.type === TYPE_ALREADY_EXISTS) {
+        return { statusCode: 409 };
+      }
+
+      if (error.type === TYPE_INPUT_INVALIDS) {
+        return { statusCode: 400 };
+      }
+
       return {
         statusCode: 500,
         data: {

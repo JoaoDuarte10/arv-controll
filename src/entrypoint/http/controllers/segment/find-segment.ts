@@ -16,6 +16,11 @@ export class FindSegmentController implements Controller {
 
     try {
       const result = await this.segmentService.execute(id_user);
+
+      if (result.length === 0) {
+        return { statusCode: 404 };
+      }
+
       return {
         statusCode: 200,
         data: result,

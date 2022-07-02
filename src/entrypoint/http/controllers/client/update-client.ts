@@ -5,6 +5,7 @@ import { HttpRequest } from '../../../contracts/http';
 import { Response } from '../../../contracts/response-request';
 
 import { Request } from 'express';
+import { TYPE_NOT_EXISTS } from '../../../../application/utils/type-errors';
 
 export class UpdateClientController implements Controller {
   constructor(private clientUseCase: UpdateClient) {}
@@ -13,7 +14,7 @@ export class UpdateClientController implements Controller {
     req?: HttpRequest<Request>,
   ): Promise<HttpResponse<void | Response>> {
     const { id, name, email, phone, segment } = req.body;
-    const id_user = JSON.stringify(req.headers.id_user);
+    const id_user = req.headers.id_user as string;
 
     if (!name || !phone) {
       return {
@@ -35,6 +36,10 @@ export class UpdateClientController implements Controller {
       });
       return { statusCode: 201 };
     } catch (error) {
+      if (error.type === TYPE_NOT_EXISTS) {
+        return { statusCode: 404 };
+      }
+
       return {
         statusCode: 500,
         data: {

@@ -5,6 +5,7 @@ import { Response } from '../../../contracts/response-request';
 import { HttpRequest } from '../../../contracts/http';
 
 import { Request } from 'express';
+import { TYPE_NOT_EXISTS } from '../../../../application/utils/type-errors';
 
 export class DeleteClientController implements Controller {
   constructor(private readonly clientUseCase: DeleteClientService) {}
@@ -19,6 +20,10 @@ export class DeleteClientController implements Controller {
       await this.clientUseCase.execute(id_user, id);
       return { statusCode: 201 };
     } catch (error) {
+      if (error.type === TYPE_NOT_EXISTS) {
+        return { statusCode: 404 };
+      }
+
       return {
         statusCode: 500,
         data: {

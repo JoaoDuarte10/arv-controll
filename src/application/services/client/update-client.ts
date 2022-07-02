@@ -3,6 +3,7 @@ import { UpdateClient } from '../../../domain/usecases/client';
 import { ILogger } from '../../../infrastructure/utils/logger';
 import { ClientEntity } from '../../../domain/entities/client';
 import { ClientModel } from '../../models/client';
+import { TYPE_NOT_EXISTS } from '../../utils/type-errors';
 
 export class UpdateClientService implements UpdateClient {
   constructor(
@@ -16,9 +17,10 @@ export class UpdateClientService implements UpdateClient {
       params.id_user,
       params.id,
     );
+
     if (!findClient) {
       throw {
-        type: 'Client already not exists',
+        type: TYPE_NOT_EXISTS,
         message: 'Client does not exist',
       };
     }
@@ -26,9 +28,7 @@ export class UpdateClientService implements UpdateClient {
     try {
       await this.clientRepository.update(client.props);
     } catch (error) {
-      this.logger.error(
-        `Error in ClientUseCase in function updateClient: ${error.message}`,
-      );
+      this.logger.error(`Error in Update Client Service: ${error.message}`);
     }
   }
 }

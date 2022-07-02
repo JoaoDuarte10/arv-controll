@@ -15,7 +15,7 @@ export class FindClientService implements FindClient {
       return findClient;
     } catch (error) {
       this.logger.error(
-        `Error in ClientUseCase in function findClient: ${error.message}`,
+        `Error in Find Client Service in function find: ${error.message}`,
       );
     }
   }
@@ -25,7 +25,7 @@ export class FindClientService implements FindClient {
       return await this.clientRepository.findAll(id_user);
     } catch (error) {
       this.logger.error(
-        `Error in ClientUseCase in function findAllClients: ${error.message}`,
+        `Error in Find Client Service in function findAll: ${error.message}`,
       );
     }
   }
@@ -42,7 +42,7 @@ export class FindClientService implements FindClient {
       return findClients;
     } catch (error) {
       this.logger.error(
-        `Error in ClientUseCase in function findBySegment: ${error.message}`,
+        `Error in Find Client Service in function findBySegment: ${error.message}`,
       );
     }
   }

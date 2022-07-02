@@ -17,13 +17,15 @@ export class FindClientBySegmentController implements Controller {
     const segment = req.query.segment as string;
 
     try {
-      const findClient = await this.clientUseCase.findBySegment(
-        id_user,
-        segment,
-      );
+      const result = await this.clientUseCase.findBySegment(id_user, segment);
+
+      if (result.length === 0) {
+        return { statusCode: 404 };
+      }
+
       return {
         statusCode: 200,
-        data: findClient,
+        data: result,
       };
     } catch (error) {
       return {

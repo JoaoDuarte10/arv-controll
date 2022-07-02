@@ -16,10 +16,15 @@ export class FindAllClientController implements Controller {
     const id_user = req.headers.id_user as string;
 
     try {
-      const findAll = await this.clientUseCase.findAll(id_user);
+      const result = await this.clientUseCase.findAll(id_user);
+
+      if (result.length === 0) {
+        return { statusCode: 404 };
+      }
+
       return {
         statusCode: 200,
-        data: findAll,
+        data: result,
       };
     } catch (error) {
       return {

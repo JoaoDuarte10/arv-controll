@@ -3,6 +3,10 @@ import { ILogger } from '../../../infrastructure/utils/logger';
 import { CreateClient } from '../../../domain/usecases/client';
 import { ClientRepository } from '../../../domain/repository';
 import { CreateClientInput } from '../../../domain/usecases/client/create-client';
+import {
+  TYPE_ALREADY_EXISTS,
+  TYPE_INPUT_INVALIDS,
+} from '../../utils/type-errors';
 
 export class CreateClientService implements CreateClient {
   constructor(
@@ -15,7 +19,7 @@ export class CreateClientService implements CreateClient {
 
     if (params.phone && !client.isValidPhone()) {
       throw {
-        type: 'inputs_invalids',
+        type: TYPE_INPUT_INVALIDS,
         message: 'Invalids parameters',
       };
     }
@@ -28,7 +32,7 @@ export class CreateClientService implements CreateClient {
 
     if (clientAlreadyExist) {
       throw {
-        type: 'Client already exists',
+        type: TYPE_ALREADY_EXISTS,
         message: 'Client already exist',
       };
     }
