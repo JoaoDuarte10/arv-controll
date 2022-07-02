@@ -20,6 +20,10 @@ export class LoadSalesForClientController implements Controller {
         id_user,
         client,
       });
+
+      if (!result || result.length === 0) {
+        return { statusCode: 404 };
+      }
       return {
         statusCode: 200,
         data: result,

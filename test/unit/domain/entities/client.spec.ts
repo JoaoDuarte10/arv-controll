@@ -24,7 +24,6 @@ describe('Client Entity', () => {
 
   it('should return a new exception with invalid params', () => {
     clientParams.name = '';
-    clientParams.email = '';
     clientParams.phone = '';
 
     expect(() => new ClientEntity(clientParams)).toThrowError(
