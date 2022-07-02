@@ -17,7 +17,7 @@ interface ISchedule {
 interface ScheduleRepository {
   findByTime(id_user: string, time: string): Promise<ISchedule>;
   findById(id_user: string, id: string): Promise<ISchedule>;
-  findAll(id_user: string): Promise<ISchedule[]>;
+  findAllExpireds(id_user: string): Promise<ISchedule[]>;
   findByDate(id_user: string, date: string): Promise<ISchedule[]>;
   save({
     id_user,

@@ -1,9 +1,9 @@
-import { LoadAllSchedules } from '../../../domain/usecases/schedule/load-all-schedules';
+import { LoadAllExpiredSchedules } from '../../../domain/usecases/schedule/load-all-expired-schedules';
 import { ScheduleRepository } from 'src/domain/repository';
 import { ILogger } from '../../../infrastructure/utils/logger';
 import { ScheduleOutput } from '../../models/schedule';
 
-export class LoadAllScheduleService implements LoadAllSchedules {
+export class LoadAllExpiredScheduleService implements LoadAllExpiredSchedules {
   constructor(
     private readonly scheduleRepository: ScheduleRepository,
     private readonly logger: ILogger,
@@ -11,7 +11,7 @@ export class LoadAllScheduleService implements LoadAllSchedules {
 
   async execute(id_user: string): Promise<ScheduleOutput[]> {
     try {
-      const findAll = await this.scheduleRepository.findAll(id_user);
+      const findAll = await this.scheduleRepository.findAllExpireds(id_user);
       return findAll;
     } catch (error) {
       this.logger.error(

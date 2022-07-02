@@ -15,6 +15,6 @@ export const scheduleRoutes = (router: Router): void => {
   router.put('/schedule/update', adaptRoute(makeUpdateScheduleController()));
   router.delete('/schedule', adaptRoute(makeDeleteScheduleController()));
   router.post('/schedule/finish', adaptRoute(makeFinishScheduleController()));
-  router.get('/schedule/all', adaptRoute(makeLoadAllScheduleController()));
+  router.get('/schedule/expireds', adaptRoute(makeLoadAllScheduleController()));
   router.get('/schedule/date', adaptRoute(makeLoadScheduleByDateController()));
 };

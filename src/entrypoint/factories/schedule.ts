@@ -9,8 +9,8 @@ import { DeleteScheduleService } from '../../application/services/schedule/delet
 import { DeleteScheduleController } from '../http/controllers/schedule/delete-schedule';
 import { FinishScheduleService } from '../../application/services/schedule/finish-schedule';
 import { FinishScheduleController } from '../http/controllers/schedule/finish-schedule';
-import { LoadAllScheduleService } from '../../application/services/schedule/load-all-schedule';
-import { LoadAllScheduleController } from '../http/controllers/schedule/load-all-schedule';
+import { LoadAllExpiredScheduleService } from '../../application/services/schedule/load-all-expired-schedule';
+import { LoadAllScheduleController } from '../http/controllers/schedule/load-all-expired-schedule';
 import { LoadScheduleByDateService } from '../../application/services/schedule/load-schedule-by-date';
 import { LoadScheduleByDateController } from '../http/controllers/schedule/load-schedule-by-date';
 import { UpdateScheduleService } from '../../application/services/schedule/update-schedule';
@@ -40,7 +40,7 @@ export const makeFinishScheduleController = () => {
 };
 
 export const makeLoadAllScheduleController = () => {
-  const service = new LoadAllScheduleService(repository, logger);
+  const service = new LoadAllExpiredScheduleService(repository, logger);
   return new LoadAllScheduleController(service);
 };
 

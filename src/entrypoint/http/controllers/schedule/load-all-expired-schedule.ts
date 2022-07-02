@@ -1,14 +1,14 @@
 import { Controller } from '../../../contracts/controller';
-import { LoadAllSchedules } from '../../../../domain/usecases/schedule/load-all-schedules';
+import { LoadAllExpiredSchedules } from '../../../../domain/usecases/schedule/load-all-expired-schedules';
 import { HttpResponse } from 'src/entrypoint/contracts';
 import { HttpRequest } from '../../../contracts/http';
-import { Schedule } from '../../../../entrypoint/view-model/schedule';
+import { Schedule } from '../../../view-model/schedule';
 import { Response } from '../../../contracts/response-request';
 
 import { Request } from 'express';
 
 export class LoadAllScheduleController implements Controller {
-  constructor(private readonly scheduleService: LoadAllSchedules) {}
+  constructor(private readonly scheduleService: LoadAllExpiredSchedules) {}
 
   async handle(
     req: HttpRequest<Request>,

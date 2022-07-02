@@ -1,5 +1,5 @@
 import { Schedule } from '../../entities/schedule';
 
-export interface LoadAllSchedules {
+export interface LoadAllExpiredSchedules {
   execute: (id_user: string) => Promise<Schedule[]>;
 }

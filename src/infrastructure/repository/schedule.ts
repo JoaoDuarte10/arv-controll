@@ -1,5 +1,6 @@
 import { ISchedule, ScheduleRepository } from '../../domain/repository';
 import { Schedule } from '../models';
+import moment from 'moment';
 
 class ScheduleRepositoryMongoDB implements ScheduleRepository {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -73,8 +74,15 @@ class ScheduleRepositoryMongoDB implements ScheduleRepository {
     );
   }
 
-  async findAll(id_user: string): Promise<ISchedule[]> {
-    const find = await Schedule.find({ id_user: id_user });
+  async findAllExpireds(id_user: string): Promise<ISchedule[]> {
+    const date = moment(new Date()).subtract(1, 'day').format('YYYY-MM-DD');
+    const find = await Schedule.find({
+      id_user: id_user,
+      date: { $lte: date },
+    }).sort({ date: -1 });
+
+    if (!find) return;
+
     return find.map((item) => {
       const {
         _id,
