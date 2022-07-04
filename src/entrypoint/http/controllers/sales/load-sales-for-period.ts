@@ -27,6 +27,8 @@ export class LoadSalesForPeriodController implements Controller {
           date1: date1 as string,
           date2: date2 as string,
         });
+
+        if (resultForPeriod.length === 0) return { statusCode: 404 };
         return {
           statusCode: 200,
           data: resultForPeriod,
@@ -38,6 +40,9 @@ export class LoadSalesForPeriodController implements Controller {
           id_user,
           date1 as string,
         );
+
+        if (resultForDate.length === 0) return { statusCode: 404 };
+
         return {
           statusCode: 200,
           data: resultForDate,
