@@ -28,7 +28,7 @@ export class UpdateScheduleController implements Controller {
       qtdTotalAtendimento,
     } = req.body;
 
-    const id_user = req.headers.id_user as string;
+    const id_user = req.headers['id-user'] as string;
 
     if (!client || !procedure || !date || !time || !price) {
       return { statusCode: 400 };

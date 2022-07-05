@@ -12,7 +12,7 @@ export class FindSegmentController implements Controller {
   async handle(
     req: HttpRequest<Request>,
   ): Promise<HttpResponse<SegmentViewModel[] | Response>> {
-    const id_user = req.headers.id_user as string;
+    const id_user = req.headers['id-user'] as string;
 
     try {
       const result = await this.segmentService.execute(id_user);

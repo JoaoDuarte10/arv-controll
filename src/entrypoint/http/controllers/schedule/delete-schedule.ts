@@ -14,7 +14,7 @@ export class DeleteScheduleController implements Controller {
     req: HttpRequest<Request>,
   ): Promise<HttpResponse<void | Response>> {
     const id = req.query.id as string;
-    const id_user = req.headers.id_user as string;
+    const id_user = req.headers['id-user'] as string;
 
     try {
       await this.scheduleService.execute({

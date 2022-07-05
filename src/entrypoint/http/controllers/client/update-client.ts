@@ -14,7 +14,7 @@ export class UpdateClientController implements Controller {
     req?: HttpRequest<Request>,
   ): Promise<HttpResponse<void | Response>> {
     const { id, name, email, phone, segment } = req.body;
-    const id_user = req.headers.id_user as string;
+    const id_user = req.headers['id-user'] as string;
 
     if (!name || !phone) {
       return {

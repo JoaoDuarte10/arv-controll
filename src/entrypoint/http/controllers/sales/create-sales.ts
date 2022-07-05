@@ -11,7 +11,7 @@ export class CreateSalesController implements Controller {
     req: HttpRequest<Request>,
   ): Promise<HttpResponse<void | Response>> {
     const { description, client, price, date } = req.body;
-    const id_user: string = req.headers.id_user as string;
+    const id_user: string = req.headers['id-user'] as string;
 
     try {
       await this.salesService.execute({

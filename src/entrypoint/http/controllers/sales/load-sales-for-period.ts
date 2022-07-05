@@ -16,7 +16,7 @@ export class LoadSalesForPeriodController implements Controller {
     req: HttpRequest<Request>,
   ): Promise<HttpResponse<SalesViewModel[] | Response>> {
     const { date1, date2 } = req.query;
-    const id_user: string = req.headers.id_user as string;
+    const id_user: string = req.headers['id-user'] as string;
 
     if ((!date1 && !date2) || date1 === '') return { statusCode: 400 };
 

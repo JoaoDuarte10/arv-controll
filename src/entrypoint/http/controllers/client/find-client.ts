@@ -12,7 +12,7 @@ export class FindClientController implements Controller {
   async handle(
     req?: HttpRequest<Request>,
   ): Promise<HttpResponse<ClientViewModel | Response>> {
-    const id_user = req.headers.id_user as string;
+    const id_user = req.headers['id-user'] as string;
     const id = req.params.id as string;
 
     try {

@@ -18,5 +18,5 @@ RUN apk add bash && \
     mkdir logs
 USER node
 COPY --chown=node:node --from=build /usr/app/arv/dist .
-CMD ["dumb-init", "node", "server.js"]
+CMD ["dumb-init", "node", "./entrypoint/http/config/server.js"]
 EXPOSE "5000"

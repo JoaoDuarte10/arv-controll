@@ -13,7 +13,7 @@ export class FindAllClientController implements Controller {
   async handle(
     req?: HttpRequest<Request>,
   ): Promise<HttpResponse<ClientViewModel[] | Response>> {
-    const id_user = req.headers.id_user as string;
+    const id_user = req.headers['id-user'] as string;
 
     try {
       const result = await this.clientUseCase.findAll(id_user);

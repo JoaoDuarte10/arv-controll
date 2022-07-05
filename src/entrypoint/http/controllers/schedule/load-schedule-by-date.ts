@@ -13,7 +13,7 @@ export class LoadScheduleByDateController implements Controller {
     req: HttpRequest<Request>,
   ): Promise<HttpResponse<Schedule[] | Response>> {
     const date = req.query.date as string;
-    const id_user = req.headers.id_user as string;
+    const id_user = req.headers['id-user'] as string;
 
     try {
       const schedules = await this.scheduleService.execute({

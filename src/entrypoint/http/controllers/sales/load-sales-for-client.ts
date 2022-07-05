@@ -13,7 +13,7 @@ export class LoadSalesForClientController implements Controller {
     req: HttpRequest<Request>,
   ): Promise<HttpResponse<SalesViewModel[] | Response>> {
     const client = req.query.client as string;
-    const id_user: string = req.headers.id_user as string;
+    const id_user: string = req.headers['id-user'] as string;
 
     try {
       const result = await this.salesService.execute({

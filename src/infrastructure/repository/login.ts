@@ -3,7 +3,6 @@ import { Login } from '../models';
 
 class LoginRepositoryMongo implements LoginRepository {
   async find({ user, password }: ILogin): Promise<ILogin> {
-    console.log(user, password);
     const result = await Login.findOne({ user, password });
 
     if (result) {

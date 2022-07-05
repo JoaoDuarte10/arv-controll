@@ -16,7 +16,7 @@ export class CreateClientController implements Controller {
     req: HttpRequest<Request>,
   ): Promise<HttpResponse<void | Response>> {
     const { name, email, phone, segment } = req.body;
-    const id_user = req.headers.id_user as string;
+    const id_user = req.headers['id-user'] as string;
 
     try {
       if (!name || !phone) {
