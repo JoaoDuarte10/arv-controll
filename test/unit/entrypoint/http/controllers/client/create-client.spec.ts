@@ -36,7 +36,7 @@ describe('Create Client Controller', () => {
     const result = await sut.handle(httpRequest);
     const message = result.data ? result.data.message : '';
 
-    expect(result.statusCode).toBe(200);
+    expect(result.statusCode).toBe(400);
     expect(message).toBe('Invalids parameters');
   });
 
