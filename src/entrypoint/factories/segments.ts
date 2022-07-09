@@ -4,6 +4,8 @@ import { logger } from '../../infrastructure/utils/logger';
 import { FindSegmentController } from '../http/controllers/segment/find-segment';
 import { CreateSegmentService } from '../../application/services/segment/create-segment';
 import { CreateSegmentController } from '../http/controllers/segment/create-segment';
+import { UpdateSegmentService } from '../../application/services/segment/update-segment';
+import { UpdateSegmentController } from '../http/controllers/segment/update-segment';
 
 const repository = new SegmentRepositoryMongo();
 
@@ -15,4 +17,9 @@ export const makeFindSegmentController = () => {
 export const makeCreateSegmentController = () => {
   const service = new CreateSegmentService(repository, logger);
   return new CreateSegmentController(service);
+};
+
+export const makeUpdateSegmentController = () => {
+  const service = new UpdateSegmentService(repository, logger);
+  return new UpdateSegmentController(service);
 };

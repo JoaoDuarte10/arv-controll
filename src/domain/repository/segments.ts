@@ -9,6 +9,11 @@ interface SegmentRepository {
     segment: string;
   }): Promise<ISegment | ISegment[]>;
   create(input: { id_user: string; segment: string }): Promise<void>;
+  update(input: {
+    id: string;
+    id_user: string;
+    segment: string;
+  }): Promise<void>;
 }
 
 export { ISegment, SegmentRepository };

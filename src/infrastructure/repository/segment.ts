@@ -18,14 +18,6 @@ class SegmentRepositoryMongo implements SegmentRepository {
     }));
   }
 
-  async create(input: { id_user: string; segment: string }): Promise<void> {
-    const segment = new Segment({
-      id_user: input.id_user,
-      segment: input.segment,
-    });
-    await segment.save();
-  }
-
   async find(id_user: string): Promise<ISegment[]> {
     const segments = await Segment.find({ id_user: id_user });
 
@@ -35,6 +27,30 @@ class SegmentRepositoryMongo implements SegmentRepository {
         segment: item.segment,
       }));
     }
+  }
+
+  async create(input: { id_user: string; segment: string }): Promise<void> {
+    const segment = new Segment({
+      id_user: input.id_user,
+      segment: input.segment,
+    });
+    await segment.save();
+  }
+
+  async update(input: {
+    id: string;
+    id_user: string;
+    segment: string;
+  }): Promise<void> {
+    await Segment.findOneAndUpdate(
+      {
+        id_user: input.id_user,
+        _id: input.id,
+      },
+      {
+        segment: input.segment,
+      },
+    );
   }
 }
 

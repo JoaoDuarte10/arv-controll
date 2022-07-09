@@ -13,6 +13,12 @@ export class SegmentEntity {
     }
   }
 
+  get id() {
+    if (this.props.id) {
+      return this.props.id;
+    }
+  }
+
   get id_user() {
     return this.props.id_user;
   }
