@@ -52,6 +52,10 @@ class SegmentRepositoryMongo implements SegmentRepository {
       },
     );
   }
+
+  async delete(input: { id_user: string; id: string }): Promise<void> {
+    await Segment.findByIdAndDelete({ id_user: input.id_user, _id: input.id });
+  }
 }
 
 export { SegmentRepositoryMongo };

@@ -14,6 +14,7 @@ interface SegmentRepository {
     id_user: string;
     segment: string;
   }): Promise<void>;
+  delete(input: { id_user: string; id: string }): Promise<void>;
 }
 
 export { ISegment, SegmentRepository };
