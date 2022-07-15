@@ -62,6 +62,9 @@ export class CreateClientService implements CreateClient {
         .then((result) => (findClient.byName = result)),
     ]);
 
-    return findClient.byEmail || findClient.byName ? true : false;
+    if ((findClient.byEmail && findClient.byEmail.email) || findClient.byName) {
+      return true;
+    }
+    return false;
   }
 }

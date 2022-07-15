@@ -9,6 +9,7 @@ export class ClientEntity {
   constructor(public props: IClientEntity) {
     this.notification = new NotificationError();
     this.valideteProps();
+    this.validationEmail();
     if (this.notification.hasErrors()) {
       throw new NotificationErrorException(this.notification.getErros());
     }
@@ -80,6 +81,12 @@ export class ClientEntity {
         type: 'InvalidParams',
         message: 'Invalid Phone',
       });
+    }
+  }
+
+  private validationEmail() {
+    if (!this.props.email) {
+      delete this.props.email;
     }
   }
 
