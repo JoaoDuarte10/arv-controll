@@ -3,6 +3,7 @@ export interface DeleteSegment {
 }
 
 type DeleteSegmentInput = {
+  segment: string;
   id_user: string;
   id: string;
 };

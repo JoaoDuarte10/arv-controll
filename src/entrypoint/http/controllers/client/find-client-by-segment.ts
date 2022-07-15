@@ -19,7 +19,7 @@ export class FindClientBySegmentController implements Controller {
     try {
       const result = await this.clientUseCase.findBySegment(id_user, segment);
 
-      if (result.length === 0) {
+      if (!result) {
         return { statusCode: 404 };
       }
 

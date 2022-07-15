@@ -19,7 +19,9 @@ class SegmentRepositoryMongo implements SegmentRepository {
   }
 
   async find(id_user: string): Promise<ISegment[]> {
-    const segments = await Segment.find({ id_user: id_user });
+    const segments = await Segment.find({ id_user: id_user }).sort({
+      segment: 1,
+    });
 
     if (segments) {
       return segments.map((item) => ({
@@ -54,7 +56,7 @@ class SegmentRepositoryMongo implements SegmentRepository {
   }
 
   async delete(input: { id_user: string; id: string }): Promise<void> {
-    await Segment.findByIdAndDelete({ id_user: input.id_user, _id: input.id });
+    await Segment.findOneAndDelete({ id_user: input.id_user, _id: input.id });
   }
 }
 

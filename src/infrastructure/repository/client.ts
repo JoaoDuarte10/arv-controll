@@ -130,6 +130,8 @@ class ClientRepositoryMongo implements ClientRepository {
       segment: segment,
     });
 
+    if (!findBySegment || findBySegment.length === 0) return;
+
     return findBySegment.map((item) => {
       const { _id, id_user, name, email, phone, segment } = item;
       return Object.assign(

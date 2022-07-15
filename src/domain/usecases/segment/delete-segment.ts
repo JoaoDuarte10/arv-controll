@@ -1,3 +1,7 @@
 export interface DeleteSegment {
-  execute: (input: { id: string; id_user: string }) => Promise<void>;
+  execute: (input: {
+    segment: string;
+    id: string;
+    id_user: string;
+  }) => Promise<void>;
 }

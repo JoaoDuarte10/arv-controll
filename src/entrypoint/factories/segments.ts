@@ -1,5 +1,8 @@
 import { FindSegmentService } from '../../application/services/segment/find-segment';
-import { SegmentRepositoryMongo } from '../../infrastructure/repository';
+import {
+  ClientRepositoryMongo,
+  SegmentRepositoryMongo,
+} from '../../infrastructure/repository';
 import { logger } from '../../infrastructure/utils/logger';
 import { FindSegmentController } from '../http/controllers/segment/find-segment';
 import { CreateSegmentService } from '../../application/services/segment/create-segment';
@@ -27,6 +30,11 @@ export const makeUpdateSegmentController = () => {
 };
 
 export const makeDeleteSegmentController = () => {
-  const service = new DeleteSegmentService(repository, logger);
+  const repositoryClient = new ClientRepositoryMongo();
+  const service = new DeleteSegmentService(
+    repository,
+    repositoryClient,
+    logger,
+  );
   return new DeleteSegmentController(service);
 };
