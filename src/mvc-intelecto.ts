@@ -7,6 +7,7 @@ const intelectoSchema = new Schema({
   name: String,
   phone: String,
   course: String,
+  created: Date,
 });
 
 const IntelectoSchema = mongoose.model('Intelecto', intelectoSchema);
@@ -44,6 +45,7 @@ export class MVCIntelecto {
       name,
       phone,
       course,
+      created: new Date(),
     });
 
     await lead.save();
