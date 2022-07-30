@@ -7,6 +7,7 @@ import { salesRoutes } from '../routes/sales';
 import { scheduleRoutes } from '../routes/schedule';
 import { segmentsRoutes } from '../routes/segments';
 import { intelectoRoutes } from '../../../mvc-intelecto';
+import { clientHistoryRoutes } from '../routes/client-history';
 
 export const setupRoutes = (app: Express): void => {
   const router = Router();
@@ -17,6 +18,7 @@ export const setupRoutes = (app: Express): void => {
   healthCheckRoutes(router);
   loginRoutes(router);
   salesRoutes(router);
+  clientHistoryRoutes(router);
   scheduleRoutes(router);
   segmentsRoutes(router);
   intelectoRoutes(router);
