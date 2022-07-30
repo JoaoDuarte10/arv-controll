@@ -26,6 +26,7 @@ export class UpdateScheduleController implements Controller {
       contact,
       pacote,
       qtdTotalAtendimento,
+      qtdAtendimento,
     } = req.body;
 
     const id_user = req.headers['id-user'] as string;
@@ -45,6 +46,7 @@ export class UpdateScheduleController implements Controller {
         phone: contact,
         pacote,
         qtdTotalAtendimento,
+        qtdAtendimento,
       });
       return { statusCode: 201 };
     } catch (error) {
