@@ -9,6 +9,7 @@ import {
 } from '../../factories/schedule';
 
 import { Router } from 'express';
+import { makeLoadScheduleByClientController } from '../../factories/schedule';
 
 export const scheduleRoutes = (router: Router): void => {
   router.post('/schedule/new', adaptRoute(makeCreateScheduleController()));
@@ -17,4 +18,8 @@ export const scheduleRoutes = (router: Router): void => {
   router.post('/schedule/finish', adaptRoute(makeFinishScheduleController()));
   router.get('/schedule/expireds', adaptRoute(makeLoadAllScheduleController()));
   router.get('/schedule/date', adaptRoute(makeLoadScheduleByDateController()));
+  router.get(
+    '/schedule/client',
+    adaptRoute(makeLoadScheduleByClientController()),
+  );
 };

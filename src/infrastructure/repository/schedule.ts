@@ -155,6 +155,45 @@ class ScheduleRepositoryMongoDB implements ScheduleRepository {
     });
   }
 
+  async findByClient(id_user: string, client: string): Promise<ISchedule[]> {
+    const find = await Schedule.find({
+      id_user: id_user,
+      client,
+    });
+
+    return find.map((item) => {
+      const {
+        _id,
+        id_user,
+        client,
+        procedure,
+        date,
+        time,
+        price,
+        phone,
+        pacote,
+        qtdAtendimento,
+        qtdTotalAtendimento,
+      } = item;
+      return Object.assign(
+        {},
+        {
+          id: _id._id as any,
+          id_user,
+          client,
+          procedure,
+          date,
+          time,
+          price,
+          phone,
+          pacote,
+          qtdAtendimento,
+          qtdTotalAtendimento,
+        },
+      );
+    });
+  }
+
   async save({
     id_user,
     client,

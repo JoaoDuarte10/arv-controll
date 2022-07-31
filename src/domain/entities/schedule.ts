@@ -126,6 +126,11 @@ export class ScheduleEntity {
     return replacePhone.length < 16 && replacePhone.length > 1 ? false : true;
   }
 
+  isValidSales(): boolean {
+    const price = parseInt(this.price.substring(2).replace(',', ''));
+    return price ? true : false;
+  }
+
   addAttendace() {
     this.props.qtdAtendimento = this.props.qtdAtendimento + 1;
   }

@@ -3,11 +3,13 @@ import { ILogger } from '../../../infrastructure/utils/logger';
 import { SalesRepository, ScheduleRepository } from 'src/domain/repository';
 import { ScheduleEntity } from '../../../domain/entities/schedule';
 import { TYPE_NOT_EXISTS } from '../../utils/type-errors';
+import { ClientHistoryRepository } from '../../../domain/repository/client-history';
 
 export class FinishScheduleService implements FinishSchedule {
   constructor(
     private readonly scheduleRepository: ScheduleRepository,
     private readonly salesRepository: SalesRepository,
+    private readonly clientHistoryRepository: ClientHistoryRepository,
     private readonly logger: ILogger,
   ) {}
 
@@ -28,13 +30,22 @@ export class FinishScheduleService implements FinishSchedule {
     schedule.addAttendace();
 
     try {
-      if (schedule.isFirstAttendaceForPacote()) {
+      if (schedule.isFirstAttendaceForPacote() && schedule.isValidSales()) {
         await this.salesRepository.create({
           id_user: params.id_user,
           description: scheduleAlreadyExists.procedure,
           client: scheduleAlreadyExists.client,
           date: scheduleAlreadyExists.date,
           price: scheduleAlreadyExists.price,
+        });
+      }
+
+      if (!schedule.isValidSales()) {
+        await this.clientHistoryRepository.save({
+          id_user: params.id_user,
+          client: scheduleAlreadyExists.client,
+          description: scheduleAlreadyExists.procedure,
+          date: scheduleAlreadyExists.date,
         });
       }
 

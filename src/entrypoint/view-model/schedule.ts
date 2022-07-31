@@ -24,7 +24,7 @@ export type UpdateScheduleViewModel = {
   qtdAtendimento: number;
 };
 
-export type Schedule = {
+export type ScheduleViewModel = {
   id?: string;
   id_user: string;
   client: string;

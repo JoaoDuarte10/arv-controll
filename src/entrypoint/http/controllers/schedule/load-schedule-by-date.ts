@@ -3,7 +3,7 @@ import { LoadSchedulesByDate } from '../../../../domain/usecases/schedule/load-s
 import { HttpResponse } from 'src/entrypoint/contracts';
 import { HttpRequest } from '../../../contracts/http';
 import { Request } from 'express';
-import { Schedule } from '../../../view-model/schedule';
+import { ScheduleViewModel } from '../../../view-model/schedule';
 import { Response } from '../../../contracts/response-request';
 
 export class LoadScheduleByDateController implements Controller {
@@ -11,7 +11,7 @@ export class LoadScheduleByDateController implements Controller {
 
   async handle(
     req: HttpRequest<Request>,
-  ): Promise<HttpResponse<Schedule[] | Response>> {
+  ): Promise<HttpResponse<ScheduleViewModel[] | Response>> {
     const date = req.query.date as string;
     const id_user = req.headers['id-user'] as string;
 

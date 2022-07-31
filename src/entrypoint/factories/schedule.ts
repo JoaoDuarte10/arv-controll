@@ -15,6 +15,9 @@ import { LoadScheduleByDateService } from '../../application/services/schedule/l
 import { LoadScheduleByDateController } from '../http/controllers/schedule/load-schedule-by-date';
 import { UpdateScheduleService } from '../../application/services/schedule/update-schedule';
 import { UpdateScheduleController } from '../http/controllers/schedule/update-schedule';
+import { ClientHistoryRepositoryMongo } from '../../infrastructure/repository/client-history';
+import { LoadScheduleByClientController } from '../http/controllers/schedule/load-schedule-by-clients';
+import { LoadScheduleByClientService } from '../../application/services/schedule/load-schedule-by-client';
 
 const repository = new ScheduleRepositoryMongoDB();
 
@@ -31,9 +34,11 @@ export const makeDeleteScheduleController = () => {
 export const makeFinishScheduleController = () => {
   const scheduleRepository = new ScheduleRepositoryMongoDB();
   const salesRepository = new SalesRepositoryMongoDB();
+  const historyRepository = new ClientHistoryRepositoryMongo();
   const service = new FinishScheduleService(
     scheduleRepository,
     salesRepository,
+    historyRepository,
     logger,
   );
   return new FinishScheduleController(service);
@@ -52,4 +57,9 @@ export const makeLoadScheduleByDateController = () => {
 export const makeUpdateScheduleController = () => {
   const service = new UpdateScheduleService(repository, logger);
   return new UpdateScheduleController(service);
+};
+
+export const makeLoadScheduleByClientController = () => {
+  const service = new LoadScheduleByClientService(repository, logger);
+  return new LoadScheduleByClientController(service);
 };
