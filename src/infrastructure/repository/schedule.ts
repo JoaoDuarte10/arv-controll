@@ -156,9 +156,12 @@ class ScheduleRepositoryMongoDB implements ScheduleRepository {
   }
 
   async findByClient(id_user: string, client: string): Promise<ISchedule[]> {
+    const date = moment(new Date()).format('YYYY-MM-DD');
+
     const find = await Schedule.find({
       id_user: id_user,
       client,
+      date: { $gte: date },
     });
 
     return find.map((item) => {
