@@ -90,4 +90,32 @@ export class ClientHistoryRepositoryMongo implements ClientHistoryRepository {
       );
     });
   }
+
+  async findByAllFilters(
+    id_user: string,
+    client: string,
+    date1: string,
+    date2: string,
+  ): Promise<ClientHistory[]> {
+    const result = await ClientsHistory.find({
+      id_user,
+      client,
+      date: { $gte: date1, $lte: date2 },
+    }).sort({ date: 1 });
+
+    if (!result) return;
+
+    return result.map((item) => {
+      const { id_user, client, description, date } = item;
+      return Object.assign(
+        {},
+        {
+          id_user,
+          client,
+          description,
+          date,
+        },
+      );
+    });
+  }
 }

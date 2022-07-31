@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ISales, SalesRepository } from '../../domain/repository';
 import { Sales } from '../models';
 
@@ -70,6 +71,34 @@ class SalesRepositoryMongoDB implements SalesRepository {
     const find = await Sales.find({ id_user, client }).sort({
       date: 1,
     });
+
+    return find.map((item) => {
+      const { _id, id_user, description, client, date, price } = item;
+      return Object.assign(
+        {},
+        {
+          id: _id as any,
+          id_user,
+          description,
+          client,
+          date,
+          price,
+        },
+      );
+    });
+  }
+
+  async findByAllFilters(
+    id_user: string,
+    client: string,
+    date1: string,
+    date2: string,
+  ): Promise<ISales[]> {
+    const find = await Sales.find({
+      id_user: id_user,
+      client,
+      date: { $gte: date1, $lte: date2 },
+    }).sort({ date: 1 });
 
     return find.map((item) => {
       const { _id, id_user, description, client, date, price } = item;

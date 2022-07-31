@@ -9,10 +9,14 @@ import { LoadSalesForClientService } from '../../application/services/sales/load
 import { LoadSalesForDateController } from '../http/controllers/sales/load-sales-for-date';
 import { LoadSalesForDateService } from '../../application/services/sales/load-sales-for-date';
 import { LoadSalesForPeriodController } from '../http/controllers/sales/load-sales-for-period';
+import { ClientHistoryRepositoryMongo } from '../../infrastructure/repository/client-history';
+import { LoadHistoryByAllFilterController } from '../http/controllers/client-history/load-history-by-all-filters';
+import { LoadSalesByAllFiltersService } from '../../application/services/sales/load-sales-by-all-filters';
 
 export const makeCreateSalesController = () => {
   const repository = new SalesRepositoryMongoDB();
-  const service = new CreateSalesService(repository, logger);
+  const clientRepository = new ClientHistoryRepositoryMongo();
+  const service = new CreateSalesService(repository, clientRepository, logger);
   return new CreateSalesController(service);
 };
 
@@ -39,4 +43,10 @@ export const makeLoadSalesForPeriodController = () => {
   const serviceForPeriod = new LoadSalesForPeriodService(repository);
   const serviceForDate = new LoadSalesForDateService(repository, logger);
   return new LoadSalesForPeriodController(serviceForPeriod, serviceForDate);
+};
+
+export const makeLoadHistoryByAllFilterController = () => {
+  const repository = new SalesRepositoryMongoDB();
+  const service = new LoadSalesByAllFiltersService(repository, logger);
+  return new LoadHistoryByAllFilterController(service);
 };

@@ -15,6 +15,12 @@ interface SalesRepository {
     date2: string,
   ): Promise<ISales[]>;
   findByClient(id_user: string, client: string): Promise<ISales[]>;
+  findByAllFilters(
+    id_user: string,
+    client: string,
+    date1: string,
+    date2: string,
+  ): Promise<ISales[]>;
 }
 
 export { ISales, SalesRepository };

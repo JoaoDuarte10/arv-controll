@@ -2,6 +2,7 @@ import { makeCreateSalesController } from '../../../entrypoint/factories/sales';
 import { adaptRoute } from '../adapters/expres-router';
 
 import { Router } from 'express';
+import { makeLoadHistoryByAllFilterController } from '../../factories/sales';
 import {
   makeLoadSalesForPeriodController,
   makeLoadSalesForDateController,
@@ -18,4 +19,8 @@ export const salesRoutes = (router: Router): void => {
   router.get('/sales/clients', adaptRoute(makeLoadSalesForClientController()));
   router.get('/sales/today', adaptRoute(makeLoadSalesForDateController()));
   router.get('/sales/period', adaptRoute(makeLoadSalesForPeriodController()));
+  router.get(
+    '/sales/all-filters',
+    adaptRoute(makeLoadHistoryByAllFilterController()),
+  );
 };

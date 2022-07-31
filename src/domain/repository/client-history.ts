@@ -11,4 +11,10 @@ export interface ClientHistoryRepository {
     date2: string,
   ): Promise<IClientHistory[]>;
   findByClient(id_user: string, client: string): Promise<IClientHistory[]>;
+  findByAllFilters(
+    id_user: string,
+    client: string,
+    date1: string,
+    date2: string,
+  ): Promise<IClientHistory[]>;
 }

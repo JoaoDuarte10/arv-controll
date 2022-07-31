@@ -7,6 +7,7 @@ import {
 } from '../../factories';
 
 import { Router } from 'express';
+import { makeLoadHistoryByAllFiltersController } from '../../factories/client-history';
 
 export const clientHistoryRoutes = (router: Router): void => {
   router.post(
@@ -21,5 +22,9 @@ export const clientHistoryRoutes = (router: Router): void => {
   router.get(
     '/history/period',
     adaptRoute(makeLoadHistoryByPeriodController()),
+  );
+  router.get(
+    '/history/all-filters',
+    adaptRoute(makeLoadHistoryByAllFiltersController()),
   );
 };

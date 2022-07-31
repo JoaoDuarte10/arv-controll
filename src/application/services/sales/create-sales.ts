@@ -3,10 +3,12 @@ import { SalesRepository } from '../../../domain/repository';
 import { SalesEntity } from '../../../domain/entities/sales';
 import { ILogger } from '../../../infrastructure/utils/logger';
 import { SalesModel } from '../../models/sales';
+import { ClientHistoryRepository } from '../../../domain/repository/client-history';
 
 export class CreateSalesService implements CreateSalesUseCase {
   constructor(
     private readonly salesRepository: SalesRepository,
+    private readonly clientHistoryRepository: ClientHistoryRepository,
     private readonly logger: ILogger,
   ) {}
 
@@ -14,7 +16,14 @@ export class CreateSalesService implements CreateSalesUseCase {
     const sales = new SalesEntity(params);
 
     if (!sales.isValidSales()) {
-      // implementar evento
+      await this.clientHistoryRepository.save({
+        id_user: params.id_user,
+        client: params.client,
+        description: params.description,
+        date: params.date,
+      });
+
+      return;
     }
     try {
       await this.salesRepository.create(sales);

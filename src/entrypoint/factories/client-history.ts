@@ -3,6 +3,8 @@ import { ClientHistoryRepositoryMongo } from '../../infrastructure/repository/cl
 import { CreateClientHistoryService } from '../../application/services/client-history/create-client-history';
 import { CreateClientHistoryController } from '../http/controllers/client-history/create-client-history';
 import { LoadHistoryByPeriodService } from '../../application/services/client-history/load-history-by-period';
+import { LoadHistoryByAllFilterController } from '../http/controllers/client-history/load-history-by-all-filters';
+import { LoadHistoryByAllFilterService } from '../../application/services/client-history/load-history-by-all-filters';
 import {
   LoadHistoryByClientController,
   LoadHistoryByDateController,
@@ -35,4 +37,10 @@ export const makeLoadHistoryByPeriodController = () => {
   const repository = new ClientHistoryRepositoryMongo();
   const service = new LoadHistoryByPeriodService(repository, logger);
   return new LoadHistoryByPeriodController(service);
+};
+
+export const makeLoadHistoryByAllFiltersController = () => {
+  const repository = new ClientHistoryRepositoryMongo();
+  const service = new LoadHistoryByAllFilterService(repository, logger);
+  return new LoadHistoryByAllFilterController(service);
 };

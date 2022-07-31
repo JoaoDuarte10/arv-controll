@@ -6,6 +6,7 @@ import { TYPE_INPUT_INVALIDS } from '../../../../application/utils/type-errors';
 import { CreateClientHistory } from '../../../../domain/usecases/clients-history/create-client-history';
 
 import { Request } from 'express';
+import { NotificationErrorException } from '../../../../domain/exceptions/notification-error-exception';
 
 export class CreateClientHistoryController implements Controller {
   constructor(private readonly createClientHistory: CreateClientHistory) {}
@@ -26,7 +27,10 @@ export class CreateClientHistoryController implements Controller {
 
       return { statusCode: 201 };
     } catch (error) {
-      if (error.type === TYPE_INPUT_INVALIDS) {
+      if (
+        error.type === TYPE_INPUT_INVALIDS ||
+        error instanceof NotificationErrorException
+      ) {
         return { statusCode: 400 };
       }
 
