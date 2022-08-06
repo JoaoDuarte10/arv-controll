@@ -3,6 +3,7 @@ import { Sales } from '../../../../../src/domain/entities/sales';
 
 describe('Create Sales Service', () => {
   let salesRepository: { create: () => Promise<void> };
+  let clientHistoryRepository: { save: () => void };
   let sut = {} as CreateSalesService;
   let logger: { error: () => void };
   let loggerErrorSpy: {};
@@ -12,8 +13,15 @@ describe('Create Sales Service', () => {
     salesRepository = {
       create: () => new Promise((resolve) => resolve(jest.fn() as any)),
     };
+    clientHistoryRepository = {
+      save: () => jest.fn(),
+    };
     logger = { error: () => jest.fn() };
-    sut = new CreateSalesService(salesRepository as any, logger as any);
+    sut = new CreateSalesService(
+      salesRepository as any,
+      clientHistoryRepository as any,
+      logger as any,
+    );
     loggerErrorSpy = jest.spyOn(logger, 'error');
     params = {
       id_user: 'any_id',
@@ -46,8 +54,10 @@ describe('Create Sales Service', () => {
     jest.spyOn(salesRepository, 'create').mockImplementationOnce(() => {
       throw new Error();
     });
-    await sut.execute(params);
-
-    expect(loggerErrorSpy).toHaveBeenCalled();
+    try {
+      await sut.execute(params);
+    } catch (error) {
+      expect(loggerErrorSpy).toHaveBeenCalled();
+    }
   });
 });

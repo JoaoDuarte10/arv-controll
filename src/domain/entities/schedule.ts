@@ -127,7 +127,7 @@ export class ScheduleEntity {
   }
 
   isValidSales(): boolean {
-    const price = parseInt(this.price.substring(2).replace(',', ''));
+    const price = parseFloat(this.props.price.substring(2).replace(',', '.'));
     return price ? true : false;
   }
 
