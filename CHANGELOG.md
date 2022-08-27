@@ -2,6 +2,49 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/JoaoDuarte10/arv-controll/compare/v0.2.4...v1.1.0) (2022-08-27)
+
+
+### Features
+
+* add client history crud ([7d77a75](https://github.com/JoaoDuarte10/arv-controll/commit/7d77a75f6d1239e2dc6a7343fc937a9b0ddd9401))
+* add create segment ([c6b3ee4](https://github.com/JoaoDuarte10/arv-controll/commit/c6b3ee4412dbcd0352267669e6ee593ea4572926))
+* add delete segment service ([adc5d27](https://github.com/JoaoDuarte10/arv-controll/commit/adc5d2786286e3aa89f1454df87f4f34f2fdcd0d))
+* add find schedule for clients ([ea984e4](https://github.com/JoaoDuarte10/arv-controll/commit/ea984e4d06ac6dd22049228947a7bfb0427252c7))
+* add front with redux ([3368918](https://github.com/JoaoDuarte10/arv-controll/commit/3368918222c2516c3d534ab221b143099a008f95))
+* add health-check ([d4ef703](https://github.com/JoaoDuarte10/arv-controll/commit/d4ef7035314c60e4c766cfcb8c3caa33fcd3bf70))
+* add html for getLeads with intelecto ([cb6f4ee](https://github.com/JoaoDuarte10/arv-controll/commit/cb6f4ee877ba14dbf1136c719a07abbd6ef78e85))
+* add mvc for landing page to intelecto ([bf3cca1](https://github.com/JoaoDuarte10/arv-controll/commit/bf3cca1d6136fa13809c4abfde8f58e45d6b7350))
+* add update segment ([7381b7a](https://github.com/JoaoDuarte10/arv-controll/commit/7381b7aa8514d0ae002e1a46b3cb4c90d101b6d8))
+* adjust in return values in find schedules by date ([abb1fdc](https://github.com/JoaoDuarte10/arv-controll/commit/abb1fdc61f534890e4caa69d0226eb94f6dba156))
+* create login entity and methods ([4d16f21](https://github.com/JoaoDuarte10/arv-controll/commit/4d16f2126fab8a31d43ef74e512895b20f6ed30a))
+* create route Authenticate for validate login ([dbc7973](https://github.com/JoaoDuarte10/arv-controll/commit/dbc797373fb125ae09391fee50289f9f7648bfe4))
+* create route FindSegment ([d77d5b9](https://github.com/JoaoDuarte10/arv-controll/commit/d77d5b9f304b04a97472a49a3b974fdd94cb3adb))
+* create router Health Check ([3db0900](https://github.com/JoaoDuarte10/arv-controll/commit/3db0900479174ca9f7d3c6c84ab43063a75da73c))
+* create SalesEntity ([c280dcb](https://github.com/JoaoDuarte10/arv-controll/commit/c280dcbcd9fec8f889cd439522ed144d82605c18))
+* create ScheduleEntity ([38ad547](https://github.com/JoaoDuarte10/arv-controll/commit/38ad5479faa5948acda0484a3518f913d463126d))
+* create services CreateSales ([0fb5f3a](https://github.com/JoaoDuarte10/arv-controll/commit/0fb5f3a599a459ebcb116283d93290ff03fd8cdb))
+* create ValidateLoginController ([b7e19fe](https://github.com/JoaoDuarte10/arv-controll/commit/b7e19fe4e7f635b0edeba13598a6511b08ecedd7))
+* create ValidateLoginUseCase and ValidateLoginService for validation login ([65f1979](https://github.com/JoaoDuarte10/arv-controll/commit/65f19797bd760a571d1dad6848d42e96132a016f))
+* ensure LoadSalesForDate logger with error in find sales ([b183119](https://github.com/JoaoDuarte10/arv-controll/commit/b183119a09ad83b2838057c37affdd6f2c2ccbdc))
+* ensure LoadSalesForDate return error with date more than now ([bc3af7f](https://github.com/JoaoDuarte10/arv-controll/commit/bc3af7fa2c977d094452b032440ba259bdf4f38c))
+* ensure LoadSalesForDate return sales with specific date ([814a848](https://github.com/JoaoDuarte10/arv-controll/commit/814a8483b50bd9a0088cc6c90d0cccb2f88a41f2))
+* ensure LoadSalesForPeriod return sales with specify period ([814de14](https://github.com/JoaoDuarte10/arv-controll/commit/814de14e2271baea42232d5a0e9556b888ed3fbf))
+* feat: create find by all filters in sales and client history ([1ecb070](https://github.com/JoaoDuarte10/arv-controll/commit/1ecb070c2fc4e637127dcc96af29e6dc982e51af))
+* return error with invalid phone in new ClientEntity ([fd00c99](https://github.com/JoaoDuarte10/arv-controll/commit/fd00c996780e98a605da3216e1102f92b9d58ef3))
+
+
+### Bug Fixes
+
+* active https ([26d5730](https://github.com/JoaoDuarte10/arv-controll/commit/26d5730b7d80af7dba6118cdddbf34b3441939ca))
+* add correct router in clients page ([2a8bc3b](https://github.com/JoaoDuarte10/arv-controll/commit/2a8bc3b05cf45b25ab555d4e5928e9815ff030db))
+* adjust in text for whatsapp in page schedule ([47c9b1b](https://github.com/JoaoDuarte10/arv-controll/commit/47c9b1b2c3b1eb646f8f0ebce68a5935b285e8be))
+* adjust in validation for valid sales in schedule entity ([14193ad](https://github.com/JoaoDuarte10/arv-controll/commit/14193ad2e3b97949ad4ea423576922f5a93cfce9))
+* disable https in site ([761efe1](https://github.com/JoaoDuarte10/arv-controll/commit/761efe10f1000a5850c9c0e1b725eb4a7bac811f))
+* resolve the conflicts ([324b4b0](https://github.com/JoaoDuarte10/arv-controll/commit/324b4b05a80924da2f779ada4758c76b9f7eb0af))
+* resolve the conflicts ([1011e96](https://github.com/JoaoDuarte10/arv-controll/commit/1011e96710311a84b9b3e9cabfa40af870981599))
+* resolve the conflicts ([117f864](https://github.com/JoaoDuarte10/arv-controll/commit/117f864bac37438e7c031b2df5a84c6ae38ce739))
+
 ### [0.2.4](https://github.com/JoaoDuarte10/arv-controll/compare/v0.2.3...v0.2.4) (2022-04-21)
 
 ### [0.2.3](https://github.com/JoaoDuarte10/arv-controll/compare/v0.2.2...v0.2.3) (2022-04-21)
