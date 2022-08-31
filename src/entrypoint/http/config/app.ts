@@ -1,3 +1,4 @@
+// import 'elastic-apm-node/start';
 import { setupRoutes } from '../config/routes';
 
 import express from 'express';
