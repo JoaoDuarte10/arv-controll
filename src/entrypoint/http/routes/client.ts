@@ -9,15 +9,38 @@ import {
 } from '../../factories';
 
 import { Router } from 'express';
+import { adapteMiddleware } from '../adapters/express-middleware';
+import { makeAuthenticatedLoginMiddleware } from '../../factories/middlewares/authenticated-login';
 
 export const clientRoutes = (router: Router): void => {
-  router.post('/client/create', adaptRoute(makeCreateClientController()));
-  router.put('/client/update', adaptRoute(makeUpdateClientController()));
-  router.get('/client/load/:id', adaptRoute(makeFindClientController()));
-  router.get('/client/all', adaptRoute(makeFindAllClientController()));
+  router.post(
+    '/client/create',
+    adapteMiddleware(makeAuthenticatedLoginMiddleware()),
+    adaptRoute(makeCreateClientController()),
+  );
+  router.put(
+    '/client/update',
+    adapteMiddleware(makeAuthenticatedLoginMiddleware()),
+    adaptRoute(makeUpdateClientController()),
+  );
+  router.get(
+    '/client/load/:id',
+    adapteMiddleware(makeAuthenticatedLoginMiddleware()),
+    adaptRoute(makeFindClientController()),
+  );
+  router.get(
+    '/client/all',
+    adapteMiddleware(makeAuthenticatedLoginMiddleware()),
+    adaptRoute(makeFindAllClientController()),
+  );
   router.get(
     '/client/segment',
+    adapteMiddleware(makeAuthenticatedLoginMiddleware()),
     adaptRoute(makeFindBySegmentClientController()),
   );
-  router.delete('/client', adaptRoute(makeDeleteClientController()));
+  router.delete(
+    '/client',
+    adapteMiddleware(makeAuthenticatedLoginMiddleware()),
+    adaptRoute(makeDeleteClientController()),
+  );
 };

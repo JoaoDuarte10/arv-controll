@@ -7,12 +7,12 @@ export class Jwt implements JwtAdapter {
     return jwt.sign(data, key, { expiresIn: `${expireIn}h` });
   }
 
-  validateToken(token: string, secretKey: string): boolean {
+  validateToken(token: string, secretKey: string): any {
     try {
-      jwt.verify(token, secretKey);
-      return true;
+      const result = jwt.verify(token, secretKey);
+      return result as any;
     } catch (error) {
-      return false;
+      throw new Error(error.message);
     }
   }
 }
