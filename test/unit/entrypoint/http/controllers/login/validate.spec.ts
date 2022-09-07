@@ -1,8 +1,8 @@
 import { ValidateLoginController } from '../../../../../../src/entrypoint/http/controllers/login/validate';
-import { LoginOutput } from '../../../../../../src/domain/usecases/login/validate';
 import { NotificationErrorException } from '../../../../../../src/domain/exceptions/notification-error-exception';
+
 describe('Validate Login Controller', () => {
-  let clientService: { execute: () => Promise<LoginOutput> };
+  let clientService: { execute: () => Promise<string> };
   let sut: ValidateLoginController;
   let httpRequest = {} as any;
 
