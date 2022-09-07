@@ -3,6 +3,8 @@ import { Request } from 'express';
 import { JwtAdapter } from '../../../../../../src/domain/usecases/adapter/JwtAdapter';
 import { Jwt } from '../../../../../../src/infrastructure/implementations/Jwt';
 import { AuthenticatedLoginMiddleware } from '../../../../../../src/entrypoint/http/controllers/middlewares/authenticated-login';
+import { Unauthorized } from '../../../../../../src/entrypoint/http/exceptions/Unauthorized';
+
 describe('AuthenticatedLogin', () => {
   let httpRequest: Request;
   let sut: AuthenticatedLoginMiddleware;
@@ -30,5 +32,11 @@ describe('AuthenticatedLogin', () => {
 
     expect(result).toBeUndefined();
     expect(httpRequest.headers['id-user']).toBe(idUser);
+  });
+
+  it('should return exception with user not authorized', () => {
+    httpRequest.headers.authorization = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF5bGFuQGJvc2Nhcmluby5jb20iLCJwYXNzd29yZCI6InlhMGdzcWh5NHd6dnV2YjQifQ.yN_8-Mge9mFgsnYHnPEh_ZzNP7YKvSbQ3Alug9HMCsM`;
+
+    expect(() => sut.handle(httpRequest)).toThrowError(Unauthorized);
   });
 });
