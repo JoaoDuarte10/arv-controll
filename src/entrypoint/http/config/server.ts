@@ -13,8 +13,8 @@ async function closeGracefully(signal) {
   process.exit();
 }
 
-process.on('SIGINT', closeGracefully);
-process.on('SIGTERM', closeGracefully);
+// process.on('SIGINT', closeGracefully);
+// process.on('SIGTERM', closeGracefully);
 
 try {
   db.connectDB();

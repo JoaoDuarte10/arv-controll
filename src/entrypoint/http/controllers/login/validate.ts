@@ -2,7 +2,6 @@ import { Controller } from '../../../contracts/controller';
 import { ValidateLoginService } from '../../../../application/services/login/validate';
 import { HttpRequest, HttpResponse } from '../../../contracts/http';
 import { Request } from 'express';
-import { LoginOutput } from '../../../../domain/usecases/login/validate';
 import { Response } from '../../../contracts/response-request';
 import { NotificationErrorException } from '../../../../domain/exceptions/notification-error-exception';
 
@@ -11,7 +10,7 @@ export class ValidateLoginController implements Controller {
 
   async handle(
     req: HttpRequest<Request>,
-  ): Promise<HttpResponse<LoginOutput | Response>> {
+  ): Promise<HttpResponse<string | Response>> {
     const { user, password } = req.body;
 
     try {

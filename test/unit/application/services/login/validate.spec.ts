@@ -1,7 +1,13 @@
 import { ValidateLoginService } from '../../../../../src/application/services/login/validate';
+import { LoginModel } from '../../../../../src/application/models/login';
+import { Jwt } from '../../../../../src/infrastructure/implementations/Jwt';
 
 describe('Validate Login Service', () => {
   let loginRepository = {} as any;
+  let jwtAdapter = new Jwt();
+  let sut: ValidateLoginService;
+
+  let params: LoginModel;
 
   beforeEach(() => {
     loginRepository = {
@@ -11,26 +17,26 @@ describe('Validate Login Service', () => {
         );
       },
     };
-  });
 
-  it('should return name a valid login with exist', async () => {
-    const sut = new ValidateLoginService(loginRepository);
-
-    const result = await sut.execute({
+    sut = new ValidateLoginService(loginRepository, jwtAdapter);
+    params = {
       user: 'any_name',
       password: 'any_password',
-    });
-
-    expect(result.user).toBe('any_name');
+    };
   });
 
   it('should return error a invalid login', async () => {
-    const sut = new ValidateLoginService(loginRepository);
-
     try {
-      await sut.execute({ user: 'any_nam', password: 'any_password' });
+      params.user = 'any';
+      await sut.execute(params);
     } catch (error) {
       expect(error).toBeDefined();
     }
+  });
+
+  it('shoul return token jwt', async () => {
+    const result = await sut.execute(params);
+
+    expect(result).toBeDefined();
   });
 });
