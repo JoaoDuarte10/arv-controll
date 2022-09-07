@@ -3,7 +3,8 @@ import { Request } from 'express';
 import { JwtAdapter } from '../../../../../../src/domain/usecases/adapter/JwtAdapter';
 import { Jwt } from '../../../../../../src/infrastructure/implementations/Jwt';
 import { AuthenticatedLoginMiddleware } from '../../../../../../src/entrypoint/http/controllers/middlewares/authenticated-login';
-import { Unauthorized } from '../../../../../../src/entrypoint/http/exceptions/Unauthorized';
+import { UnauthorizedException } from '../../../../../../src/entrypoint/http/exceptions/Unauthorized';
+import { InvalidTokenException } from '../../../../../../src/entrypoint/http/exceptions/invalid-token';
 
 describe('AuthenticatedLogin', () => {
   let httpRequest: Request;
@@ -34,9 +35,15 @@ describe('AuthenticatedLogin', () => {
     expect(httpRequest.headers['id-user']).toBe(idUser);
   });
 
+  it('shoud return exception when authorization is null', () => {
+    httpRequest.headers.authorization = null as any;
+
+    expect(() => sut.handle(httpRequest)).toThrowError(InvalidTokenException);
+  });
+
   it('should return exception with user not authorized', () => {
     httpRequest.headers.authorization = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF5bGFuQGJvc2Nhcmluby5jb20iLCJwYXNzd29yZCI6InlhMGdzcWh5NHd6dnV2YjQifQ.yN_8-Mge9mFgsnYHnPEh_ZzNP7YKvSbQ3Alug9HMCsM`;
 
-    expect(() => sut.handle(httpRequest)).toThrowError(Unauthorized);
+    expect(() => sut.handle(httpRequest)).toThrowError(UnauthorizedException);
   });
 });
