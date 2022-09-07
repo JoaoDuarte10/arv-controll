@@ -4,13 +4,14 @@ import { HttpRequest, HttpResponse } from '../../../contracts/http';
 import { Request } from 'express';
 import { Response } from '../../../contracts/response-request';
 import { NotificationErrorException } from '../../../../domain/exceptions/notification-error-exception';
+import { Login } from '../../../../entrypoint/view-model/login';
 
 export class ValidateLoginController implements Controller {
   constructor(private readonly loginService: ValidateLoginService) {}
 
   async handle(
     req: HttpRequest<Request>,
-  ): Promise<HttpResponse<string | Response>> {
+  ): Promise<HttpResponse<Login | Response>> {
     const { user, password } = req.body;
 
     try {

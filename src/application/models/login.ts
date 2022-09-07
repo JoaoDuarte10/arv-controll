@@ -1,4 +1,4 @@
-import { LoginOutput, Login } from '../../domain/usecases/login/validate';
+import { Login, LoginOutput } from '../../domain/usecases/login/validate';
 
 export type LoginModel = Login;
 

@@ -5,6 +5,7 @@ import { LoginRepository } from '../../../domain/repository';
 import { LoginEntity } from '../../../domain/entities/login';
 import { LoginModel } from '../../models';
 import { JwtAdapter } from '../../../domain/usecases/adapter/JwtAdapter';
+import { LoginOutputModel } from '../../models/login';
 
 export class ValidateLoginService implements ValidateLoginUseCase {
   private TWO_HOURS = 2;
@@ -14,7 +15,7 @@ export class ValidateLoginService implements ValidateLoginUseCase {
     private readonly jwtAdapter: JwtAdapter,
   ) {}
 
-  async execute(login: LoginModel): Promise<string> {
+  async execute(login: LoginModel): Promise<LoginOutputModel> {
     const loginEntity = new LoginEntity(login);
 
     const result = await this.loginRepository.find(login);
@@ -25,10 +26,15 @@ export class ValidateLoginService implements ValidateLoginUseCase {
 
     const loginUser = loginEntity.validateLogin(result);
 
-    return this.jwtAdapter.createToken(
+    const token = this.jwtAdapter.createToken(
       loginUser,
       process.env.TOKEN_LOGIN,
       this.TWO_HOURS,
     );
+
+    return {
+      token,
+      refreshToken: '',
+    };
   }
 }

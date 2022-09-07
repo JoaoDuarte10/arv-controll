@@ -1,3 +1,4 @@
 export const HTTP_STATUS_CODE = {
   UNAUTHORIZED: 401,
+  SERVER_ERROR: 500,
 };
