@@ -37,6 +37,12 @@ describe('Validate Login Service', () => {
   it('shoul return token jwt', async () => {
     const result = await sut.execute(params);
 
-    expect(result).toBeDefined();
+    expect(typeof result.token).toBe('string');
+  });
+
+  it('should return refreshToken jwt', async () => {
+    const result = await sut.execute(params);
+
+    expect(typeof result.refreshToken).toBe('string');
   });
 });
