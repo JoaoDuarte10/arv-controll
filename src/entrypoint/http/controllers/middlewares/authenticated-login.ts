@@ -4,19 +4,22 @@ import { Request } from 'express';
 import { Middleware } from '../../../contracts/middleware';
 import { HttpRequest } from '../../../contracts/http';
 import { JwtAdapter } from '../../../../domain/usecases/adapter/JwtAdapter';
-import { Unauthorized } from '../../exceptions/Unauthorized';
+import { UnauthorizedException } from '../../exceptions/Unauthorized';
+import { InvalidTokenException } from '../../exceptions/invalid-token';
 
 export class AuthenticatedLoginMiddleware implements Middleware {
   constructor(private readonly jwt: JwtAdapter) {}
 
   handle(req: HttpRequest<Request>): void {
-    const userToken = req.headers.authorization;
+    const authToken = req.headers.authorization;
+
+    if (!authToken) throw new InvalidTokenException();
 
     try {
-      const token = this.jwt.validateToken(userToken, process.env.TOKEN_LOGIN);
+      const token = this.jwt.validateToken(authToken, process.env.TOKEN_LOGIN);
       req.headers['id-user'] = token.id;
     } catch (error) {
-      throw new Unauthorized();
+      throw new UnauthorizedException();
     }
   }
 }
