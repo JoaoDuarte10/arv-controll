@@ -11,12 +11,12 @@ export class AuthenticatedLoginMiddleware implements Middleware {
 
   handle(req: HttpRequest<Request>): void {
     const userToken = req.headers.authorization;
-    const token = this.jwt.validateToken(userToken, process.env.TOKEN_LOGIN);
 
-    if (!token) {
+    try {
+      const token = this.jwt.validateToken(userToken, process.env.TOKEN_LOGIN);
+      req.headers['id-user'] = token.id;
+    } catch (error) {
       throw new Unauthorized();
     }
-
-    req.headers['id-user'] = token.id;
   }
 }
