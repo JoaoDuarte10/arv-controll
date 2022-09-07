@@ -1,3 +1,3 @@
 export const HTTP_STATUS_CODE = {
-  UNAUTHORIZED: 403,
+  UNAUTHORIZED: 401,
 };

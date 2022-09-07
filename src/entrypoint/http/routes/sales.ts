@@ -9,18 +9,38 @@ import {
   makeLoadSalesForClientController,
   makeLoadSalesForClientByPeriodController,
 } from '../../factories/sales';
+import { makeAuthenticatedLoginMiddleware } from '../../../entrypoint/factories/middlewares/authenticated-login';
+import { adapteMiddleware } from '../adapters/express-middleware';
 
 export const salesRoutes = (router: Router): void => {
-  router.post('/sales/new', adaptRoute(makeCreateSalesController()));
+  router.post(
+    '/sales/new',
+    adapteMiddleware(makeAuthenticatedLoginMiddleware()),
+    adaptRoute(makeCreateSalesController()),
+  );
   router.get(
     '/sales/period-clients',
+    adapteMiddleware(makeAuthenticatedLoginMiddleware()),
     adaptRoute(makeLoadSalesForClientByPeriodController()),
   );
-  router.get('/sales/clients', adaptRoute(makeLoadSalesForClientController()));
-  router.get('/sales/today', adaptRoute(makeLoadSalesForDateController()));
-  router.get('/sales/period', adaptRoute(makeLoadSalesForPeriodController()));
+  router.get(
+    '/sales/clients',
+    adapteMiddleware(makeAuthenticatedLoginMiddleware()),
+    adaptRoute(makeLoadSalesForClientController()),
+  );
+  router.get(
+    '/sales/today',
+    adapteMiddleware(makeAuthenticatedLoginMiddleware()),
+    adaptRoute(makeLoadSalesForDateController()),
+  );
+  router.get(
+    '/sales/period',
+    adapteMiddleware(makeAuthenticatedLoginMiddleware()),
+    adaptRoute(makeLoadSalesForPeriodController()),
+  );
   router.get(
     '/sales/all-filters',
+    adapteMiddleware(makeAuthenticatedLoginMiddleware()),
     adaptRoute(makeLoadHistoryByAllFilterController()),
   );
 };

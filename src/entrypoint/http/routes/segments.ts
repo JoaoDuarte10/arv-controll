@@ -9,10 +9,28 @@ import {
   makeUpdateSegmentController,
   makeDeleteSegmentController,
 } from '../../factories/segments';
+import { makeAuthenticatedLoginMiddleware } from '../../../entrypoint/factories/middlewares/authenticated-login';
+import { adapteMiddleware } from '../adapters/express-middleware';
 
 export const segmentsRoutes = (router: Router): void => {
-  router.get('/segments', adaptRoute(makeFindSegmentController()));
-  router.post('/segment/create', adaptRoute(makeCreateSegmentController()));
-  router.put('/segment/update', adaptRoute(makeUpdateSegmentController()));
-  router.delete('/segment', adaptRoute(makeDeleteSegmentController()));
+  router.get(
+    '/segments',
+    adapteMiddleware(makeAuthenticatedLoginMiddleware()),
+    adaptRoute(makeFindSegmentController()),
+  );
+  router.post(
+    '/segment/create',
+    adapteMiddleware(makeAuthenticatedLoginMiddleware()),
+    adaptRoute(makeCreateSegmentController()),
+  );
+  router.put(
+    '/segment/update',
+    adapteMiddleware(makeAuthenticatedLoginMiddleware()),
+    adaptRoute(makeUpdateSegmentController()),
+  );
+  router.delete(
+    '/segment',
+    adapteMiddleware(makeAuthenticatedLoginMiddleware()),
+    adaptRoute(makeDeleteSegmentController()),
+  );
 };
