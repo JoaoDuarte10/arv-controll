@@ -19,7 +19,7 @@ describe('AuthenticatedLogin', () => {
       headers: {
         authorization: jwtAdapter.createToken(
           { id: idUser },
-          process.env.TOKEN_LOGIN as string,
+          process.env.SECRECT_TOKEN as string,
           1,
         ),
       },

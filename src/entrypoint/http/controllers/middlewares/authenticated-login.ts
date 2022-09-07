@@ -16,7 +16,10 @@ export class AuthenticatedLoginMiddleware implements Middleware {
     if (!authToken) throw new InvalidTokenException();
 
     try {
-      const token = this.jwt.validateToken(authToken, process.env.TOKEN_LOGIN);
+      const token = this.jwt.validateToken(
+        authToken,
+        process.env.SECRECT_TOKEN,
+      );
       req.headers['id-user'] = token.id;
     } catch (error) {
       throw new UnauthorizedException();

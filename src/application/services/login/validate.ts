@@ -8,7 +8,7 @@ import { JwtAdapter } from '../../../domain/usecases/adapter/JwtAdapter';
 import { LoginOutputModel } from '../../models/login';
 
 export class ValidateLoginService implements ValidateLoginUseCase {
-  private TWO_HOURS = 2;
+  private TWO_HOURS = 24;
 
   constructor(
     private readonly loginRepository: LoginRepository,
@@ -28,7 +28,7 @@ export class ValidateLoginService implements ValidateLoginUseCase {
 
     const token = this.jwtAdapter.createToken(
       loginUser,
-      process.env.TOKEN_LOGIN,
+      process.env.SECRECT_TOKEN,
       this.TWO_HOURS,
     );
 
