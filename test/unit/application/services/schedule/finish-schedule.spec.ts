@@ -9,7 +9,6 @@ describe('Finish Schedule Service', () => {
   };
   let scheduleRepositorySpy;
   let salesRepositoryMake: { create: () => void };
-  let salesRepositorySpy;
   let clientHistoryRepositoryMake: { save: () => void };
   let logger: { error: () => void };
 
@@ -43,14 +42,12 @@ describe('Finish Schedule Service', () => {
     salesRepositoryMake = {
       create: () => jest.fn(),
     };
-    salesRepositorySpy = jest.spyOn(salesRepositoryMake, 'create');
     clientHistoryRepositoryMake = {
       save: () => jest.fn(),
     };
     logger = { error: () => jest.fn() };
     sut = new FinishScheduleService(
       scheduleRepositoryMake as any,
-      salesRepositoryMake as any,
       clientHistoryRepositoryMake as any,
       logger as any,
     );
@@ -63,7 +60,6 @@ describe('Finish Schedule Service', () => {
   it('should create a new sales', async () => {
     await sut.execute(paramsMock);
 
-    expect(salesRepositorySpy).toHaveBeenCalledTimes(1);
     expect(scheduleRepositorySpy).toHaveBeenCalledTimes(1);
   });
 });

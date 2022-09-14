@@ -4,7 +4,6 @@ export type CreateScheduleModel = {
   procedure: string;
   date: string;
   time: string;
-  price: string;
   phone?: string;
   pacote?: boolean;
   qtdTotalAtendimento?: number;
@@ -17,7 +16,6 @@ export type UpdateScheduleModel = {
   procedure: string;
   date: string;
   time: string;
-  price: string;
   phone?: string;
   pacote?: boolean;
   qtdTotalAtendimento?: number;
@@ -32,7 +30,6 @@ export type ScheduleOutput = {
   procedure: string;
   date: string;
   time: string;
-  price: string;
   phone?: string;
   isDefeated?: boolean;
   pacote?: boolean;

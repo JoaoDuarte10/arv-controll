@@ -33,11 +33,9 @@ export const makeDeleteScheduleController = () => {
 
 export const makeFinishScheduleController = () => {
   const scheduleRepository = new ScheduleRepositoryMongoDB();
-  const salesRepository = new SalesRepositoryMongoDB();
   const historyRepository = new ClientHistoryRepositoryMongo();
   const service = new FinishScheduleService(
     scheduleRepository,
-    salesRepository,
     historyRepository,
     logger,
   );

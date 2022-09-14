@@ -8,7 +8,6 @@ const scheduleSchema = new Schema({
   procedure: String,
   date: String,
   time: String,
-  price: String,
   phone: String,
   pacote: Boolean,
   qtdAtendimento: Number,

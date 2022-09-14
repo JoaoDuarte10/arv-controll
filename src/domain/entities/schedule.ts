@@ -41,10 +41,6 @@ export class ScheduleEntity {
     return this.props.time;
   }
 
-  get price() {
-    return this.props.time;
-  }
-
   get phone() {
     return this.props.phone;
   }
@@ -90,12 +86,6 @@ export class ScheduleEntity {
         message: 'Invalid Date',
       });
     }
-    if (!this.price.trim()) {
-      this.notification.addError({
-        type: 'InvalidParams',
-        message: 'Invalid Price',
-      });
-    }
   }
 
   private defineActualAttendace() {
@@ -126,11 +116,6 @@ export class ScheduleEntity {
     return replacePhone.length < 16 && replacePhone.length > 1 ? false : true;
   }
 
-  isValidSales(): boolean {
-    const price = parseFloat(this.props.price.substring(2).replace(',', '.'));
-    return price ? true : false;
-  }
-
   addAttendace() {
     this.props.qtdAtendimento = this.props.qtdAtendimento + 1;
   }
@@ -151,7 +136,6 @@ export type Schedule = {
   procedure: string;
   date: string;
   time: string;
-  price: string;
   phone?: string;
   isDefeated?: boolean;
   pacote?: boolean;

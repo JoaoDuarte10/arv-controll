@@ -9,7 +9,6 @@ type Input = {
   procedure: string;
   date: string;
   time: string;
-  price: string;
   phone?: string;
   pacote?: boolean;
   qtdTotalAtendimento?: number;

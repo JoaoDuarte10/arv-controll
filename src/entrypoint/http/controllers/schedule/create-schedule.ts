@@ -21,7 +21,6 @@ export class CreateScheduleController implements Controller {
       procedure,
       date,
       time,
-      price,
       contact,
       pacote,
       qtdTotalAtendimento,
@@ -29,7 +28,7 @@ export class CreateScheduleController implements Controller {
 
     const id_user = req.headers['id-user'] as string;
 
-    if (!client || !procedure || !date || !time || !price) {
+    if (!client || !procedure || !date || !time) {
       return { statusCode: 400 };
     }
 
@@ -40,7 +39,6 @@ export class CreateScheduleController implements Controller {
         procedure,
         date,
         time,
-        price,
         phone: contact,
         pacote,
         qtdTotalAtendimento,

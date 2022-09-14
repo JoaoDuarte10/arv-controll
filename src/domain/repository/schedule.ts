@@ -6,7 +6,6 @@ interface ISchedule {
   procedure: string;
   date: string;
   time: string;
-  price: string;
   phone?: string;
   isDefeated?: boolean;
   pacote?: boolean;
@@ -26,7 +25,6 @@ interface ScheduleRepository {
     procedure,
     date,
     time,
-    price,
     phone,
     pacote,
     qtdTotalAtendimento,
@@ -38,7 +36,6 @@ interface ScheduleRepository {
     procedure,
     date,
     time,
-    price,
     phone,
     pacote,
     qtdTotalAtendimento,

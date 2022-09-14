@@ -33,7 +33,6 @@ export class LoadScheduleByDateService implements LoadSchedulesByDate {
               procedure: item.procedure,
               date: item.date,
               time: item.time,
-              price: item.price,
               phone: item.phone,
               isDefeated: true,
             };
