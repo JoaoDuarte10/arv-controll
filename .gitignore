@@ -7,3 +7,7 @@ letsencrypt/
 .env
 .env.dev
 .env.prod
+
+data/
+
+.scannerwork

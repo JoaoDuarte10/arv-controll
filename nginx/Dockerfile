@@ -13,3 +13,5 @@ EXPOSE "443"
 
 # RUN apt-get update && \
 #     apt-get install -y nano
+#     apt install python3-certbot-nginx
+#     apt install certbot
