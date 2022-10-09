@@ -1,14 +1,16 @@
 import { ILogin, LoginRepository } from '../../domain/repository';
-import { Login } from '../models';
+import { database } from '../database/index';
+import { LoginDb } from '../../domain/repository/login';
 
 class LoginRepositoryMongo implements LoginRepository {
-  async find({ user, password }: ILogin): Promise<ILogin> {
-    const result = await Login.findOne({ user, password });
+  async find(name: string, password: string): Promise<LoginDb> {
+    const sql = {
+      text: 'SELECT * FROM users WHERE name = $1 AND password = $2',
+      values: [name, password],
+    };
 
-    if (result) {
-      const { _id, user, password } = result;
-      return Object.assign({}, { id: _id, user, password }) as any;
-    }
+    const { rows } = await database.query(sql.text, sql.values);
+    return rows[0];
   }
 }
 

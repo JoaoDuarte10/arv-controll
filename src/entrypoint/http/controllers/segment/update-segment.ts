@@ -8,11 +8,11 @@ export class UpdateSegmentController implements Controller {
   constructor(private readonly updateSegmentService: UpdateSegmentService) {}
 
   async handle(req: Request): Promise<HttpResponse<void | Response>> {
-    const id_user = req.headers['id-user'] as string;
-    const { id, segment } = req.body;
+    const idusers = parseInt(req.headers['id-user'].toString(), 10);
+    const { idsegments, segment } = req.body;
 
     try {
-      await this.updateSegmentService.execute({ id, id_user, segment });
+      await this.updateSegmentService.execute({ idsegments, idusers, segment });
       return { statusCode: 201 };
     } catch (error) {
       return {

@@ -14,8 +14,8 @@ export class UpdateClientService implements UpdateClient {
     const client = new ClientEntity(params);
 
     const findClient = await this.clientRepository.find(
-      params.id_user,
-      params.id,
+      params.idusers,
+      params.idsegments,
     );
 
     if (!findClient) {
@@ -26,7 +26,7 @@ export class UpdateClientService implements UpdateClient {
     }
 
     try {
-      await this.clientRepository.update(client.props);
+      await this.clientRepository.update(client.returnProps());
     } catch (error) {
       this.logger.error(`Error in Update Client Service: ${error.message}`);
     }

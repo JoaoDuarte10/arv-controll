@@ -5,8 +5,8 @@ CREATE TABLE IF NOT EXISTS clients (
     email VARCHAR(256) NULL,
     phone VARCHAR(256) NULL,
     idsegment int NULL,
-    createdAt TIMESTAMP DEFAULT NOW() NOT NULL,
-    updatedAt TIMESTAMP NULL,
+    created_at TIMESTAMP DEFAULT NOW() NOT NULL,
+    updated_at TIMESTAMP NULL,
     FOREIGN KEY(idusers) REFERENCES users(idusers),
     FOREIGN KEY(idsegments) REFERENCES segments(idsegments)
 );

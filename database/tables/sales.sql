@@ -5,8 +5,8 @@ create table if not exists sales(
     description varchar(256) not null,
     date date not null,
     price int not null,
-    createdAt timestamp default now() not null,
-    updatedAt timestamp null,
+    created_at TIMESTAMP DEFAULT NOW() NOT NULL,
+    updated_at TIMESTAMP NULL,
     FOREIGN KEY(idusers) REFERENCES users(idusers),
     FOREIGN KEY(idclients) REFERENCES clients(idclients)
 );

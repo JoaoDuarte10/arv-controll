@@ -20,7 +20,8 @@ export class AuthenticatedLoginMiddleware implements Middleware {
         authToken,
         process.env.SECRECT_TOKEN,
       );
-      req.headers['id-user'] = token.id;
+
+      req.headers['id-user'] = token.idusers;
     } catch (error) {
       throw new UnauthorizedException();
     }

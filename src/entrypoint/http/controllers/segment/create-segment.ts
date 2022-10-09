@@ -8,11 +8,11 @@ import { TYPE_ALREADY_EXISTS } from '../../../../application/utils/type-errors';
 export class CreateSegmentController implements Controller {
   constructor(private readonly createSegmentService: CreateSegment) {}
   async handle(req: Request): Promise<HttpResponse<void | Response>> {
-    const id_user = req.headers['id-user'] as string;
+    const idusers = parseInt(req.headers['id-user'].toString(), 10);
     const { segment } = req.body;
 
     try {
-      await this.createSegmentService.execute({ id_user, segment });
+      await this.createSegmentService.execute({ idusers, segment });
 
       return { statusCode: 201 };
     } catch (error) {

@@ -9,10 +9,9 @@ export class FindClientService implements FindClient {
     private readonly logger: ILogger,
   ) {}
 
-  async find(id_user: string, id: string): Promise<ClientModel> {
+  async find(id_user: number, id: number): Promise<ClientModel> {
     try {
-      const findClient = await this.clientRepository.find(id_user, id);
-      return findClient;
+      return await this.clientRepository.find(id_user, id);
     } catch (error) {
       this.logger.error(
         `Error in Find Client Service in function find: ${error.message}`,
@@ -20,7 +19,7 @@ export class FindClientService implements FindClient {
     }
   }
 
-  async findAll(id_user: string): Promise<ClientModel[]> {
+  async findAll(id_user: number): Promise<ClientModel[]> {
     try {
       return await this.clientRepository.findAll(id_user);
     } catch (error) {
@@ -31,15 +30,11 @@ export class FindClientService implements FindClient {
   }
 
   async findBySegment(
-    id_user: string,
-    segment: string,
+    id_user: number,
+    segment: number,
   ): Promise<ClientModel[]> {
     try {
-      const findClients = await this.clientRepository.findBySegment(
-        id_user,
-        segment,
-      );
-      return findClients;
+      return await this.clientRepository.findBySegment(id_user, segment);
     } catch (error) {
       this.logger.error(
         `Error in Find Client Service in function findBySegment: ${error.message}`,

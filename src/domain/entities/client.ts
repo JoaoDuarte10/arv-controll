@@ -6,7 +6,7 @@ import { NotificationErrorException } from '../exceptions/notification-error-exc
 export class ClientEntity {
   private notification: INotificationError;
 
-  constructor(public props: IClientEntity) {
+  constructor(private props: IClientEntity) {
     this.notification = new NotificationError();
     this.valideteProps();
     this.validationEmail();
@@ -15,20 +15,20 @@ export class ClientEntity {
     }
   }
 
-  get id() {
-    return this.id;
+  get idclients() {
+    return this.idclients;
   }
 
-  private set id(value: string) {
-    this.props.id = value;
+  private set idclients(value: number) {
+    this.props.idclients = value;
   }
 
-  get id_user() {
-    return this.props.id_user;
+  get idusers() {
+    return this.props.idusers;
   }
 
-  private set id_user(value: string) {
-    this.props.id_user = value;
+  private set idusers(value: number) {
+    this.props.idusers = value;
   }
 
   get name() {
@@ -55,16 +55,16 @@ export class ClientEntity {
     this.props.phone = value;
   }
 
-  get segment() {
-    return this.props.segment;
+  get idsegments() {
+    return this.props.idsegments;
   }
 
-  private set segment(value: string) {
-    this.props.segment = value;
+  private set idsegments(value: number) {
+    this.props.idsegments = value;
   }
 
   private valideteProps() {
-    if (!this.props.id_user.trim()) {
+    if (!this.props.idusers) {
       this.notification.addError({
         type: 'InvalidParams',
         message: 'Invalid idUser',
@@ -105,9 +105,8 @@ export class ClientEntity {
     this.phone = phone.trim();
   }
 
-  updateSegment(segment: string) {
-    if (!segment.trim()) throw new Error('Invalid segment');
-    this.segment = segment.trim();
+  updateSegment(segment: number) {
+    this.props.idsegments = segment;
   }
 
   returnProps() {
@@ -121,10 +120,10 @@ export class ClientEntity {
 }
 
 export type IClientEntity = {
-  id?: string;
-  id_user: string;
+  idclients?: number;
+  idusers?: number;
+  idsegments?: number;
   name: string;
   email: string;
   phone: string;
-  segment?: string;
 };

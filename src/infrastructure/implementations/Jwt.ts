@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 export class Jwt implements JwtAdapter {
   createToken(data: any, key: string, expireIn: number): string {
     return jwt.sign(data, key, {
-      subject: data.id.toString(),
+      subject: data.idusers.toString(),
       expiresIn: `${expireIn}h`,
     });
   }

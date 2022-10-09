@@ -13,11 +13,11 @@ export class DeleteClientController implements Controller {
   async handle(
     req?: HttpRequest<Request>,
   ): Promise<HttpResponse<void | Response>> {
-    const id = req.query.id as string;
-    const id_user = req.headers['id-user'] as string;
+    const idclients = parseInt(req.query.id.toString(), 10);
+    const idusers = parseInt(req.headers['id-user'].toString(), 10);
 
     try {
-      await this.clientUseCase.execute(id_user, id);
+      await this.clientUseCase.execute(idusers, idclients);
       return { statusCode: 201 };
     } catch (error) {
       if (error.type === TYPE_NOT_EXISTS) {

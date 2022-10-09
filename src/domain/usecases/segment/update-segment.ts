@@ -3,7 +3,7 @@ export interface UpdateSegment {
 }
 
 type UpdateSegmentInput = {
-  id_user: string;
-  id: string;
+  idusers: number;
+  idsegments: number;
   segment: string;
 };

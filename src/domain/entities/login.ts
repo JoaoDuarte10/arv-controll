@@ -3,7 +3,7 @@ import { NotificationErrorException } from '../exceptions/notification-error-exc
 export class LoginEntity {
   private notification: NotificationError;
 
-  constructor(public props: Login) {
+  constructor(private props: Login) {
     this.notification = new NotificationError();
     this.validateProps();
     if (this.notification.hasErrors()) {
@@ -11,8 +11,8 @@ export class LoginEntity {
     }
   }
 
-  get id() {
-    return this.props.id;
+  get idusers() {
+    return this.props.idusers;
   }
 
   get user() {
@@ -23,8 +23,8 @@ export class LoginEntity {
     return this.props.password;
   }
 
-  insertId(id: string) {
-    this.props.id = id;
+  insertId(idusers: number) {
+    this.props.idusers = idusers;
   }
 
   private validateProps() {
@@ -42,9 +42,9 @@ export class LoginEntity {
     }
   }
 
-  validateLogin(login: Login): LoginOutput {
-    if (this.user === login.user && this.password === login.password) {
-      return { id: this.id, user: this.user };
+  validateLogin(user: string, password: string): LoginOutput {
+    if (this.user === user && this.password === password) {
+      return { idusers: this.idusers, user: this.user };
     }
     this.notification.addError({
       type: 'unauthorized',
@@ -67,12 +67,13 @@ export class LoginEntity {
 }
 
 export type Login = {
-  id?: string;
+  idusers?: number;
   user: string;
   password: string;
+  phone: string;
 };
 
 export type LoginOutput = {
-  id: string;
+  idusers: number;
   user: string;
 };

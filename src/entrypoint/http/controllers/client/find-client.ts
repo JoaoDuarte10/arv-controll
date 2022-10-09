@@ -12,11 +12,11 @@ export class FindClientController implements Controller {
   async handle(
     req?: HttpRequest<Request>,
   ): Promise<HttpResponse<ClientViewModel | Response>> {
-    const id_user = req.headers['id-user'] as string;
-    const id = req.params.id as string;
+    const idusers = parseInt(req.headers['id-user'].toString(), 10);
+    const idclients = parseInt(req.params.id.toString(), 10);
 
     try {
-      const findClient = await this.clientUseCase.find(id_user, id);
+      const findClient = await this.clientUseCase.find(idusers, idclients);
       return {
         statusCode: 200,
         data: findClient,

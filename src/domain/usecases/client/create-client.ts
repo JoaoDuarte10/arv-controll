@@ -3,9 +3,9 @@ export interface CreateClient {
 }
 
 export type CreateClientInput = {
-  id_user: string;
+  idusers: number;
   name: string;
   email: string;
   phone: string;
-  segment?: string;
+  idsegments?: number;
 };

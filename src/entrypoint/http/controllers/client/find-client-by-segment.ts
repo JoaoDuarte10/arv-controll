@@ -13,11 +13,14 @@ export class FindClientBySegmentController implements Controller {
   async handle(
     req?: HttpRequest<Request>,
   ): Promise<HttpResponse<ClientViewModel[] | Response>> {
-    const id_user = req.headers['id-user'] as string;
-    const segment = req.query.segment as string;
+    const idusers = parseInt(req.headers['id-user'].toString(), 10);
+    const idsegments = parseInt(req.query.segment.toString(), 10);
 
     try {
-      const result = await this.clientUseCase.findBySegment(id_user, segment);
+      const result = await this.clientUseCase.findBySegment(
+        idusers,
+        idsegments,
+      );
 
       if (!result) {
         return { statusCode: 404 };

@@ -17,8 +17,6 @@ async function closeGracefully(signal) {
 // process.on('SIGTERM', closeGracefully);
 
 try {
-  db.connectDB();
-
   app.listen(process.env.PORT || 5000, () => {
     logger.info(`Server running on PORT ${process.env.PORT || 5000}`);
   });

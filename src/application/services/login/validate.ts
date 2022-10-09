@@ -16,15 +16,15 @@ export class ValidateLoginService implements ValidateLoginUseCase {
   ) {}
 
   async execute(login: LoginModel): Promise<LoginOutputModel> {
-    const loginEntity = new LoginEntity(login);
+    const loginEntity = new LoginEntity(login as any);
 
-    const result = await this.loginRepository.find(login);
+    const result = await this.loginRepository.find(login.user, login.password);
 
     if (!result) loginEntity.invalidLogin();
 
-    loginEntity.insertId(result.id);
+    loginEntity.insertId(result.idusers);
 
-    const loginUser = loginEntity.validateLogin(result);
+    const loginUser = loginEntity.validateLogin(result.name, result.password);
 
     const token = this.jwtAdapter.createToken(
       loginUser,

@@ -2,12 +2,12 @@ import { Controller, HttpResponse } from '../../../contracts';
 import { HttpRequest } from '../../../contracts/http';
 import { CreateClient } from '../../../../domain/usecases/client/create-client';
 import { Response } from '../../../contracts/response-request';
-
-import { Request } from 'express';
 import {
   TYPE_ALREADY_EXISTS,
   TYPE_INPUT_INVALIDS,
 } from '../../../../application/utils/type-errors';
+
+import { Request } from 'express';
 
 export class CreateClientController implements Controller {
   constructor(private clientUseCase: CreateClient) {}
@@ -15,8 +15,8 @@ export class CreateClientController implements Controller {
   async handle(
     req: HttpRequest<Request>,
   ): Promise<HttpResponse<void | Response>> {
-    const { name, email, phone, segment } = req.body;
-    const id_user = req.headers['id-user'] as string;
+    const { name, email, phone, idsegments } = req.body;
+    const idusers = parseInt(req.headers['id-user'].toString(), 10);
 
     try {
       if (!name || !phone) {
@@ -30,11 +30,11 @@ export class CreateClientController implements Controller {
       }
 
       await this.clientUseCase.execute({
-        id_user,
+        idusers,
         name,
         email,
         phone,
-        segment,
+        idsegments,
       });
 
       return { statusCode: 201 };

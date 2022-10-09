@@ -24,21 +24,10 @@ export class CreateClientService implements CreateClient {
       };
     }
 
-    const clientAlreadyExist: boolean = await this.isClientExist(
-      params.id_user,
-      params.name,
-      params.email,
-    );
-
-    if (clientAlreadyExist) {
-      throw {
-        type: TYPE_ALREADY_EXISTS,
-        message: 'Client already exist',
-      };
-    }
+    await this.isClientExist(params.idusers, params.name, params.email);
 
     try {
-      await this.clientRepository.create(client.props);
+      await this.clientRepository.create(client.returnProps());
     } catch (error) {
       this.logger.error(
         `Error in CreateClientService in function create: ${error.message}`,
@@ -47,24 +36,26 @@ export class CreateClientService implements CreateClient {
   }
 
   private async isClientExist(
-    id_user: string,
+    idusers: number,
     name: string,
     email: string,
-  ): Promise<boolean> {
+  ): Promise<void> {
     const findClient = { byEmail: null, byName: null };
 
     await Promise.all([
       this.clientRepository
-        .findByEmail(id_user, email)
+        .findByEmail(idusers, email)
         .then((result) => (findClient.byEmail = result)),
       this.clientRepository
-        .findByName(id_user, name)
+        .findByName(idusers, name)
         .then((result) => (findClient.byName = result)),
     ]);
 
     if ((findClient.byEmail && findClient.byEmail.email) || findClient.byName) {
-      return true;
+      throw {
+        type: TYPE_ALREADY_EXISTS,
+        message: 'Client already exist',
+      };
     }
-    return false;
   }
 }

@@ -1,17 +1,21 @@
 interface ILogin {
-  id?: string;
-  user: string;
+  idusers?: number;
+  name: string;
   password: string;
+  phone: string;
 }
 
-type LoginDb = {
-  id?: string;
-  user: string;
+export type LoginDb = {
+  idusers?: number;
+  name: string;
   password: string;
+  phone: string;
+  created_at: string;
+  updated_at: string;
 };
 
 interface LoginRepository {
-  find({ user, password }: ILogin): Promise<LoginDb>;
+  find(name: string, password: string): Promise<LoginDb>;
 }
 
 export { ILogin, LoginRepository };

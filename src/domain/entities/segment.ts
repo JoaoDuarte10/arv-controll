@@ -3,9 +3,10 @@ import {
   INotificationError,
 } from '../../application/notification/notification-error';
 import { NotificationErrorException } from '../exceptions/notification-error-exception';
+
 export class SegmentEntity {
   private notification: INotificationError;
-  constructor(public props: Segment) {
+  constructor(private props: Segment) {
     this.notification = new NotificationError();
     this.validateProps();
     if (this.notification.hasErrors()) {
@@ -13,14 +14,14 @@ export class SegmentEntity {
     }
   }
 
-  get id() {
-    if (this.props.id) {
-      return this.props.id;
+  get idsegments() {
+    if (this.props.idsegments) {
+      return this.props.idsegments;
     }
   }
 
-  get id_user() {
-    return this.props.id_user;
+  get idusers() {
+    return this.props.idusers;
   }
 
   get segment() {
@@ -28,7 +29,7 @@ export class SegmentEntity {
   }
 
   private validateProps() {
-    if (!this.props.id_user.trim()) {
+    if (!this.props.idusers) {
       this.notification.addError({
         type: 'InvalidParams',
         message: 'Invalid Id User',
@@ -48,7 +49,7 @@ export class SegmentEntity {
 }
 
 export type Segment = {
-  id_user: string;
-  id?: string;
+  idusers: number;
+  idsegments?: number;
   segment: string;
 };

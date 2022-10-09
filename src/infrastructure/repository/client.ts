@@ -1,157 +1,160 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ClientRepository, IClient } from '../../domain/repository';
-import { Client } from '../models';
+import { database } from '../database/index';
 
-class ClientRepositoryMongo implements ClientRepository {
+export class ClientRepositoryMongo implements ClientRepository {
   async create({
-    id_user,
+    idusers,
     name,
     email,
     phone,
-    segment,
-  }: IClient): Promise<void> {
-    const client = new Client({
-      id_user: id_user,
-      name: name,
-      email: email,
-      phone: phone,
-      segment: segment,
-    });
+    idsegments,
+  }: any): Promise<void> {
+    const sql = {
+      text: `INSERT INTO clients(
+        idusers,
+        name,
+        email,
+        phone,
+        idsegments
+      ) VALUES(
+        $1, $2, $3, $4, $5
+      )`,
+      values: [idusers, name, email, phone, idsegments],
+    };
 
-    await client.save();
+    await database.query(sql.text, sql.values);
   }
 
   async update({
-    id_user,
-    id,
+    idusers,
+    idclients,
     name,
     email,
     phone,
-    segment,
-  }: IClient): Promise<void> {
-    const findClient = await Client.findOne({ id_user: id_user, _id: id });
-    const updateClient = await findClient.updateOne({
-      id_user: id_user,
-      name: name,
-      email: email,
-      phone: phone,
-      segment: segment,
-    });
-    return updateClient;
+    idsegments,
+  }: any): Promise<void> {
+    const sql = {
+      text: 'UPDATE clients SET name = $1, email = $2, phone = $3, idsegments = $4 WHERE idclients = $5 AND idusers = $6',
+      values: [name, email, phone, idsegments, idclients, idusers],
+    };
+
+    await database.query(sql.text, sql.values);
   }
 
-  async findAll(id_user: string): Promise<IClient[]> {
-    const findAll = await Client.find({ id_user: id_user }).sort({ name: 1 });
+  async findAll(idusers: number): Promise<IClient[]> {
+    const sql = {
+      text: `SELECT
+          c.idclients,
+          s.name AS segment,
+          c.name,
+          c.email,
+          c.phone,
+          c.created_at,
+          c.updated_at
+        FROM clients c 
+          LEFT JOIN segments s ON c.idsegments = s.idsegments
+        WHERE c.idusers = $1
+        ORDER BY name`,
+      values: [idusers],
+    };
+    const { rows } = await database.query(sql.text, sql.values);
 
-    if (!findAll) return;
-
-    return findAll.map((item) => {
-      const { _id, id_user, name, email, phone, segment } = item;
-      return Object.assign(
-        {},
-        {
-          id: _id as any,
-          id_user,
-          name,
-          email,
-          phone,
-          segment,
-        },
-      );
-    });
+    return rows;
   }
 
-  async find(idUser: string, id: string): Promise<IClient> {
-    const findClient = await Client.findOne({ id_user: idUser, _id: id });
+  async find(idusers: number, idclients: number): Promise<IClient | any> {
+    const sql = {
+      text: `SELECT
+          c.idclients,
+          s.name AS segment,
+          c.name,
+          c.email,
+          c.phone,
+          c.created_at,
+          c.updated_at
+        FROM clients c 
+          LEFT JOIN segments s ON c.idsegments = s.idsegments
+        WHERE c.idusers = $1 AND c.idclients = $2`,
+      values: [idusers, idclients],
+    };
 
-    if (!findClient) return;
+    const { rows } = await database.query(sql.text, sql.values);
 
-    const { _id, id_user, name, email, phone, segment } = findClient;
-    return Object.assign(
-      {},
-      {
-        id: _id as any,
-        id_user,
-        name,
-        email,
-        phone,
-        segment,
-      },
+    return rows[0];
+  }
+
+  async findByEmail(idusers: number, email: string): Promise<IClient | any> {
+    const sql = {
+      text: `SELECT
+          c.idclients,
+          s.name AS segment,
+          c.name,
+          c.email,
+          c.phone,
+          c.created_at,
+          c.updated_at
+        FROM clients c 
+          LEFT JOIN segments s ON c.idsegments = s.idsegments
+        WHERE c.idusers = $1 AND c.email = $2`,
+      values: [idusers, email],
+    };
+
+    const { rows } = await database.query(sql.text, sql.values);
+
+    return rows[0];
+  }
+
+  async findByName(idusers: number, name: string): Promise<IClient | any> {
+    const sql = {
+      text: `SELECT
+          c.idclients,
+          s.name AS segment,
+          c.name,
+          c.email,
+          c.phone,
+          c.created_at,
+          c.updated_at
+        FROM clients c 
+          LEFT JOIN segments s ON c.idsegments = s.idsegments
+        WHERE c.idusers = $1 AND c.name = $2`,
+      values: [idusers, name],
+    };
+
+    const { rows } = await database.query(sql.text, sql.values);
+
+    return rows[0];
+  }
+
+  async findBySegment(
+    idusers: number,
+    idsegments: number,
+  ): Promise<IClient[] | any> {
+    const sql = {
+      text: `SELECT
+          c.idclients,
+          s.name AS segment,
+          c.name,
+          c.email,
+          c.phone,
+          c.created_at,
+          c.updated_at
+        FROM clients c 
+          LEFT JOIN segments s ON s.idsegments = c.idsegments
+        WHERE c.idusers = $1 AND c.idsegments = $2
+        ORDER BY name`,
+      values: [idusers, idsegments],
+    };
+
+    const { rows } = await database.query(sql.text, sql.values);
+
+    return rows;
+  }
+
+  async delete(idusers: number, idclients: number): Promise<void> {
+    await database.query(
+      'DELETE FROM clients WHERE idusers = $1 AND idclients = $2',
+      [idusers, idclients],
     );
-  }
-
-  async findByEmail(idUser: string, emailUser: string): Promise<IClient> {
-    const findByEmail = await Client.findOne({
-      id_user: idUser,
-      email: emailUser,
-    });
-
-    if (!findByEmail) return;
-
-    const { _id, id_user, name, email, phone, segment } = findByEmail;
-    return Object.assign(
-      {},
-      {
-        id: _id as any,
-        id_user,
-        name,
-        email,
-        phone,
-        segment,
-      },
-    );
-  }
-
-  async findByName(idUser: string, userName: string): Promise<IClient> {
-    const findByName = await Client.findOne({
-      id_user: idUser,
-      name: userName,
-    });
-
-    if (!findByName) return;
-
-    const { _id, id_user, name, email, phone, segment } = findByName;
-    return Object.assign(
-      {},
-      {
-        id: _id as any,
-        id_user,
-        name,
-        email,
-        phone,
-        segment,
-      },
-    );
-  }
-
-  async findBySegment(id_user: string, segment: string): Promise<IClient[]> {
-    const findBySegment = await Client.find({
-      id_user: id_user,
-      segment: segment,
-    });
-
-    if (!findBySegment || findBySegment.length === 0) return;
-
-    return findBySegment.map((item) => {
-      const { _id, id_user, name, email, phone, segment } = item;
-      return Object.assign(
-        {},
-        {
-          id: _id as any,
-          id_user,
-          name,
-          email,
-          phone,
-          segment,
-        },
-      );
-    }) as any;
-  }
-
-  async delete(id_user: string, id: string): Promise<void> {
-    const findClient = await Client.findOne({ id_user: id_user, _id: id });
-    await findClient.delete();
   }
 }
-
-export { ClientRepositoryMongo };

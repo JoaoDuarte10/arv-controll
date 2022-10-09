@@ -11,12 +11,12 @@ export class DeleteSegmentService implements DeleteSegment {
   ) {}
 
   async execute(input: {
-    segment: string;
-    id: string;
-    id_user: string;
+    segment: number;
+    idsegments: number;
+    idusers: number;
   }): Promise<void> {
     const alreadyClientInSegment = await this.clientRepository.findBySegment(
-      input.id_user,
+      input.idusers,
       input.segment,
     );
 
@@ -29,8 +29,8 @@ export class DeleteSegmentService implements DeleteSegment {
 
     try {
       await this.segmentRepository.delete({
-        id_user: input.id_user,
-        id: input.id,
+        idusers: input.idusers,
+        idsegments: input.idsegments,
       });
     } catch (error) {
       this.logger.info(`Error in delete segment service: ${error.message}`);

@@ -3,6 +3,6 @@ CREATE TABLE IF NOT EXISTS users (
     name VARCHAR(256) NOT NULL,
     password VARCHAR(256) NOT NULL,
     phone VARCHAR(256) NOT NULL,
-    createdAt TIMESTAMP DEFAULT NOW() NOT NULL,
-    updatedAt TIMESTAMP NULL
+    created_at TIMESTAMP DEFAULT NOW() NOT NULL,
+    updated_at TIMESTAMP NULL,
 );

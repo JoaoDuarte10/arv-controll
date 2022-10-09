@@ -10,16 +10,16 @@ export class UpdateSegmentService implements UpdateSegment {
   ) {}
 
   async execute(params: {
-    id_user: string;
-    id: string;
+    idusers: number;
+    idsegments: number;
     segment: string;
   }): Promise<void> {
     try {
       const segment = new SegmentEntity(params);
 
       await this.segmentRepository.update({
-        id_user: segment.id_user,
-        id: segment.id,
+        idusers: segment.idusers,
+        idsegments: segment.idsegments,
         segment: segment.segment,
       });
     } catch (error) {

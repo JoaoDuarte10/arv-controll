@@ -1,7 +1,9 @@
 export interface FindSegmentUseCase {
-  execute: (id_user: string) => Promise<Segment[]>;
+  execute: (idusers: number) => Promise<Segment[]>;
 }
 
 export type Segment = {
+  idsegments: number;
   segment: string;
+  createdAt: string;
 };

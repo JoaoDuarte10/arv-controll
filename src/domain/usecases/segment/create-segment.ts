@@ -3,6 +3,6 @@ export interface CreateSegment {
 }
 
 type CreateSegmentInput = {
-  id_user: string;
+  idusers: number;
   segment: string;
 };

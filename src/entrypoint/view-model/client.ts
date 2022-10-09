@@ -1,8 +1,10 @@
 export type ClientViewModel = {
-  id?: string;
-  id_user: string;
+  idclients?: number;
+  idusers?: number;
+  idsegments?: number;
   name: string;
   email: string;
   phone: string;
-  segment?: string;
+  created_at?: string;
+  updated_at?: string;
 };

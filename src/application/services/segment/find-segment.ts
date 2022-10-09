@@ -9,10 +9,17 @@ export class FindSegmentService implements FindSegmentUseCase {
     private readonly logger: ILogger,
   ) {}
 
-  async execute(id_user: string): Promise<SegmentModel[]> {
+  async execute(idusers: number): Promise<SegmentModel[]> {
     try {
-      const segment = await this.segmentRepository.find(id_user);
-      return segment;
+      const result = await this.segmentRepository.find(idusers);
+
+      return result.map((item) => {
+        return {
+          idsegments: item.idsegments,
+          segment: item.name,
+          createdAt: item.created_at,
+        };
+      });
     } catch (error) {
       this.logger.error(`Error SegmentUseCase: ${error.message}`);
     }

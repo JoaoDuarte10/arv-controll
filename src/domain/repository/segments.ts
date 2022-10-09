@@ -1,20 +1,24 @@
 interface ISegment {
-  segment: string;
+  idsegments: number;
+  idusers: number;
+  name: string;
+  created_at: string;
+  updated_at: string;
 }
 
 interface SegmentRepository {
-  find(id_user: string): Promise<ISegment[]>;
+  find(idusers: number): Promise<ISegment[]>;
   findByName(input: {
-    id_user: string;
+    idusers: number;
     segment: string;
   }): Promise<ISegment | ISegment[]>;
-  create(input: { id_user: string; segment: string }): Promise<void>;
+  create(input: { idusers: number; segment: string }): Promise<void>;
   update(input: {
-    id: string;
-    id_user: string;
+    idsegments: number;
+    idusers: number;
     segment: string;
   }): Promise<void>;
-  delete(input: { id_user: string; id: string }): Promise<void>;
+  delete(input: { idusers: number; idsegments: number }): Promise<void>;
 }
 
 export { ISegment, SegmentRepository };

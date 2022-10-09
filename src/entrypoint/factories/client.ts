@@ -15,31 +15,31 @@ import { logger } from '../../infrastructure/utils/logger';
 const clientRepository = new ClientRepositoryMongo();
 
 export const makeCreateClientController = (): Controller => {
-  const service = new CreateClientService(clientRepository, logger);
+  const service = new CreateClientService(clientRepository as any, logger);
   return new CreateClientController(service);
 };
 
 export const makeUpdateClientController = (): Controller => {
-  const service = new UpdateClientService(clientRepository, logger);
-  return new UpdateClientController(service);
+  const service = new UpdateClientService(clientRepository as any, logger);
+  return new UpdateClientController(service as any);
 };
 
 export const makeFindClientController = (): Controller => {
-  const service = new FindClientService(clientRepository, logger);
+  const service = new FindClientService(clientRepository as any, logger);
   return new FindClientController(service);
 };
 
 export const makeFindAllClientController = (): Controller => {
-  const service = new FindClientService(clientRepository, logger);
+  const service = new FindClientService(clientRepository as any, logger);
   return new FindAllClientController(service);
 };
 
 export const makeFindBySegmentClientController = (): Controller => {
-  const service = new FindClientService(clientRepository, logger);
+  const service = new FindClientService(clientRepository as any, logger);
   return new FindClientBySegmentController(service);
 };
 
 export const makeDeleteClientController = (): Controller => {
-  const service = new DeleteClientService(clientRepository, logger);
+  const service = new DeleteClientService(clientRepository as any, logger);
   return new DeleteClientController(service);
 };

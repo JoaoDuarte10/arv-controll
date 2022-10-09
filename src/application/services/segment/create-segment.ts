@@ -10,11 +10,11 @@ export class CreateSegmentService implements CreateSegment {
     private readonly logger: Logger,
   ) {}
 
-  async execute(input: { id_user: string; segment: string }): Promise<void> {
+  async execute(input: { idusers: number; segment: string }): Promise<void> {
     const segment = new SegmentEntity(input);
 
     const alreadExists = await this.segmentRepository.findByName({
-      id_user: segment.id_user,
+      idusers: segment.idusers,
       segment: segment.segment,
     });
 

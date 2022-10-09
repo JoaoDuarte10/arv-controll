@@ -9,12 +9,12 @@ export class DeleteSegmentController implements Controller {
   constructor(private readonly deleteSegmentService: DeleteSegment) {}
 
   async handle(req: Request): Promise<HttpResponse<void | Response>> {
-    const id = req.query.id as string;
-    const segment = req.query.segment as string;
-    const id_user = req.headers['id-user'] as string;
+    const idsegments = req.query.id as any;
+    const segment = req.query.segment as any;
+    const idusers = parseInt(req.headers['id-user'].toString(), 10);
 
     try {
-      await this.deleteSegmentService.execute({ segment, id, id_user });
+      await this.deleteSegmentService.execute({ segment, idsegments, idusers });
       return { statusCode: 204 };
     } catch (error) {
       if (error.type === TYPE_ALREADY_EXISTS) {

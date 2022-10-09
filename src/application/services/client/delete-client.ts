@@ -9,8 +9,8 @@ export class DeleteClientService implements DeleteClient {
     private readonly logger: ILogger,
   ) {}
 
-  async execute(id_user: string, id: string): Promise<void> {
-    const findClient = await this.clientRepository.find(id_user, id);
+  async execute(idusers: number, idclients: number): Promise<void> {
+    const findClient = await this.clientRepository.find(idusers, idclients);
 
     if (!findClient) {
       throw {
@@ -20,7 +20,7 @@ export class DeleteClientService implements DeleteClient {
     }
 
     try {
-      await this.clientRepository.delete(id_user, id);
+      await this.clientRepository.delete(idusers, idclients);
     } catch (error) {
       this.logger.error(
         `Error in ClientUseCase in function deleteClient: ${error.message}`,

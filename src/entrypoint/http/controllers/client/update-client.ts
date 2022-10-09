@@ -13,8 +13,8 @@ export class UpdateClientController implements Controller {
   async handle(
     req?: HttpRequest<Request>,
   ): Promise<HttpResponse<void | Response>> {
-    const { id, name, email, phone, segment } = req.body;
-    const id_user = req.headers['id-user'] as string;
+    const { idclients, name, email, phone, idsegments } = req.body;
+    const idusers = parseInt(req.headers['id-user'].toString(), 10);
 
     if (!name || !phone) {
       return {
@@ -27,12 +27,12 @@ export class UpdateClientController implements Controller {
     }
     try {
       await this.clientUseCase.execute({
-        id_user,
-        id,
+        idusers,
+        idclients,
         name,
         email,
         phone,
-        segment,
+        idsegments,
       });
       return { statusCode: 201 };
     } catch (error) {

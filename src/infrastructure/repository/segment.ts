@@ -1,63 +1,52 @@
 import { ISegment, SegmentRepository } from '../../domain/repository';
-import { Segment } from '../models';
+import { database } from '../database/index';
 
-class SegmentRepositoryMongo implements SegmentRepository {
+export class SegmentRepositoryMongo implements SegmentRepository {
   async findByName(input: {
-    id_user: string;
+    idusers: number;
     segment: string;
   }): Promise<ISegment | ISegment[]> {
-    const segments = await Segment.find({
-      id_user: input.id_user,
-      segment: input.segment,
-    });
-
-    if (!segments || segments.length === 0) return;
-
-    return segments.map((item) => ({
-      segment: item.segment,
-    }));
+    const sql = {
+      text: 'SELECT * FROM segments WHERE idusers = $1 AND name = LIKE "%$2%"',
+      values: [input.idusers, `%${input.segment}%`],
+    };
+    const { rows } = await database.query(sql.text, sql.values);
+    return rows[0];
   }
 
-  async find(id_user: string): Promise<ISegment[]> {
-    const segments = await Segment.find({ id_user: id_user }).sort({
-      segment: 1,
-    });
-
-    if (segments) {
-      return segments.map((item) => ({
-        id: item._id,
-        segment: item.segment,
-      }));
-    }
+  async find(idusers: number): Promise<ISegment[]> {
+    const { rows } = await database.query(
+      'SELECT * FROM segments WHERE idusers = $1 ORDER BY name',
+      [idusers],
+    );
+    return rows;
   }
 
-  async create(input: { id_user: string; segment: string }): Promise<void> {
-    const segment = new Segment({
-      id_user: input.id_user,
-      segment: input.segment,
-    });
-    await segment.save();
+  async create(input: { idusers: number; segment: string }): Promise<void> {
+    const sql = {
+      text: 'INSERT INTO segments(idusers, name) VALUES($1, $2)',
+      values: [input.idusers, input.segment],
+    };
+    await database.query(sql.text, sql.values);
   }
 
   async update(input: {
-    id: string;
-    id_user: string;
+    idsegments: number;
+    idusers: number;
     segment: string;
   }): Promise<void> {
-    await Segment.findOneAndUpdate(
-      {
-        id_user: input.id_user,
-        _id: input.id,
-      },
-      {
-        segment: input.segment,
-      },
-    );
+    const sql = {
+      text: 'UPDATE segments SET name = $1 WHERE idusers = $2 AND idsegments = $3',
+      values: [input.segment, input.idusers, input.idsegments],
+    };
+    await database.query(sql.text, sql.values);
   }
 
-  async delete(input: { id_user: string; id: string }): Promise<void> {
-    await Segment.findOneAndDelete({ id_user: input.id_user, _id: input.id });
+  async delete(input: { idusers: number; idsegments: number }): Promise<void> {
+    const sql = {
+      text: 'DELETE FROM segments WHERE idusers = $1 AND idsegments = $2',
+      values: [input.idusers, input.idsegments],
+    };
+    await database.query(sql.text, sql.values);
   }
 }
-
-export { SegmentRepositoryMongo };

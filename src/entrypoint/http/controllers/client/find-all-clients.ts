@@ -13,12 +13,12 @@ export class FindAllClientController implements Controller {
   async handle(
     req?: HttpRequest<Request>,
   ): Promise<HttpResponse<ClientViewModel[] | Response>> {
-    const id_user = req.headers['id-user'] as string;
+    const idusers = parseInt(req.headers['id-user'].toString(), 10);
 
     try {
-      const result = await this.clientUseCase.findAll(id_user);
+      const result = await this.clientUseCase.findAll(idusers);
 
-      if (result.length === 0) {
+      if (!result) {
         return { statusCode: 404 };
       }
 

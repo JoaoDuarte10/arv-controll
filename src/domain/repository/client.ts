@@ -1,16 +1,30 @@
-import { IClientEntity } from '../entities/client';
-
-type IClient = IClientEntity;
+type IClient = {
+  idclients?: number;
+  idusers?: number;
+  idsegments?: number;
+  name: string;
+  email: string;
+  phone: string;
+  created_at?: string;
+  updated_at?: string;
+};
 
 interface ClientRepository {
-  create({ id_user, name, email, phone, segment }: IClient): Promise<void>;
-  update({ id_user, id, name, email, phone, segment }: IClient): Promise<void>;
-  findAll(id_user: string): Promise<IClient[]>;
-  find(id_user: string, id: string): Promise<IClient>;
-  findByEmail(id_user: string, email: string): Promise<IClient>;
-  findByName(id_user: string, name: string): Promise<IClient>;
-  findBySegment(id_user: string, segment: string): Promise<IClient[]>;
-  delete(id_user: string, id: string): Promise<void>;
+  create({ idusers, name, email, phone, idsegments }: IClient): Promise<void>;
+  update({
+    idusers,
+    idclients,
+    name,
+    email,
+    phone,
+    idsegments,
+  }: IClient): Promise<void>;
+  findAll(idusers: number): Promise<IClient[]>;
+  find(idusers: number, idclients: number): Promise<IClient>;
+  findByEmail(idusers: number, email: string): Promise<IClient>;
+  findByName(idusers: number, name: string): Promise<IClient>;
+  findBySegment(idusers: number, idsegments: number): Promise<IClient[]>;
+  delete(idusers: number, idclients: number): Promise<void>;
 }
 
 export { IClient, ClientRepository };
